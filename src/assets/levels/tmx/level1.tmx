@@ -7,7 +7,7 @@
   <image source="tiles_spritesheet.png" width="914" height="936"/>
  </tileset>
  <tileset firstgid="157" name="tileset" tilewidth="32" tileheight="32" tilecount="256" columns="16">
-  <image source="../../../../../tileset.png" width="512" height="512"/>
+  <image source="../../../../../../OneDrive/Desktop/tileset.png" width="512" height="512"/>
  </tileset>
  <layer id="1" name="Tile Layer 1" width="40" height="49">
   <data encoding="csv">
@@ -63,6 +63,6 @@
 </data>
  </layer>
  <objectgroup id="2" name="Object Layer 1">
-  <object id="30" type="platform" x="2.33333" y="1478" width="1277.33" height="5"/>
+  <object id="30" type="platform" x="5.33332" y="1475.66" width="1277.33" height="1"/>
  </objectgroup>
 </map>

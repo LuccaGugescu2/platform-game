@@ -1,10 +1,8 @@
 package game;
 
-import com.almasb.fxgl.app.ApplicationMode;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.app.scene.Viewport;
-import com.almasb.fxgl.core.util.LazyValue;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.level.Level;
 import com.almasb.fxgl.input.UserAction;
@@ -17,18 +15,20 @@ import java.util.Map;
 import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class PlatformerApp extends GameApplication {
-
+	//posizione dello spawn del player
+	private static final Point2D PLAYER_POSITION;
+	static {
+		PLAYER_POSITION = new Point2D(50, 1400);
+	}
     private static final int MAX_LEVEL = 5;
     private static final int STARTING_LEVEL = 0;
-
+    //altezza del livello
+    private static final int levelHeight = 10000;
     @Override
     protected void initSettings(GameSettings settings) {
         settings.setWidth(1280);
         settings.setHeight(900);
-        settings.setApplicationMode(ApplicationMode.DEVELOPER);
     }
-
-    private LazyValue<LevelEndScene> levelEndScene = new LazyValue<>(() -> new LevelEndScene());
     private Entity player;
 
     @Override
@@ -88,7 +88,7 @@ public class PlatformerApp extends GameApplication {
 
         // player must be spawned after call to nextLevel, otherwise player gets removed
         // before the update tick _actually_ adds the player to game world
-        player = spawn("player", 50, 1400);
+        player = spawn("player", PLAYER_POSITION.getX(), PLAYER_POSITION.getY());
 
         set("player", player);
 
@@ -96,7 +96,7 @@ public class PlatformerApp extends GameApplication {
 
         Viewport viewport = getGameScene().getViewport();
         viewport.setBounds(0, 0, 250 * 40, 2000);
-        viewport.bindToEntity(player, getAppWidth() / 2, getAppHeight() / 2);
+        viewport.bindToEntity(player, getAppWidth() / 2, getAppHeight() / 2 + 300);
         viewport.setLazy(true);
     }
 
@@ -132,7 +132,7 @@ public class PlatformerApp extends GameApplication {
     protected void onUpdate(double tpf) {
         inc("levelTime", tpf);
 
-        if (player.getY() > getAppHeight()) {
+        if (player.getY() > levelHeight) {
             onPlayerDied();
         }
     }
@@ -143,7 +143,7 @@ public class PlatformerApp extends GameApplication {
 
     private void setLevel(int levelNum) {
         if (player != null) {
-            player.getComponent(PhysicsComponent.class).overwritePosition(new Point2D(50, 50));
+            player.getComponent(PhysicsComponent.class).overwritePosition(PLAYER_POSITION);
             player.setZIndex(Integer.MAX_VALUE);
         }
 
