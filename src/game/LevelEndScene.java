@@ -1,4 +1,4 @@
-package com.almasb.fxglgames.platformer;
+package game;
 
 import com.almasb.fxgl.animation.Interpolators;
 import com.almasb.fxgl.input.UserAction;
@@ -23,9 +23,6 @@ import javafx.util.Duration;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 
-/**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
- */
 public class LevelEndScene extends SubScene {
 
     private static final int WIDTH = 400;

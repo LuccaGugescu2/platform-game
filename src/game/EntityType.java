@@ -1,4 +1,4 @@
-package com.almasb.fxglgames.platformer;
+package game;
 
 public enum EntityType {
     PLAYER, COIN, PLATFORM, EXIT_TRIGGER, ENEMY, KEY_PROMPT, EXIT_SIGN, BUTTON,

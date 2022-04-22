@@ -1,35 +1,21 @@
-package com.almasb.fxglgames.platformer;
+package game;
 
-import com.almasb.fxgl.animation.Interpolators;
 import com.almasb.fxgl.app.ApplicationMode;
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
-import com.almasb.fxgl.app.scene.GameView;
-import com.almasb.fxgl.app.scene.LoadingScene;
-import com.almasb.fxgl.app.scene.SceneFactory;
 import com.almasb.fxgl.app.scene.Viewport;
 import com.almasb.fxgl.core.util.LazyValue;
 import com.almasb.fxgl.entity.Entity;
-import com.almasb.fxgl.entity.SpawnData;
-import com.almasb.fxgl.entity.components.CollidableComponent;
 import com.almasb.fxgl.entity.level.Level;
 import com.almasb.fxgl.input.UserAction;
-import com.almasb.fxgl.input.view.KeyView;
 import com.almasb.fxgl.input.virtual.VirtualButton;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
-import javafx.scene.paint.Color;
-import javafx.util.Duration;
-
 import java.util.Map;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
-import static com.almasb.fxglgames.platformer.EntityType.*;
 
-/**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
- */
 public class PlatformerApp extends GameApplication {
 
     private static final int MAX_LEVEL = 5;

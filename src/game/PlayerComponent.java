@@ -1,4 +1,4 @@
-package com.almasb.fxglgames.platformer;
+package game;
 
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.physics.PhysicsComponent;
