@@ -18,12 +18,12 @@ public class PlatformerApp extends GameApplication {
 	//posizione dello spawn del player
 	private static final Point2D PLAYER_POSITION;
 	static {
-		PLAYER_POSITION = new Point2D(50, 1400);
+		PLAYER_POSITION = new Point2D(50, 1425);
 	}
     private static final int MAX_LEVEL = 5;
     private static final int STARTING_LEVEL = 0;
     //altezza del livello
-    private static final int levelHeight = 10000;
+    private static final int levelHeight = 2000;
     @Override
     protected void initSettings(GameSettings settings) {
         settings.setWidth(1280);
@@ -62,15 +62,13 @@ public class PlatformerApp extends GameApplication {
             protected void onActionBegin() {
                 player.getComponent(PlayerComponent.class).jump();
             }
-        }, KeyCode.W, VirtualButton.A);
+        }, KeyCode.SPACE, VirtualButton.A);
 
     }
 
     @Override
     protected void initGameVars(Map<String, Object> vars) {
         vars.put("level", STARTING_LEVEL);
-        vars.put("levelTime", 0.0);
-        vars.put("score", 0);
     }
 
     @Override
@@ -97,12 +95,12 @@ public class PlatformerApp extends GameApplication {
         Viewport viewport = getGameScene().getViewport();
         viewport.setBounds(0, 0, 250 * 40, 2000);
         viewport.bindToEntity(player, getAppWidth() / 2, getAppHeight() / 2 + 300);
-        viewport.setLazy(true);
     }
 
     @Override
     protected void initPhysics() {
         getPhysicsWorld().setGravity(0, 760);
+        getPhysicsWorld().addCollisionHandler(new PlayerWallJumpHandler());
       
     }
 
@@ -130,7 +128,6 @@ public class PlatformerApp extends GameApplication {
 
     @Override
     protected void onUpdate(double tpf) {
-        inc("levelTime", tpf);
 
         if (player.getY() > levelHeight) {
             onPlayerDied();
@@ -147,16 +144,8 @@ public class PlatformerApp extends GameApplication {
             player.setZIndex(Integer.MAX_VALUE);
         }
 
-        set("levelTime", 0.0);
-
-        Level level = setLevelFromMap("tmx/level" + levelNum  + ".tmx");
-
-        var shortestTime = level.getProperties().getDouble("star1time");
-
-        var levelTimeData = new LevelEndScene.LevelTimeData(shortestTime * 2.4, shortestTime*1.3, shortestTime);
-
-        set("levelTimeData", levelTimeData);
-    }
+        setLevelFromMap("tmx/level" + levelNum  + ".tmx");
+        }
 
     public static void main(String[] args) {
         launch(args);

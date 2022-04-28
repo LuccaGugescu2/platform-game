@@ -39,7 +39,6 @@ public class PlayerComponent extends Component {
 	
 	@Override
 	public void onAdded() {
-		entity.getTransformComponent().setScaleOrigin(new Point2D(2, 3));
 		entity.getViewComponent().addChild(texture);
 
 		physics.onGroundProperty().addListener((obs, old, isOnGround) -> {
@@ -78,14 +77,14 @@ public class PlayerComponent extends Component {
 	 */
 	public void left() {
 		getEntity().setScaleX(-1.5);
-		physics.setVelocityX(-190);
+		physics.setVelocityX(-300);
 	}
 	/**
 	 * muove e specchia il player a destra
 	 */
 	public void right() {
 		getEntity().setScaleX(1.5);
-		physics.setVelocityX(190);
+		physics.setVelocityX(300);
 	}
 
 	public void stop() {
@@ -96,7 +95,12 @@ public class PlayerComponent extends Component {
 		if (jumps == 0)
 			return;
 
-		physics.setVelocityY(-310);
+		physics.setVelocityY(-400);
 		jumps--;
+	}
+
+
+	public void setJump() {
+		jumps = 2;
 	}
 }

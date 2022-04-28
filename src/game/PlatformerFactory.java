@@ -26,6 +26,7 @@ public class PlatformerFactory implements EntityFactory {
         return entityBuilder()
                 .view(new ScrollingBackgroundView(texture("background/forest.png").getImage(), getAppWidth(), getAppHeight()))
                 .zIndex(-1)
+                .at(data.getX(), data.getY() + 780)
                 .with(new IrremovableComponent())
                 .build();
     }
@@ -38,6 +39,15 @@ public class PlatformerFactory implements EntityFactory {
                 .with(new PhysicsComponent())
                 .build();
     }
+    
+    @Spawns("walljump")
+    public Entity newWalljump(SpawnData data) {
+        return entityBuilder(data)
+                .type(WALLJUMP)
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+                .with(new CollidableComponent(true))
+                .build();
+    }
 
  
     @Spawns("player")
@@ -47,7 +57,7 @@ public class PlatformerFactory implements EntityFactory {
         physics.addGroundSensor(new HitBox("GROUND_SENSOR", new Point2D(16, 38), BoundingShape.box(6, 8)));
 
         // this avoids player sticking to walls
-        physics.setFixtureDef(new FixtureDef().friction(0.0f));
+        physics.setFixtureDef(new FixtureDef().friction(1.0f));
 
         return entityBuilder(data)
                 .type(PLAYER)
