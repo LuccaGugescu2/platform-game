@@ -13,4 +13,9 @@ public class PlayerWallJumpHandler extends CollisionHandler {
     protected void onCollisionBegin(Entity player, Entity walljump) {
         player.getComponent(PlayerComponent.class).setJump();
     }
+    
+    @Override
+    protected void onCollisionEnd(Entity player, Entity walljump) {
+        player.getComponent(PlayerComponent.class).setFalling();
+    }
 }

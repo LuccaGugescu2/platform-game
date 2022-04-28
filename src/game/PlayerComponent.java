@@ -16,7 +16,9 @@ public class PlayerComponent extends Component {
 
 	private AnimatedTexture texture;
 
-	private AnimationChannel animIdle, animWalk, animJump, animFall;
+	private AnimationChannel animIdle, animWalk, animJump, animFall,animWallSlide;
+	
+	private boolean wallContact = false;
 
 	private int jumps = 2;
 	/**
@@ -28,10 +30,12 @@ public class PlayerComponent extends Component {
 		Image imgDash = image("player/_Run.png");
 		Image jumpImage = image("player/_Jump.png");
 		Image fallImage = image("player/_Fall.png");
+		Image wallSlide = image("player/_WallSlide.png");
 		animIdle = new AnimationChannel(image, 10, 120, 80, Duration.seconds(1), 0, 9);
 		animWalk = new AnimationChannel(imgDash, 10, 120, 80, Duration.seconds(0.6), 0, 8);
 		animJump = new AnimationChannel(jumpImage, 3, 120, 80, Duration.seconds(1), 0, 2);
 		animFall = new AnimationChannel(fallImage, 3, 120, 80, Duration.seconds(0.5), 0, 2);
+		animWallSlide = new AnimationChannel(wallSlide, 3, 120, 80, Duration.seconds(0.5), 0, 2);
 		texture = new AnimatedTexture(animJump);
 		texture.loop();
 	}
@@ -71,6 +75,10 @@ public class PlayerComponent extends Component {
 			}
 		}
 
+		if (wallContact) {
+			texture.loopAnimationChannel(animWallSlide);
+		}
+		
 	}
 	/**
 	 * muove e specchia il player a sinistra
@@ -101,6 +109,11 @@ public class PlayerComponent extends Component {
 
 
 	public void setJump() {
+		wallContact = true;
 		jumps = 2;
+	}
+	
+	public void setFalling() {
+		wallContact = false;
 	}
 }
