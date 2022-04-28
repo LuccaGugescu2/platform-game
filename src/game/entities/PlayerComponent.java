@@ -1,4 +1,4 @@
-package game;
+package game.entities;
 
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.physics.PhysicsComponent;
@@ -31,11 +31,11 @@ public class PlayerComponent extends Component {
 		Image jumpImage = image("player/_Jump.png");
 		Image fallImage = image("player/_Fall.png");
 		Image wallSlide = image("player/_WallSlide.png");
-		animIdle = new AnimationChannel(image, 10, 120, 80, Duration.seconds(1), 0, 9);
-		animWalk = new AnimationChannel(imgDash, 10, 120, 80, Duration.seconds(0.6), 0, 8);
-		animJump = new AnimationChannel(jumpImage, 3, 120, 80, Duration.seconds(1), 0, 2);
-		animFall = new AnimationChannel(fallImage, 3, 120, 80, Duration.seconds(0.5), 0, 2);
-		animWallSlide = new AnimationChannel(wallSlide, 3, 120, 80, Duration.seconds(0.5), 0, 2);
+		animIdle = new AnimationChannel(image, 10, 119, 80, Duration.seconds(0.8), 0, 9);
+		animWalk = new AnimationChannel(imgDash, 10, 119, 80, Duration.seconds(0.8), 0, 8);
+		animJump = new AnimationChannel(jumpImage, 3, 119, 80, Duration.seconds(1), 0, 2);
+		animFall = new AnimationChannel(fallImage, 3, 119, 80, Duration.seconds(1), 0, 2);
+		animWallSlide = new AnimationChannel(wallSlide, 3, 119, 80, Duration.seconds(1), 0, 2);
 		texture = new AnimatedTexture(animJump);
 		texture.loop();
 	}

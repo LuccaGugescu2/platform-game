@@ -1,7 +1,10 @@
-package game;
+package game.collisionHandler;
 
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.physics.CollisionHandler;
+
+import game.EntityType;
+import game.entities.PlayerComponent;
 
 public class PlayerWallJumpHandler extends CollisionHandler {
 

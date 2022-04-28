@@ -8,6 +8,9 @@ import com.almasb.fxgl.entity.level.Level;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.input.virtual.VirtualButton;
 import com.almasb.fxgl.physics.PhysicsComponent;
+
+import game.collisionHandler.PlayerWallJumpHandler;
+import game.entities.PlayerComponent;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 import java.util.Map;
@@ -16,9 +19,10 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class PlatformerApp extends GameApplication {
 	//posizione dello spawn del player
+	private Entity player, box;
 	private static final Point2D PLAYER_POSITION;
 	static {
-		PLAYER_POSITION = new Point2D(50, 1425);
+		PLAYER_POSITION = new Point2D(50, 1420);
 	}
     private static final int MAX_LEVEL = 5;
     private static final int STARTING_LEVEL = 0;
@@ -29,7 +33,6 @@ public class PlatformerApp extends GameApplication {
         settings.setWidth(1280);
         settings.setHeight(900);
     }
-    private Entity player;
 
     @Override
     protected void initInput() {
@@ -81,15 +84,12 @@ public class PlatformerApp extends GameApplication {
     protected void initGame() {
         getGameWorld().addEntityFactory(new PlatformerFactory());
 
-        player = null;
         nextLevel();
 
         // player must be spawned after call to nextLevel, otherwise player gets removed
         // before the update tick _actually_ adds the player to game world
         player = spawn("player", PLAYER_POSITION.getX(), PLAYER_POSITION.getY());
-
         set("player", player);
-
         spawn("background");
 
         Viewport viewport = getGameScene().getViewport();
