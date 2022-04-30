@@ -20,10 +20,6 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 public class PlatformerApp extends GameApplication {
 	//posizione dello spawn del player
 	private Entity player, box;
-	private static final Point2D PLAYER_POSITION;
-	static {
-		PLAYER_POSITION = new Point2D(50, 1420);
-	}
     private static final int MAX_LEVEL = 5;
     private static final int STARTING_LEVEL = 0;
     //altezza del livello
@@ -86,15 +82,14 @@ public class PlatformerApp extends GameApplication {
 
         nextLevel();
 
-        // player must be spawned after call to nextLevel, otherwise player gets removed
-        // before the update tick _actually_ adds the player to game world
-        player = spawn("player", PLAYER_POSITION.getX(), PLAYER_POSITION.getY());
+        //il player viene spwnato in base alla sua posizione su tiled
+        player = getGameWorld().getSingleton(EntityType.PLAYER);
         set("player", player);
         spawn("background");
 
         Viewport viewport = getGameScene().getViewport();
-        viewport.setBounds(0, 0, 250 * 40, 2000);
-        viewport.bindToEntity(player, getAppWidth() / 2, getAppHeight() / 2 + 300);
+        viewport.setBounds(0, 0, 70*70, 80*70);
+        viewport.bindToEntity(player, getAppWidth() / 2, getAppHeight() / 2);
     }
 
     @Override
@@ -129,9 +124,9 @@ public class PlatformerApp extends GameApplication {
     @Override
     protected void onUpdate(double tpf) {
 
-        if (player.getY() > levelHeight) {
-            onPlayerDied();
-        }
+        //if (player.getY() > levelHeight) {
+         //   onPlayerDied();
+        //}
     }
 
     public void onPlayerDied() {
@@ -140,7 +135,6 @@ public class PlatformerApp extends GameApplication {
 
     private void setLevel(int levelNum) {
         if (player != null) {
-            player.getComponent(PhysicsComponent.class).overwritePosition(PLAYER_POSITION);
             player.setZIndex(Integer.MAX_VALUE);
         }
 

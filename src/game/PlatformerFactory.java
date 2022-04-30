@@ -33,7 +33,7 @@ public class PlatformerFactory implements EntityFactory {
         return entityBuilder()
                 .view(new ScrollingBackgroundView(texture("background/forest.png").getImage(), getAppWidth(), getAppHeight()))
                 .zIndex(-1)
-                .at(data.getX(), data.getY() + 780)
+                .at(data.getX(), data.getY() + (80 * 70 - getAppHeight()))
                 .with(new IrremovableComponent())
                 .build();
     }
@@ -80,8 +80,7 @@ public class PlatformerFactory implements EntityFactory {
 
         return entityBuilder(data)
                 .type(PLAYER)
-                .bbox(new HitBox(new Point2D(5,5), BoundingShape.circle(13)))
-                .bbox(new HitBox(new Point2D(10,25), BoundingShape.box(12, 12)))
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
                 .with(physics)
                 .with(new CollidableComponent(true))
                 .with(new IrremovableComponent())
