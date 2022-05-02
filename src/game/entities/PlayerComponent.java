@@ -21,6 +21,8 @@ public class PlayerComponent extends Component {
 	private boolean wallContact = false;
 
 	private int jumps = 2;
+	
+	private int health = 6;
 	/**
 	 * funzione contenente le animazioni del personaggio
 	 * @author luccagugescu
@@ -115,5 +117,19 @@ public class PlayerComponent extends Component {
 	
 	public void setFalling() {
 		wallContact = false;
+	}
+	
+	public void losehealth() {
+		health--;
+		physics.setVelocityY(-350);
+		physics.setVelocityX(50);
+	}
+	
+	public void refillHealth() {
+		health = 6;
+	}
+	
+	public int getHealth() {
+		return health;
 	}
 }

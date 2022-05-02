@@ -14,6 +14,7 @@ import com.almasb.fxgl.physics.box2d.dynamics.BodyType;
 import com.almasb.fxgl.physics.box2d.dynamics.FixtureDef;
 import com.almasb.fxgl.texture.Texture;
 
+import game.entities.CheckpointComponent;
 import game.entities.PlayerComponent;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
@@ -63,6 +64,31 @@ public class PlatformerFactory implements EntityFactory {
                 .with(new CollidableComponent(true))
                 .build();
     }
+    
+    @Spawns("checkpoint")
+    public Entity newCheckpoint(SpawnData data) {
+        return entityBuilder(data)
+                .type(CHEKPOINT)
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+                .with(new CollidableComponent(true))
+                .build();
+    }
+    
+    @Spawns("spike")
+    public Entity newSpike(SpawnData data) {
+        return entityBuilder(data)
+                .type(SPIKE)
+                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+                .with(new CollidableComponent(true))
+                .build();
+    }
+    
+    @Spawns("health")
+    public Entity newHealth(SpawnData data) {
+        return entityBuilder(data)
+                .type(HEALTH)
+                .build();
+    }
 
     /**
      * crea l' entità player e gli assegna le fisiche e alcuni elementi presenti nel PlayerComponent come ad esempio le animazioni
@@ -80,7 +106,7 @@ public class PlatformerFactory implements EntityFactory {
 
         return entityBuilder(data)
                 .type(PLAYER)
-                .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+                .bbox(new HitBox(BoundingShape.box(31.39, 37.18)))
                 .with(physics)
                 .with(new CollidableComponent(true))
                 .with(new IrremovableComponent())
@@ -94,6 +120,8 @@ public class PlatformerFactory implements EntityFactory {
         physics.setBodyType(BodyType.DYNAMIC);
         Image image = image("box.png");
         Texture texture = new Texture(image);
+        
+        physics.setFixtureDef(new FixtureDef().friction(0.9f));
         return entityBuilder(data)
                 .type(BOX)
                 .view(texture)

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="70" height="80" tilewidth="70" tileheight="70" infinite="0" nextlayerid="7" nextobjectid="67">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="70" height="80" tilewidth="70" tileheight="70" infinite="0" nextlayerid="7" nextobjectid="72">
  <properties>
   <property name="star1time" type="float" value="7"/>
  </properties>
@@ -11,12 +11,13 @@
  </tileset>
  <layer id="4" name="Livello tile 1" width="70" height="80">
   <data encoding="base64" compression="zlib">
-   eJztzikOwDAMRcG0oAtIDxPW+1+sJmEmAWnIjPQkS5+4FAAAAAAAAAAAAAAAAAAAAAAAAAAA/rBFe3Jne3dE5+S/VruiO7mzvavRM/mv1ZrSXmmgD/EPLT0=
+   eJztzjsKgEAMQEG18FPoUSzsvIr3P4hpFrZII6jbzMCDhDTpOgAAAAAAAAAAAAAAAAAAAAAAAAAA/tBHQzJn92KMpo//am2OlmTO7sUabdV+VRX7iz+2cCjtlB50A/waLnk=
   </data>
  </layer>
  <objectgroup id="5" name="Livello di oggetti 1">
-  <object id="62" type="platform" x="10" y="5392.67" width="4892" height="16"/>
-  <object id="63" name="box" type="box" x="1059.33" y="5330" width="60" height="60"/>
-  <object id="65" name="player" type="player" x="756.667" y="5355.41" width="31.394" height="37.1818"/>
+  <object id="62" type="platform" x="10" y="5390.05" width="4892" height="18.625"/>
+  <object id="63" name="box" type="box" x="1058.33" y="5328" width="60" height="60"/>
+  <object id="67" name="spike" type="spike" x="1191.67" y="5379" width="208.333" height="13"/>
+  <object id="71" name="falo" type="checkpoint" x="1545" y="5365" width="60.5" height="26"/>
  </objectgroup>
 </map>

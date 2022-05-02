@@ -9,6 +9,8 @@ import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.input.virtual.VirtualButton;
 import com.almasb.fxgl.physics.PhysicsComponent;
 
+import game.collisionHandler.PlayerChekpointHandler;
+import game.collisionHandler.PlayerSpikeHandler;
 import game.collisionHandler.PlayerWallJumpHandler;
 import game.entities.PlayerComponent;
 import javafx.geometry.Point2D;
@@ -19,11 +21,15 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 
 public class PlatformerApp extends GameApplication {
 	//posizione dello spawn del player
-	private Entity player, box;
+	private Entity player, box, checkpoint;
+	public static Point2D playerPosition;
+	static {
+		playerPosition = new Point2D(76, 76*70);
+	}
     private static final int MAX_LEVEL = 5;
     private static final int STARTING_LEVEL = 0;
     //altezza del livello
-    private static final int levelHeight = 2000;
+    private static final int levelHeight = 80*70;
     @Override
     protected void initSettings(GameSettings settings) {
         settings.setWidth(1280);
@@ -83,7 +89,7 @@ public class PlatformerApp extends GameApplication {
         nextLevel();
 
         //il player viene spwnato in base alla sua posizione su tiled
-        player = getGameWorld().getSingleton(EntityType.PLAYER);
+        player = spawn("player", playerPosition.getX(), playerPosition.getY());
         set("player", player);
         spawn("background");
 
@@ -96,6 +102,8 @@ public class PlatformerApp extends GameApplication {
     protected void initPhysics() {
         getPhysicsWorld().setGravity(0, 760);
         getPhysicsWorld().addCollisionHandler(new PlayerWallJumpHandler());
+        getPhysicsWorld().addCollisionHandler(new PlayerSpikeHandler());
+        getPhysicsWorld().addCollisionHandler(new PlayerChekpointHandler());
       
     }
 
@@ -124,17 +132,20 @@ public class PlatformerApp extends GameApplication {
     @Override
     protected void onUpdate(double tpf) {
 
-        //if (player.getY() > levelHeight) {
-         //   onPlayerDied();
-        //}
+        if (player.getY() > levelHeight || player.getComponent(PlayerComponent.class).getHealth() <= 0) {
+        	player.getComponent(PlayerComponent.class).refillHealth();
+            onPlayerDied();
+        }
     }
 
     public void onPlayerDied() {
-        setLevel(geti("level"));
+    	player.getComponent(PhysicsComponent.class).overwritePosition(playerPosition);
+        
     }
 
     private void setLevel(int levelNum) {
         if (player != null) {
+        	player.getComponent(PhysicsComponent.class).overwritePosition(playerPosition);
             player.setZIndex(Integer.MAX_VALUE);
         }
 
