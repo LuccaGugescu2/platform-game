@@ -70,7 +70,9 @@ public class PlatformerFactory implements EntityFactory {
         return entityBuilder(data)
                 .type(CHEKPOINT)
                 .bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+                .with(new CheckpointComponent())
                 .with(new CollidableComponent(true))
+                
                 .build();
     }
     

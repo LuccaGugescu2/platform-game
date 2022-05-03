@@ -4,6 +4,7 @@ import com.almasb.fxgl.physics.CollisionHandler;
 
 import game.EntityType;
 import game.PlatformerApp;
+import game.entities.CheckpointComponent;
 import game.entities.PlayerComponent;
 
 public class PlayerChekpointHandler extends CollisionHandler {
@@ -15,5 +16,6 @@ public class PlayerChekpointHandler extends CollisionHandler {
     @Override
     protected void onCollisionBegin(Entity player, Entity checkpoint) {
     	PlatformerApp.playerPosition =  player.getPosition();
+    	checkpoint.getComponent(CheckpointComponent.class).setActive();
     }
 }

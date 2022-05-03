@@ -11,13 +11,13 @@
  </tileset>
  <layer id="4" name="Livello tile 1" width="70" height="80">
   <data encoding="base64" compression="zlib">
-   eJztzjsKgEAMQEG18FPoUSzsvIr3P4hpFrZII6jbzMCDhDTpOgAAAAAAAAAAAAAAAAAAAAAAAAAA/tBHQzJn92KMpo//am2OlmTO7sUabdV+VRX7iz+2cCjtlB50A/waLnk=
+   eJztzjsKgEAMQMHVwk+xHsbOq3j/g5hmYYs0FirIDDxISJNSAAAAAAAAAAAAAAAAAAAAAAAAAAB4wxCNyZzdmymaH/7ra0u0JnN2b2q0dfvZ9Re70g7pRhdCqi5L
   </data>
  </layer>
  <objectgroup id="5" name="Livello di oggetti 1">
   <object id="62" type="platform" x="10" y="5390.05" width="4892" height="18.625"/>
-  <object id="63" name="box" type="box" x="1058.33" y="5328" width="60" height="60"/>
+  <object id="63" name="box" type="box" x="1058.33" y="5329" width="60" height="59"/>
   <object id="67" name="spike" type="spike" x="1191.67" y="5379" width="208.333" height="13"/>
-  <object id="71" name="falo" type="checkpoint" x="1545" y="5365" width="60.5" height="26"/>
+  <object id="71" name="falo" type="checkpoint" x="1545" y="5322.5" width="60.5" height="68.5"/>
  </objectgroup>
 </map>
