@@ -16,13 +16,13 @@ import javafx.scene.image.Image;
 import javafx.util.Duration;
 
 public class EnemyComponent extends Component {    
-	public int health = 100;
+	public int health = 2;
 	private LocalTimer timer;
 	private Duration duration;
 	private double distance;
 	private boolean goingRight = true;
 	private double speed;
-	
+	private boolean isRemoved = false;
 	private AnimationChannel animIdle, animWalk, animAttack;
 	private AnimatedTexture texture;
 
@@ -40,7 +40,7 @@ public class EnemyComponent extends Component {
 
 	@Override
 	public void onAdded() {
-		distance = 1000 - entity.getX();
+		distance = 300 - entity.getX();
 		timer = FXGL.newLocalTimer();
 		timer.capture();
 		speed = distance / duration.toSeconds();
@@ -65,6 +65,16 @@ public class EnemyComponent extends Component {
 			entity.setScaleY(1.2);
 		}
 		entity.translateX(goingRight ? speed *tpf : -speed * tpf);
+		
+	}
+
+	public void addDamage() {
+		if(this.health == 0) {
+			getEntity().removeComponent(EnemyComponent.class);
+			this.isRemoved = true;
+		}
+		this.health--;
+		
 		
 	}
 }

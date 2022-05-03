@@ -20,6 +20,8 @@ import game.entities.HealthComponent;
 import game.entities.PlayerComponent;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
+import javafx.scene.paint.Color;
+import javafx.scene.shape.Rectangle;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static game.EntityType.*;
@@ -112,6 +114,7 @@ public class PlatformerFactory implements EntityFactory {
 				.with(new IrremovableComponent())
 				.with(new PlayerComponent())
 				.scale(new Point2D(1.5, 1.5)).build();
+			    
 	}
 
 	@Spawns("box")
@@ -133,12 +136,22 @@ public class PlatformerFactory implements EntityFactory {
 
 	@Spawns("skeleton")
 	public Entity newSkeleton(SpawnData data) {
-		return entityBuilder(data).type(ENEMY)
+		return entityBuilder(data)
+				.type(ENEMY)
 				.bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
 				.with(new CollidableComponent(true))
 				.with(new IrremovableComponent())
 				.with(new EnemyComponent())
 				.build();
 	}
+	   @Spawns("playerAttack")
+	    public Entity newPlayerAttack(SpawnData data) {
+	        return entityBuilder(data)
+	                .type(PLAYER_ATTACK)
+	                .viewWithBBox(new Rectangle(130, 60, Color.RED))
+	                .with(new CollidableComponent(true))
+					.with(new IrremovableComponent())
+	                .build();
+	    }
 
 }

@@ -11,6 +11,7 @@ import com.almasb.fxgl.input.virtual.VirtualButton;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.texture.Texture;
 
+import game.collisionHandler.PlayerAttackHandler;
 import game.collisionHandler.PlayerChekpointHandler;
 import game.collisionHandler.PlayerSpikeHandler;
 import game.collisionHandler.PlayerWallJumpHandler;
@@ -118,7 +119,7 @@ public class PlatformerApp extends GameApplication {
 		getPhysicsWorld().addCollisionHandler(new PlayerWallJumpHandler());
 		getPhysicsWorld().addCollisionHandler(new PlayerSpikeHandler());
 		getPhysicsWorld().addCollisionHandler(new PlayerChekpointHandler());
-
+		getPhysicsWorld().addCollisionHandler(new PlayerAttackHandler());
 	}
 
 	private void nextLevel() {
@@ -137,6 +138,7 @@ public class PlatformerApp extends GameApplication {
 		for(int i  = 0; i < 3; i++) {
 			addUINode(new HPIcon(), 10 + i* 40, 30);
 		}
+		
 		//player.getComponent(PlayerComponent.class).getHealth();
 		
 	}
