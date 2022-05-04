@@ -15,7 +15,7 @@ import com.almasb.fxgl.time.LocalTimer;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
 
-public class EnemyComponent extends Component {    
+public class EnemyComponent extends Component {
 	public int health = 3;
 	private LocalTimer timer;
 	private Duration duration;
@@ -49,37 +49,31 @@ public class EnemyComponent extends Component {
 	}
 
 	public void onUpdate(double tpf) {
-		if(timer.elapsed(duration)) {
+		if (timer.elapsed(duration)) {
 			goingRight = !goingRight;
 			timer.capture();
 		}
-		if(goingRight) {
-			if(texture.getAnimationChannel() != animWalk)
-			texture.loopAnimationChannel(animWalk);
+		if (goingRight) {
+			if (texture.getAnimationChannel() != animWalk)
+				texture.loopAnimationChannel(animWalk);
 			entity.setScaleX(-1.2);
 			entity.setScaleY(1.2);
 		}
-		if(!goingRight) {
-			if(texture.getAnimationChannel() != animWalk)
-			texture.loopAnimationChannel(animWalk);
+		if (!goingRight) {
+			if (texture.getAnimationChannel() != animWalk)
+				texture.loopAnimationChannel(animWalk);
 			entity.setScaleX(1.2);
 			entity.setScaleY(1.2);
 		}
-		entity.translateX(goingRight ? speed *tpf : -speed * tpf);
-		
+		entity.translateX(goingRight ? speed * tpf : -speed * tpf);
+
 	}
 
 	public void addDamage() {
-		if(this.health <= 0) {
-			getEntity().removeFromWorld();
-			this.isRemoved = true;
-		}
-		if(!hasTakenDamage) {
-			this.health--;
-			hasTakenDamage = true;
-		}
 		System.out.print(this.health);
-		
-		
+		if(!this.hasTakenDamage) {
+			this.health--;			
+			this.hasTakenDamage = true;
+		}
 	}
 }

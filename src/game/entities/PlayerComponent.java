@@ -17,20 +17,16 @@ import com.almasb.fxgl.dsl.FXGL;
 
 public class PlayerComponent extends Component {
 	private LocalTimer timer;
-	private Entity enemy = null;
 	private PhysicsComponent physics;
-	private boolean enemyColliding = false;
 	private AnimatedTexture texture;
 	private boolean isAttacking = false;
 	private AnimationChannel animIdle, animWalk, animJump, animFall, animWallSlide, animAttack;
-	private boolean enemyLoading = false;
 	private boolean wallContact = false;
-
+	private Entity enemy;
 	private int jumps = 2;
-
+	private boolean enemyLoading = false;
 	private int health = 6;
 	private Duration duration;
-
 	private Entity playerAttack;
 
 	/**
@@ -67,16 +63,21 @@ public class PlayerComponent extends Component {
 			}
 		});
 	}
-
+	public void setEnemy(Entity enemy) {
+		this.enemy = enemy;
+		this.enemyLoading = true;
+	}
+	public void clearEnemy() {
+		this.enemyLoading = false;
+	}
 	@Override
 	public void onUpdate(double tpf) {
 		playerAttack.setAnchoredPosition(entity.getPosition());
-		if(this.enemyColliding && isAttacking && enemyLoading && !enemy.getComponent(EnemyComponent.class).hasTakenDamage) {
-			enemy.getComponent(EnemyComponent.class).addDamage();
-		}
-		if (texture.getAnimationChannel() == animAttack && timer.elapsed(duration)) {
-			this.isAttacking = false;
+		if (enemyLoading && texture.getAnimationChannel() == animAttack && timer.elapsed(duration)) {
+			
+			enemy.getComponent(EnemyComponent.class).hasTakenDamage = false;
 			timer.capture();
+			this.isAttacking = false;
 		}
 		if (texture.getAnimationChannel() != animAttack && isAttacking) {
 			texture.playAnimationChannel(animAttack);
@@ -139,10 +140,7 @@ public class PlayerComponent extends Component {
 		timer = FXGL.newLocalTimer();
 		if (!isAttacking) {
 			timer.capture();
-			enemy.getComponent(EnemyComponent.class).hasTakenDamage = false;
 			}
-
-
 		this.isAttacking = true;
 	}
 
@@ -168,18 +166,7 @@ public class PlayerComponent extends Component {
 	public int getHealth() {
 		return health;
 	}
-
-	public void setEnemyColliding() {
-		this.enemyColliding = true;
+	public boolean getAttack() {
+		return this.isAttacking;
 	}
-	public void removeEnemyColliding() {
-		this.enemyColliding = false;
-		this.enemyLoading = false;
-	}
-	public void addEnemy(Entity enemy) {
-			if(!enemyLoading) {
-			this.enemy = enemy;
-			this.enemyLoading = true;
-			}
-}
 }
