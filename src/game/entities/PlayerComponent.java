@@ -29,6 +29,7 @@ public class PlayerComponent extends Component {
 	private Duration duration;
 	private Entity playerAttack;
 	private int attacks = 0;
+	private String moving = "right";
 	/**
 	 * funzione contenente le animazioni del personaggio
 	 * 
@@ -72,7 +73,16 @@ public class PlayerComponent extends Component {
 	}
 	@Override
 	public void onUpdate(double tpf) {
-		playerAttack.setAnchoredPosition(entity.getPosition());
+		switch(moving) {
+		case "left":
+			playerAttack.setAnchoredPosition(entity.getPosition().getX() -100, entity.getPosition().getY());			
+			break;
+		case "right":
+			playerAttack.setAnchoredPosition(entity.getPosition().getX(), entity.getPosition().getY());			
+			break;
+		default: 
+			playerAttack.setAnchoredPosition(entity.getPosition());
+		}
 		
 		if (enemyLoading && texture.getAnimationChannel() == animAttack && timer.elapsed(duration)) {
 			enemy.getComponent(EnemyComponent.class).hasTakenDamage = false;
@@ -116,14 +126,17 @@ public class PlayerComponent extends Component {
 	public void left() {
 		getEntity().setScaleX(-1.5);
 		physics.setVelocityX(-300);
+		this.moving = "left";
 	}
 
 	/**
 	 * muove e specchia il player a destra
 	 */
 	public void right() {
+		playerAttack.setScaleY(1);
 		getEntity().setScaleX(1.5);
 		physics.setVelocityX(300);
+		this.moving = "right";
 	}
 
 	public void stop() {

@@ -74,6 +74,5 @@ public class EnemyComponent extends Component {
 			this.health--;			
 			this.hasTakenDamage = true;
 		}
-		System.out.println(this.health);
 	}
 }

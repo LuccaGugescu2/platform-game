@@ -39,10 +39,22 @@ public class PlatformerFactory implements EntityFactory {
 		return entityBuilder()
 				.view(new ScrollingBackgroundView(texture("background/forest.png").getImage(), getAppWidth(),
 						getAppHeight()))
-				.zIndex(-1).at(data.getX(), data.getY() + (80 * 70 - getAppHeight()))
+				.zIndex(-2).at(data.getX(), data.getY() + (80 * 70 - getAppHeight()))
 				.with(new IrremovableComponent())
 				.build();
 	}
+	@Spawns("castleBackground")
+	public Entity newCastleBackground(SpawnData data) {
+		Image image = image("background/Sfondo_castello.png");
+		Texture texture = new Texture(image);
+		return entityBuilder()
+				.view(texture)
+				.zIndex(-1)
+				.at(70 *24, 5)
+				.with(new IrremovableComponent())
+				.build();
+	}
+	
 
 	/**
 	 * crea una piattaforma in base ai valori presenti nel file level1.tmx(i file
@@ -123,9 +135,10 @@ public class PlatformerFactory implements EntityFactory {
 		physics.setBodyType(BodyType.DYNAMIC);
 		Image image = image("box.png");
 		Texture texture = new Texture(image);
-
 		physics.setFixtureDef(new FixtureDef().friction(0.9f));
-		return entityBuilder(data).type(BOX).view(texture)
+		return entityBuilder(data)
+				.type(BOX)
+				.view(texture)
 				.bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
 				.with(physics)
 				.with(new CollidableComponent(true))
@@ -147,7 +160,8 @@ public class PlatformerFactory implements EntityFactory {
 	    public Entity newPlayerAttack(SpawnData data) {
 	        return entityBuilder(data)
 	                .type(PLAYER_ATTACK)
-	                .viewWithBBox(new Rectangle(130, 60, Color.RED))
+	                .bbox(new HitBox(new Point2D(0, -30), BoundingShape.box(130, 60)))
+	                //.viewWithBBox(new Rectangle(130, 60, Color.RED))
 	                .with(new CollidableComponent(true))
 					.with(new IrremovableComponent())
 	                .build();

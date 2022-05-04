@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="70" height="80" tilewidth="70" tileheight="70" infinite="0" nextlayerid="18" nextobjectid="238">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="70" height="80" tilewidth="70" tileheight="70" infinite="0" nextlayerid="18" nextobjectid="235">
  <properties>
   <property name="star1time" type="float" value="7"/>
  </properties>
@@ -16,12 +16,12 @@
  </layer>
  <layer id="17" name="Decorazioni" width="70" height="80">
   <data encoding="base64" compression="zlib">
-   eJztzqENACAQBEEUKFA4aqD/9nhBDw/JTLLi3JUCAAAAAAAAAAAAAAAAAAAAAAAAAMAPatSyTzyoRyOad69o590BHnIAgC4AhQ==
+   eJztzqENwCAARFFUq0DhOgPsPx4nugOQvJd8ce5KAQAAAAAAAAAAAAAAAAAAAAAAAADgBk96d584UE0t9X9/aaS57RFwigU5rQCz
   </data>
  </layer>
  <layer id="12" name="Piattaforme" width="70" height="80">
   <data encoding="base64" compression="zlib">
-   eJzt3FGugjAQheHuSZ/Ygs/qiwL7X4U0oXGCDZRai9P5v6SBKDHlZCilV69zONIwtXHef0yt39iHXePRHVDAX0/Xqd3m9kzYv7v4NYg4CxnJOtp7rkP57hxO3qdQJg9/HYXxBwAAoKYwD2l9Tp+Kua6NZzyUMR7dAQUYY3+PMQs5WlyvQxl+TPHrc1exZYxp33lql8RjQ40AAADUlPPsK+e2T8f81pqS69xhfYvvM7Sp1Noaf1tp31jgM1quk5bPrTayhCfnH2uNua1tvk78sw51gDXUCVKxZrKfvF+TXRxjEFJQJ+vIZ1v4vaP8LSzeunm7zKlbHHeq2Kd/sDx/+bp8z1IuXULr562FXFLyWDaNueScZ04umrLxfSWXT+QSl3t+W81aLlbqhesojlzi9ubidh4vc9GkZr1oknp/+TY/jblQL59qZKItl19lIP/PW/jeIbnorxfAihdeG4wI
+   eJzt3EEOwiAQQFEO5S1cVzfWcv9TCElJJhYpRSzC/JcQuzCGTgY60FZj0NLiml2PH649d46hl23dgQ748TS5dlvbnHF8N/ExiDgNMZJ5dPRcl/rdaU5ep1AnHn4chfkHAADgTKEOGb2mz0Wtq2ONhzps6w50gDn295izUGLE/TrU4ecUvz83iU/mmPFdXLtmfjfkCAAAwJlK1r6ytp0N9a02Nfe5w/4WzzOMqdbeGvdWxmcr/MbIeTLyuZ2NWMKT9UeqUdvq5vPEr3XIA6SQJ8jFnslx8npN7OKYg5CDPEkjPvvC+47yXVhsESd8g7kIpXq/ryZr/k//xZAzLkZaO/DM+pZt3YE/Rr5s2dYd6JzWe2jv552Kg9YY4RjyZJ+MEfFCidj9/t7XRwB0eQFsiD3b
   </data>
  </layer>
  <layer id="13" name="Spine" width="70" height="80" opacity="0.9">
@@ -59,6 +59,7 @@
   <object id="103" name="platform" type="platform" x="2506.99" y="4027.99" width="96.0063" height="7.00461"/>
   <object id="104" name="platform" type="platform" x="2366.99" y="3957.98" width="96.0063" height="7.00461"/>
   <object id="105" name="platform" type="platform" x="2506.98" y="3817.99" width="96.0063" height="7.00461"/>
+  <object id="106" name="box" type="box" x="2314" y="4457" width="60" height="60"/>
   <object id="109" name="box" type="box" x="2352.33" y="3686.66" width="60" height="60"/>
   <object id="110" name="platform" type="platform" x="2297" y="3747.98" width="166.001" height="7.01242"/>
   <object id="111" name="wall" type="platform" x="1750" y="3850" width="560" height="70"/>
@@ -154,12 +155,18 @@
   <object id="206" name="platform" type="platform" x="2087" y="108.005" width="26.0067" height="6.9968"/>
   <object id="207" name="platform" type="platform" x="2296.99" y="107.994" width="26.0067" height="6.9968"/>
   <object id="208" name="platform" type="platform" x="2506.99" y="108.002" width="26.0067" height="6.9968"/>
-  <object id="223" name="Skeleton" type="skeleton" x="1018.33" y="5336.66" width="85.3333" height="53"/>
+  <object id="221" name="Skeleton" type="skeleton" x="3045.33" y="4085.33" width="48" height="78.6667"/>
+  <object id="223" name="Skeleton" type="skeleton" x="2088" y="4424.67" width="48" height="78.6667"/>
+  <object id="224" name="Skeleton" type="skeleton" x="2780" y="4003.33" width="48" height="78.6667"/>
+  <object id="225" name="Skeleton" type="skeleton" x="2288" y="3172.67" width="48" height="78.6667"/>
+  <object id="226" name="Skeleton" type="skeleton" x="2638.67" y="3171.33" width="48" height="78.6667"/>
   <object id="227" name="Skeleton" type="skeleton" x="3268" y="1774" width="48" height="78.6667"/>
+  <object id="228" name="Skeleton" type="skeleton" x="2777.33" y="232.667" width="48" height="78.6667"/>
+  <object id="229" name="Skeleton" type="skeleton" x="2142.67" y="234" width="48" height="78.6667"/>
+  <object id="230" name="Skeleton" type="skeleton" x="2352" y="232.667" width="48" height="78.6667"/>
+  <object id="231" name="Skeleton" type="skeleton" x="2561.33" y="232.667" width="48" height="78.6667"/>
   <object id="232" name="checkpoint" type="checkpoint" x="2028" y="1905.33" width="73.3333" height="45.3333"/>
   <object id="233" name="checkpoint" type="checkpoint" x="2518.18" y="3754.55" width="72.7273" height="54.5455"/>
   <object id="234" name="checkpoint" type="checkpoint" x="2030" y="715" width="70" height="43"/>
-  <object id="235" name="checkpoint" type="checkpoint" x="1575.67" y="5319.16" width="70" height="43"/>
-  <object id="237" name="Skeleton" type="skeleton" x="781.333" y="5337.5" width="85.3333" height="53"/>
  </objectgroup>
 </map>

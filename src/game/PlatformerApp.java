@@ -107,7 +107,7 @@ public class PlatformerApp extends GameApplication {
 		player = spawn("player", Config.playerPosition.getX(), Config.playerPosition.getY());
 		set("player", player);
 		spawn("background");
-		
+		spawn("castleBackground");
 		Viewport viewport = getGameScene().getViewport();
 		viewport.setBounds(0, 0, 70 * 70, 80 * 70);
 		viewport.bindToEntity(player, getAppWidth() / 2, getAppHeight() / 2);
