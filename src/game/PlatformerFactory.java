@@ -140,7 +140,6 @@ public class PlatformerFactory implements EntityFactory {
 				.type(ENEMY)
 				.bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
 				.with(new CollidableComponent(true))
-				.with(new IrremovableComponent())
 				.with(new EnemyComponent())
 				.build();
 	}

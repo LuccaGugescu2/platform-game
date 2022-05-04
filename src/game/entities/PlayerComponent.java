@@ -39,7 +39,7 @@ public class PlayerComponent extends Component {
 	 * @author luccagugescu
 	 */
 	public PlayerComponent() {
-		duration = Duration.millis(450);
+		duration = Duration.millis(350);
 		Image image = image("player/_Idle.png");
 		Image imgDash = image("player/_Run.png");
 		Image jumpImage = image("player/_Jump.png");
@@ -71,9 +71,8 @@ public class PlayerComponent extends Component {
 	@Override
 	public void onUpdate(double tpf) {
 		playerAttack.setAnchoredPosition(entity.getPosition());
-		if(this.enemyColliding && isAttacking && enemyLoading) {
+		if(this.enemyColliding && isAttacking && enemyLoading && !enemy.getComponent(EnemyComponent.class).hasTakenDamage) {
 			enemy.getComponent(EnemyComponent.class).addDamage();
-			System.out.print(enemy);
 		}
 		if (texture.getAnimationChannel() == animAttack && timer.elapsed(duration)) {
 			this.isAttacking = false;
@@ -138,8 +137,12 @@ public class PlayerComponent extends Component {
 
 	public void attack() {
 		timer = FXGL.newLocalTimer();
-		if (!isAttacking)
+		if (!isAttacking) {
 			timer.capture();
+			enemy.getComponent(EnemyComponent.class).hasTakenDamage = false;
+			}
+
+
 		this.isAttacking = true;
 	}
 
@@ -174,9 +177,9 @@ public class PlayerComponent extends Component {
 		this.enemyLoading = false;
 	}
 	public void addEnemy(Entity enemy) {
-		if(enemyLoading == false) {
-			this.enemy = enemy;			
-			enemyLoading = true;
-		}
-	}
+			if(!enemyLoading) {
+			this.enemy = enemy;
+			this.enemyLoading = true;
+			}
+}
 }

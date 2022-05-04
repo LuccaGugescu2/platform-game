@@ -16,13 +16,14 @@ import javafx.scene.image.Image;
 import javafx.util.Duration;
 
 public class EnemyComponent extends Component {    
-	public int health = 2;
+	public int health = 3;
 	private LocalTimer timer;
 	private Duration duration;
 	private double distance;
 	private boolean goingRight = true;
 	private double speed;
 	private boolean isRemoved = false;
+	public boolean hasTakenDamage = false;
 	private AnimationChannel animIdle, animWalk, animAttack;
 	private AnimatedTexture texture;
 
@@ -69,11 +70,15 @@ public class EnemyComponent extends Component {
 	}
 
 	public void addDamage() {
-		if(this.health == 0) {
-			getEntity().removeComponent(EnemyComponent.class);
+		if(this.health <= 0) {
+			getEntity().removeFromWorld();
 			this.isRemoved = true;
 		}
-		this.health--;
+		if(!hasTakenDamage) {
+			this.health--;
+			hasTakenDamage = true;
+		}
+		System.out.print(this.health);
 		
 		
 	}
