@@ -28,7 +28,7 @@ public class PlayerComponent extends Component {
 	private int health = 6;
 	private Duration duration;
 	private Entity playerAttack;
-
+	private int attacks = 0;
 	/**
 	 * funzione contenente le animazioni del personaggio
 	 * 
@@ -73,12 +73,14 @@ public class PlayerComponent extends Component {
 	@Override
 	public void onUpdate(double tpf) {
 		playerAttack.setAnchoredPosition(entity.getPosition());
+		
 		if (enemyLoading && texture.getAnimationChannel() == animAttack && timer.elapsed(duration)) {
-			
 			enemy.getComponent(EnemyComponent.class).hasTakenDamage = false;
 			timer.capture();
 			this.isAttacking = false;
 		}
+		if(this.isAttacking && timer.elapsed(duration))
+			this.isAttacking = false;
 		if (texture.getAnimationChannel() != animAttack && isAttacking) {
 			texture.playAnimationChannel(animAttack);
 		}

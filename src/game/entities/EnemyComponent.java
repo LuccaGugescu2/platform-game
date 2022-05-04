@@ -70,10 +70,10 @@ public class EnemyComponent extends Component {
 	}
 
 	public void addDamage() {
-		System.out.print(this.health);
 		if(!this.hasTakenDamage) {
 			this.health--;			
 			this.hasTakenDamage = true;
 		}
+		System.out.println(this.health);
 	}
 }
