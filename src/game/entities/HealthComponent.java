@@ -19,16 +19,21 @@ public class HealthComponent extends Component {
 	private Image full = image("health/full_health.png");
 	public HealthComponent() {
 		
-		texture = new Texture(half);
+		texture = new Texture(full);
 	}
 	public void onAdded() {
 		entity.getViewComponent().addChild(texture);
 	}
-	public void onUpdate() {
-		List<Entity> player = FXGL.getGameWorld().getEntitiesByType(EntityType.PLAYER);
-		 if(player.get(0).getComponent(PlayerComponent.class).getHealth() > 0){
-			texture.setImage(full);
-		 }
-		
+	
+	public void setFull() {
+		texture.setImage(full);
+	}
+	
+	public void sethalf() {
+		texture.setImage(half);
+	}
+	
+	public void setEmpty() {
+		texture.setImage(empty);
 	}
 }

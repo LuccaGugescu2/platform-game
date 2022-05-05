@@ -154,11 +154,6 @@ public class PlatformerApp extends GameApplication {
 
 	@Override
 	protected void initUI() {
-		HPIcon health = new HPIcon();
-		for(int i  = 0; i < 3; i++) {
-			addUINode(new HPIcon(), 10 + i* 40, 30);
-		}
-		
 		//player.getComponent(PlayerComponent.class).getHealth();
 		
 	}
@@ -171,7 +166,33 @@ public class PlatformerApp extends GameApplication {
 		}
 		//getGameScene().getUINodes().forEach((Node nodo) -> nodo.getParent().fil;
 		
-		
+		switch (player.getComponent(PlayerComponent.class).getHealth()) {
+		case 6: 
+			health[2].getComponent(HealthComponent.class).setFull();
+			health[1].getComponent(HealthComponent.class).setFull();
+			health[0].getComponent(HealthComponent.class).setFull();
+			break;
+		case 5:
+			health[2].getComponent(HealthComponent.class).sethalf();
+			break;
+		case 4:
+			health[2].getComponent(HealthComponent.class).setEmpty();
+			break;
+		case 3: 
+			health[1].getComponent(HealthComponent.class).sethalf();
+			break;
+		case 2:
+			health[1].getComponent(HealthComponent.class).setEmpty();
+			break;
+		case 1: 
+			health[0].getComponent(HealthComponent.class).sethalf();
+			break;
+		case 0:
+			health[0].getComponent(HealthComponent.class).setEmpty();
+			break;
+		default:
+			throw new IllegalArgumentException("Unexpected value: " + player.getComponent(PlayerComponent.class).getHealth() % 6 );
+		}
 	}
 
 	public void onPlayerDied() {
