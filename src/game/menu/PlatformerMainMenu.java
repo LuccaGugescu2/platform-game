@@ -42,7 +42,7 @@ public class PlatformerMainMenu extends FXGLMenu {
 	protected double optionMenuPositionX = getAppWidth() / 12;
 	protected double optionMenuPositionY = getAppHeight() / 12;
 	
-	private VBox scoresRoot = new VBox(10);
+
 
 	/**
 	 * Costruttore Main Menu
@@ -86,19 +86,8 @@ public class PlatformerMainMenu extends FXGLMenu {
 
         menuBox.setTranslateX(getAppWidth() / 20);
         menuBox.setTranslateY(getAppHeight() / 2.0 + 100);
-
-
-        scoresRoot.setPadding(new Insets(10));
-        scoresRoot.setAlignment(Pos.TOP_LEFT);
-
-        StackPane hsRoot = new StackPane(new Rectangle(450, 250, Color.color(0, 0, 0.2, 0.8)), scoresRoot);
-        hsRoot.setAlignment(Pos.TOP_CENTER);
-        hsRoot.setCache(true);
-        hsRoot.setCacheHint(CacheHint.SPEED);
-        hsRoot.setTranslateX(getAppWidth());
-        hsRoot.setTranslateY(menuBox.getTranslateY());
-
-
+        
+        
         getContentRoot().getChildren().addAll(menuBox);
     }
 
@@ -134,7 +123,7 @@ public class PlatformerMainMenu extends FXGLMenu {
     			new Text(""),
     			new MenuButton("Audio", dim, () -> audio()),
     			new Text(""),
-    			new MenuButton("Video", dim, () -> instructions()),
+    			new MenuButton("Video", dim, () ->  {}),
     			new Text(""),
     			new MenuButton("Command", dim, () -> command()),
     			new Text(""),
@@ -175,7 +164,7 @@ public class PlatformerMainMenu extends FXGLMenu {
     	FXGL.getDialogService().showConfirmationBox("vuoi resettare le impostazioni ?", yes -> {
     		if (yes) {
             restoreDefaultSettings();
-            comeBackToMainMenu();
+            
         }
     		
     	});
