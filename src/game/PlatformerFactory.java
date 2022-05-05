@@ -151,7 +151,7 @@ public class PlatformerFactory implements EntityFactory {
 	public Entity newSkeleton(SpawnData data) {
 		return entityBuilder(data)
 				.type(ENEMY)
-				.bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+				.bbox(new HitBox(new Point2D(45,0), BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
 				.with(new CollidableComponent(true))
 				.with(new EnemyComponent())
 				.build();
@@ -166,5 +166,15 @@ public class PlatformerFactory implements EntityFactory {
 					.with(new IrremovableComponent())
 	                .build();
 	    }
+	   
+	   @Spawns("health")
+	    public Entity newHealth(SpawnData data) {
+	        return entityBuilder(data)
+	                .type(HEALTH)
+					.with(new IrremovableComponent())
+					.with(new HealthComponent())
+	                .build();
+	    }
+	   
 
 }

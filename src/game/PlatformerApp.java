@@ -32,7 +32,7 @@ import static com.almasb.fxgl.dsl.FXGL.*;
 public class PlatformerApp extends GameApplication {
 	// posizione dello spawn del player
 	private Entity player;
-
+	private Entity [] health = new Entity[3];
 	private static final int MAX_LEVEL = 2;
 	private static final int STARTING_LEVEL = 0;
 	// altezza del livello
@@ -102,6 +102,11 @@ public class PlatformerApp extends GameApplication {
 	protected void initGame() {
 		getGameWorld().addEntityFactory(new PlatformerFactory());
 		nextLevel();
+		//player.getComponent(PlayerComponent.class).getHealth();
+				for (int i = 0; i < health.length; i++) {
+					health[i] = spawn("health", Config.playerPosition.getX() + 50*i, Config.playerPosition.getY());
+					set("health", health[i]);
+				}
 
 		// il player viene spwnato in base alla sua posizione su tiled
 		player = spawn("player", Config.playerPosition.getX(), Config.playerPosition.getY());
