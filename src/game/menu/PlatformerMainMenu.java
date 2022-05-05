@@ -33,15 +33,14 @@ import game.data.Config;
  */
 public class PlatformerMainMenu extends FXGLMenu {
 
+	
 	protected double optionMenuDimensionX = getAppWidth() - getAppWidth() / 6;
 	protected double optionMenuDimensionY = getAppHeight() - getAppHeight() / 6;
 	protected double optionMenuPositionX = getAppWidth() / 12;
 	protected double optionMenuPositionY = getAppHeight() / 12;
 	
-	private KeyCode leftKey = A;
-    private KeyCode rightKey = D;
-    private KeyCode jumpKey = SPACE;
-
+	
+	
 	/**
 	 * Costruttore Main Menu
 	 * @author montis
@@ -100,8 +99,8 @@ public class PlatformerMainMenu extends FXGLMenu {
         
         pane.setHgap(25);
         pane.setVgap(10);
-        pane.addRow(1, getUIFactoryService().newText("Movement"), new HBox(2, new KeyView(leftKey), new KeyView(rightKey)));
-        pane.addRow(2, getUIFactoryService().newText("Jump"), new KeyView(jumpKey));
+        pane.addRow(1, getUIFactoryService().newText("Movement"), new HBox(2, new KeyView(Config.leftKey), new KeyView(Config.rightKey)));
+        pane.addRow(2, getUIFactoryService().newText("Jump"), new KeyView(Config.jumpKey));
         
         
         getDialogService().showBox("Istruzzioni", pane, getUIFactoryService().newButton("Ok"));;
@@ -161,8 +160,7 @@ public class PlatformerMainMenu extends FXGLMenu {
     	
     	FXGL.getDialogService().showConfirmationBox("vuoi resettare le impostazioni ?", yes -> {
     		if (yes) {
-            restoreDefaultSettings();
-            
+            Config.setDefaultSettings();
         }
     		
     	});
@@ -202,9 +200,9 @@ public class PlatformerMainMenu extends FXGLMenu {
 
 		pane.setHgap(450);
 		pane.setVgap(50);
-		pane.addRow(1, getUIFactoryService().newText("Right"), new CommandButton(rightKey,() -> cambiaTasto(rightKey)));
-		pane.addRow(2, getUIFactoryService().newText("Left"),  new CommandButton(leftKey,() -> cambiaTasto(leftKey)));
-		pane.addRow(3, getUIFactoryService().newText("Jump"),  new CommandButton(jumpKey,() -> cambiaTasto(jumpKey)));
+		pane.addRow(1, getUIFactoryService().newText("Right"), new CommandButton(Config.rightKey,() -> cambiaTasto(Config.rightKey)));
+		pane.addRow(2, getUIFactoryService().newText("Left"),  new CommandButton(Config.leftKey,() -> cambiaTasto(Config.leftKey)));
+		pane.addRow(3, getUIFactoryService().newText("Jump"),  new CommandButton(Config.jumpKey,() -> cambiaTasto(Config.jumpKey)));
 		
 		pane.setTranslateX(optionMenuPositionX + optionMenuDimensionX / 4 + 100);
 		pane.setTranslateY(optionMenuPositionY + optionMenuDimensionY / 4);
