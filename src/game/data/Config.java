@@ -7,8 +7,16 @@ import javafx.scene.input.KeyCode;
 public class Config {
     public static Point2D playerPosition = new Point2D(76, 76*70);
     
-    public static KeyCode leftKey = A;
-    public static KeyCode rightKey = D;
-    public static KeyCode jumpKey = SPACE;
+    public static KeyCode leftKey;
+    public static KeyCode rightKey;
+    public static KeyCode jumpKey;
+    
+    
+    public static void setDefaultSettings () {
+    	playerPosition = new Point2D(76, 76*70);
+    	leftKey = A;
+    	rightKey = D;
+    	jumpKey = SPACE;
+    }
 
 }
