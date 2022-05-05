@@ -2,7 +2,9 @@ package game;
 
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
+import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.GameScene;
+import com.almasb.fxgl.app.scene.SceneFactory;
 import com.almasb.fxgl.app.scene.Viewport;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
@@ -10,6 +12,7 @@ import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.input.virtual.VirtualButton;
 import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.texture.Texture;
+import game.menu.PlatformerMainMenu;
 
 import game.collisionHandler.PlayerAttackHandler;
 import game.collisionHandler.PlayerChekpointHandler;
@@ -43,6 +46,17 @@ public class PlatformerApp extends GameApplication {
 		settings.setWidth(1280);
 		settings.setHeight(900);
 		settings.setTitle("platformer");
+		
+		settings.setMainMenuEnabled(true);
+        settings.setGameMenuEnabled(true);
+        settings.setDeveloperMenuEnabled(true);
+        
+        settings.setSceneFactory(new SceneFactory() {
+            @Override
+            public FXGLMenu newMainMenu() {
+                return new PlatformerMainMenu();
+            }
+        });
 	}
 
 	@Override
