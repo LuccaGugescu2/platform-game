@@ -26,23 +26,21 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static javafx.scene.input.KeyCode.*;
-
+import game.data.Config;
 
 /**
  * @author Almas Baimagambetov (almaslvl@gmail.com)
  */
 public class PlatformerMainMenu extends FXGLMenu {
 
-	private KeyCode leftKey = A;
-	private KeyCode rightKey = D;
-	private KeyCode jumpKey = SPACE;
-
 	protected double optionMenuDimensionX = getAppWidth() - getAppWidth() / 6;
 	protected double optionMenuDimensionY = getAppHeight() - getAppHeight() / 6;
 	protected double optionMenuPositionX = getAppWidth() / 12;
 	protected double optionMenuPositionY = getAppHeight() / 12;
 	
-
+	private KeyCode leftKey = A;
+    private KeyCode rightKey = D;
+    private KeyCode jumpKey = SPACE;
 
 	/**
 	 * Costruttore Main Menu
