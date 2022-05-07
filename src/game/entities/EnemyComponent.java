@@ -32,9 +32,9 @@ public class EnemyComponent extends Component {
 		Image image = image("enemies/Skeleton/Idle.png");
 		Image imgWalk = image("enemies/Skeleton/Walk.png");
 		Image imgAttack = image("enemies/Skeleton/Attack.png");
-		animIdle = new AnimationChannel(image, 4, 151, 61, Duration.seconds(0.8), 0, 3);
-		animAttack = new AnimationChannel(imgAttack, 8, 151, 61, Duration.seconds(1.5), 0, 7);
-		animWalk = new AnimationChannel(imgWalk, 4, 151, 61, Duration.seconds(0.8), 0, 3);
+		animIdle = new AnimationChannel(image, 4, 45, 51, Duration.seconds(0.8), 0, 3);
+		animAttack = new AnimationChannel(imgAttack, 8, 45, 57, Duration.seconds(1.5), 0, 7);
+		animWalk = new AnimationChannel(imgWalk, 4, 45, 51, Duration.seconds(0.8), 0, 3);
 		texture = new AnimatedTexture(animIdle);
 		texture.loop();
 	}

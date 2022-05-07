@@ -43,12 +43,12 @@ public class PlayerComponent extends Component {
 		Image fallImage = image("player/_Fall.png");
 		Image wallSlide = image("player/_WallSlide.png");
 		Image attack = image("player/_Attack.png");
-		animIdle = new AnimationChannel(image, 10, 119, 80, Duration.seconds(0.8), 0, 9);
-		animWalk = new AnimationChannel(imgDash, 10, 119, 80, Duration.seconds(0.8), 0, 8);
-		animJump = new AnimationChannel(jumpImage, 3, 119, 80, Duration.seconds(1), 0, 2);
-		animFall = new AnimationChannel(fallImage, 3, 119, 80, Duration.seconds(1), 0, 2);
-		animWallSlide = new AnimationChannel(wallSlide, 3, 119, 80, Duration.seconds(1), 0, 2);
-		animAttack = new AnimationChannel(attack, 4, 119, 80, Duration.seconds(0.35), 0, 3);
+		animIdle = new AnimationChannel(image, 10, 21, 38, Duration.seconds(0.8), 0, 9);
+		animWalk = new AnimationChannel(imgDash, 8, 29, 38, Duration.seconds(0.8), 0, 7);
+		animJump = new AnimationChannel(jumpImage, 3, 25, 38, Duration.seconds(1), 0, 2);
+		animFall = new AnimationChannel(fallImage, 3, 29, 39, Duration.seconds(1), 0, 2);
+		animWallSlide = new AnimationChannel(wallSlide, 3, 21, 38, Duration.seconds(1), 0, 2);
+		animAttack = new AnimationChannel(attack, 4, 65, 39, Duration.seconds(0.35), 0, 3);
 		texture = new AnimatedTexture(animJump);
 		texture.loop();
 	}
