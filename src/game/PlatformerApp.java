@@ -2,6 +2,7 @@ package game;
 
 import com.almasb.fxgl.app.GameApplication;
 import com.almasb.fxgl.app.GameSettings;
+import com.almasb.fxgl.app.MainWindow;
 import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.GameScene;
 import com.almasb.fxgl.app.scene.SceneFactory;
@@ -22,6 +23,7 @@ import game.data.Config;
 import game.entities.HealthComponent;
 import game.entities.PlayerComponent;
 import game.ui.HPIcon;
+import javafx.geometry.Point2D;
 import javafx.scene.Node;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyCode;
@@ -43,8 +45,8 @@ public class PlatformerApp extends GameApplication {
 
 	@Override
 	protected void initSettings(GameSettings settings) {
-		settings.setWidth(1280);
-		settings.setHeight(900);
+		settings.setWidth(1920);
+		settings.setHeight(1080);
 		settings.setTitle("platformer");
 		
 		settings.setMainMenuEnabled(true);
@@ -109,7 +111,7 @@ public class PlatformerApp extends GameApplication {
 	@Override
 	protected void onPreInit() {
 		Config.setDefaultSettings();
-		getSettings().setGlobalMusicVolume(Config.music);
+		getSettings().setGlobalMusicVolume(0.0);
 		loopBGM("BGM_dash_runner.wav");
 	}
 
@@ -120,6 +122,7 @@ public class PlatformerApp extends GameApplication {
 		//player.getComponent(PlayerComponent.class).getHealth();
 				for (int i = 0; i < health.length; i++) {
 					health[i] = spawn("health", Config.playerPosition.getX() + 50*i, Config.playerPosition.getY());
+					health[i].setScaleUniform(0.75);
 					set("health", health[i]);
 				}
 
@@ -155,15 +158,26 @@ public class PlatformerApp extends GameApplication {
 	@Override
 	protected void initUI() {
 		//player.getComponent(PlayerComponent.class).getHealth();
+		HPIcon healthl = new HPIcon();
+		for(int i  = 0; i < 3; i++) {
+			addUINode(new HPIcon(), 10 + i* 40, 30);
+		}
 		
+		if(player.getComponent(PlayerComponent.class).getHealth() < 6)
+			healthl.changeHPIcon();
 	}
 
 	@Override
 	protected void onUpdate(double tpf) {
+		
 		if (player.getY() > levelHeight || player.getComponent(PlayerComponent.class).getHealth() <= 0) {
 			player.getComponent(PlayerComponent.class).refillHealth();
 			onPlayerDied();
 		}
+		
+		health[0].setPosition(new Point2D(player.getX() + -28 , player.getY() - 50 ));
+		health[1].setPosition(new Point2D(player.getX() + 10 , player.getY() - 50 ));
+		health[2].setPosition(new Point2D(player.getX() + 48 , player.getY() - 50 ));
 		//getGameScene().getUINodes().forEach((Node nodo) -> nodo.getParent().fil;
 		
 		switch (player.getComponent(PlayerComponent.class).getHealth()) {
