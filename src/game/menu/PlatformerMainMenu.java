@@ -93,18 +93,7 @@ public class PlatformerMainMenu extends FXGLMenu {
     }
 
     
-    private void instructions() {
-        GridPane pane = new GridPane();
-        
-        
-        pane.setHgap(25);
-        pane.setVgap(10);
-        pane.addRow(1, getUIFactoryService().newText("Movement"), new HBox(2, new KeyView(Config.leftKey), new KeyView(Config.rightKey)));
-        pane.addRow(2, getUIFactoryService().newText("Jump"), new KeyView(Config.jumpKey));
-        
-        
-        getDialogService().showBox("Istruzzioni", pane, getUIFactoryService().newButton("Ok"));;
-    }
+    
     
     /**
      * Crea un menu Opzioni che consente di modificare le impostazioni
@@ -116,11 +105,7 @@ public class PlatformerMainMenu extends FXGLMenu {
     	
     	VBox optionMenu = new VBox(
     			10,
-    			new MenuButton("How to Play", dim, () -> instructions()),
-    			new Text(""),
     			new MenuButton("Audio", dim, () -> audio()),
-    			new Text(""),
-    			new MenuButton("Video", dim, () ->  {}),
     			new Text(""),
     			new MenuButton("Command", dim, () -> command()),
     			new Text(""),
@@ -166,19 +151,22 @@ public class PlatformerMainMenu extends FXGLMenu {
     	});
 	}
 
-    /**
-     * crea l'interfaccia impostazioni audio
+     /**
+     * crea il menu impostazioni audio
      * @author montis
      */
-	private void audio() {
+	protected void audio() {
 		getContentRoot().getChildren().remove(9, getContentRoot().getChildren().size());
 		
 		Slider musicSlider = new Slider();
 		musicSlider.setValue(getSettings().getGlobalMusicVolume());
+		musicSlider.setOnMouseReleased(e -> getSettings().setGlobalMusicVolume(musicSlider.getValue()));
 		
 		Slider volumeSlider = new Slider();
-		var menuAudio = new GridPane();
+		volumeSlider.setValue(getSettings().getGlobalMusicVolume());
+		volumeSlider.setOnMouseReleased(e -> getSettings().setGlobalSoundVolume(volumeSlider.getValue()));
 		
+		var menuAudio = new GridPane();
 		menuAudio.setHgap(optionMenuDimensionX / 3 - 160);
         menuAudio.setVgap(optionMenuDimensionY / 8);
         menuAudio.add(getUIFactoryService().newText("Impostazioni Audio"), 1, 0);
@@ -229,7 +217,7 @@ public class PlatformerMainMenu extends FXGLMenu {
 	}
 
 
-	private static class MenuButton extends Parent {
+	protected static class MenuButton extends Parent {
 		MenuButton(String name, float dimentionText, Runnable action) {
 			var text = getUIFactoryService().newText(name, Color.GRAY, FontType.MONO, dimentionText);
 			text.setStrokeWidth(1);

@@ -9,6 +9,8 @@ import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.input.virtual.VirtualButton;
 import com.almasb.fxgl.physics.PhysicsComponent;
+
+import game.menu.PlatformerGameMenu;
 import game.menu.PlatformerMainMenu;
 import game.collisionHandler.PlayerAttackHandler;
 import game.collisionHandler.PlayerChekpointHandler;
@@ -42,11 +44,17 @@ public class PlatformerApp extends GameApplication {
 		settings.setMainMenuEnabled(true);
 		settings.setGameMenuEnabled(true);
 		settings.setDeveloperMenuEnabled(true);
-		// menu inizio gioco
+		
 		settings.setSceneFactory(new SceneFactory() {
+			// menu inizio gioco
 			@Override
 			public FXGLMenu newMainMenu() {
 				return new PlatformerMainMenu();
+			}
+			// menu interno gioco
+			@Override
+			public FXGLMenu newGameMenu() {
+				return new PlatformerGameMenu();
 			}
 		});
 	}

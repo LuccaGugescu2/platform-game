@@ -10,6 +10,7 @@ public class Config {
     public static KeyCode leftKey;
     public static KeyCode rightKey;
     public static KeyCode jumpKey;
+    public static KeyCode fightKey;
     
     public static double music;
     
@@ -18,7 +19,9 @@ public class Config {
     	leftKey = A;
     	rightKey = D;
     	jumpKey = SPACE;
+    	fightKey = F;
     	music = 0.25;
+    	
     }
 
 }
