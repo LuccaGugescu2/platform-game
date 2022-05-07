@@ -23,6 +23,7 @@ public class HealthComponent extends Component {
 	}
 	public void onAdded() {
 		entity.getViewComponent().addChild(texture);
+		entity.setScaleUniform(0.6);
 	}
 	
 	public void setFull() {
