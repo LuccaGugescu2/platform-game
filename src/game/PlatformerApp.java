@@ -5,6 +5,7 @@ import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.SceneFactory;
 import com.almasb.fxgl.app.scene.Viewport;
+import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.input.virtual.VirtualButton;
@@ -44,13 +45,14 @@ public class PlatformerApp extends GameApplication {
 		settings.setMainMenuEnabled(true);
 		settings.setGameMenuEnabled(true);
 		settings.setDeveloperMenuEnabled(true);
-		
+
 		settings.setSceneFactory(new SceneFactory() {
 			// menu inizio gioco
 			@Override
 			public FXGLMenu newMainMenu() {
 				return new PlatformerMainMenu();
 			}
+
 			// menu interno gioco
 			@Override
 			public FXGLMenu newGameMenu() {
@@ -116,6 +118,7 @@ public class PlatformerApp extends GameApplication {
 
 	@Override
 	protected void initGame() {
+
 		getGameWorld().addEntityFactory(new PlatformerFactory());
 		nextLevel();
 		// creazione vita del player (quando il gioco parte)
@@ -130,6 +133,7 @@ public class PlatformerApp extends GameApplication {
 		spawn("background");
 		spawn("castleBackground");
 		Viewport viewport = getGameScene().getViewport();
+		viewport.setZoom(1.5);
 		viewport.setBounds(0, 0, 70 * 70, 80 * 70);
 		viewport.bindToEntity(player, getAppWidth() / 2, getAppHeight() / 2);
 	}

@@ -21,6 +21,7 @@ import game.entities.PlayerComponent;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
@@ -120,7 +121,10 @@ public class PlatformerFactory implements EntityFactory {
 
 		return entityBuilder(data)
 				.type(PLAYER)
-				.bbox(new HitBox(BoundingShape.box(31.39, 37.18)))
+				.bbox(new HitBox(new Point2D(5, 4), BoundingShape.circle(4)))
+				//.viewWithBBox(new Circle(13, 5, 4, Color.TRASPARENT))
+			//	.viewWithBBox(new Rectangle(25, 28, Color.RED))
+				.bbox(new HitBox(new Point2D(0, 12),BoundingShape.box(25, 24)))
 				.with(physics)
 				.with(new CollidableComponent(true))
 				.with(new IrremovableComponent())

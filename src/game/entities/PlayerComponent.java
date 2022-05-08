@@ -20,7 +20,7 @@ public class PlayerComponent extends Component {
 	private PhysicsComponent physics;
 	private AnimatedTexture texture;
 	private boolean isAttacking = false;
-	private AnimationChannel animIdle, animWalk, animJump, animFall, animWallSlide, animAttack;
+	private AnimationChannel animIdle, animWalk, animJump, animFall, animWallSlide, animAttack, animTurnAround;
 	private boolean wallContact = false;
 	private Entity enemy;
 	private int jumps = 2;
@@ -30,6 +30,7 @@ public class PlayerComponent extends Component {
 	private Entity playerAttack;
 	private int attacks = 0;
 	private String moving = "right";
+	private String prevMoving = "right";
 	/**
 	 * funzione contenente le animazioni del personaggio
 	 * 
@@ -43,12 +44,14 @@ public class PlayerComponent extends Component {
 		Image fallImage = image("player/_Fall.png");
 		Image wallSlide = image("player/_WallSlide.png");
 		Image attack = image("player/_Attack.png");
+		Image turnAround = image("player/_TurnAround.png");
 		animIdle = new AnimationChannel(image, 10, 21, 38, Duration.seconds(0.8), 0, 9);
-		animWalk = new AnimationChannel(imgDash, 8, 29, 38, Duration.seconds(0.8), 0, 7);
-		animJump = new AnimationChannel(jumpImage, 3, 25, 38, Duration.seconds(1), 0, 2);
-		animFall = new AnimationChannel(fallImage, 3, 29, 39, Duration.seconds(1), 0, 2);
-		animWallSlide = new AnimationChannel(wallSlide, 3, 21, 34, Duration.seconds(1), 0, 2);
-		animAttack = new AnimationChannel(attack, 4, 65, 39, Duration.seconds(0.35), 0, 3);
+		animWalk = new AnimationChannel(imgDash, 8, 30, 39, Duration.seconds(0.8), 0, 7);
+		animJump = new AnimationChannel(jumpImage, 3, 26, 38, Duration.seconds(1), 0, 2);
+		animFall = new AnimationChannel(fallImage, 3, 29, 42, Duration.seconds(0.5), 0, 2);
+		animWallSlide = new AnimationChannel(wallSlide, 3, 22, 36, Duration.seconds(0.5), 0, 2);
+		animAttack = new AnimationChannel(attack, 4, 82, 43, Duration.seconds(0.35), 0, 3);
+		animTurnAround= new AnimationChannel(turnAround, 4, 30, 35, Duration.seconds(1), 0, 3);
 		texture = new AnimatedTexture(animJump);
 		texture.loop();
 	}
@@ -73,6 +76,11 @@ public class PlayerComponent extends Component {
 	}
 	@Override
 	public void onUpdate(double tpf) {
+		if(prevMoving != moving && !isAttacking) {
+			if(texture.getAnimationChannel() != animTurnAround)
+			texture.playAnimationChannel(animTurnAround);
+			prevMoving = moving;
+		}
 		switch(moving) {
 		case "left":
 			playerAttack.setAnchoredPosition(entity.getPosition().getX() -100, entity.getPosition().getY());			
@@ -108,7 +116,7 @@ public class PlayerComponent extends Component {
 		if (!physics.isMovingX() && jumps == 2 && !isAttacking) {
 			texture.loopAnimationChannel(animIdle);
 		}
-		if (physics.isMovingX() && !physics.isMovingY()) {
+		if (physics.isMovingX() && !physics.isMovingY() && prevMoving == moving) {
 			if (texture.getAnimationChannel() != animWalk && !isAttacking) {
 				texture.loopAnimationChannel(animWalk);
 			}
