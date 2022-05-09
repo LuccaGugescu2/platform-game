@@ -132,7 +132,7 @@ public class PlatformerApp extends GameApplication {
 		spawn("background");
 		//spawn("castleBackground");
 		Viewport viewport = getGameScene().getViewport();
-		viewport.setZoom(1.05);
+		viewport.setZoom(1);
 		viewport.setBounds(0, 0, 70 * 32, 80 * 32);
 		viewport.bindToEntity(player, getAppWidth() / 2, getAppHeight() / 2);
 	}
@@ -162,12 +162,21 @@ public class PlatformerApp extends GameApplication {
 
 		if (player.getY() > levelHeight || player.getComponent(PlayerComponent.class).getHealth() <= 0) {
 			player.getComponent(PlayerComponent.class).refillHealth();
+			for (int i = 0; i < health.length; i++) {
+				health[i].setOpacity(1);
+			}
 			onPlayerDied();
 		}
+		
+		if(player.getComponent(PlayerComponent.class).isDead) {
+			for (int i = 0; i < health.length; i++) {
+				health[i].setOpacity(0);
+			}
+		}
 		// la vita segue il player
-		health[0].setPosition(new Point2D(player.getX() - 12, player.getY() - 30));
-		health[1].setPosition(new Point2D(player.getX() + 12, player.getY() - 30));
-		health[2].setPosition(new Point2D(player.getX() + 35, player.getY() - 30));
+		health[0].setPosition(new Point2D(player.getX() - 22, player.getY() - 30));
+		health[1].setPosition(new Point2D(player.getX() + 2, player.getY() - 30));
+		health[2].setPosition(new Point2D(player.getX() + 25, player.getY() - 30));
 		// cambia la vita del player se prende danno
 		switch (player.getComponent(PlayerComponent.class).getHealth()) {
 		case 6:

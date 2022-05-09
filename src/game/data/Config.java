@@ -5,7 +5,7 @@ import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 
 public class Config {
-    public static Point2D playerPosition = new Point2D(76, 76*32);
+    public static Point2D playerPosition = new Point2D(76, 77*32 -20);
     
     public static KeyCode leftKey;
     public static KeyCode rightKey;
@@ -15,7 +15,7 @@ public class Config {
     public static double music;
     
     public static void setDefaultSettings () {
-    	playerPosition = new Point2D(76, 76*32);
+    	playerPosition = new Point2D(76, 77*32 -20);
     	leftKey = A;
     	rightKey = D;
     	jumpKey = SPACE;

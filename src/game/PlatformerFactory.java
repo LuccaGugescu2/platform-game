@@ -121,15 +121,15 @@ public class PlatformerFactory implements EntityFactory {
 
 		return entityBuilder(data)
 				.type(PLAYER)
-				.bbox(new HitBox(new Point2D(5, 4), BoundingShape.circle(4)))
-				//.viewWithBBox(new Circle(13, 5, 4, Color.TRASPARENT))
-			//	.viewWithBBox(new Rectangle(25, 28, Color.RED))
-				.bbox(new HitBox(new Point2D(0, 12),BoundingShape.box(25, 24)))
+				//.bbox(new HitBox(new Point2D(5, 4), BoundingShape.circle(4)))
+				//.viewWithBBox(new Circle(13, 5, 4, Color.BLUE))
+				//.viewWithBBox(new Rectangle(28, 38, Color.RED))
+				.bbox(new HitBox(new Point2D(0, 0),BoundingShape.box(28, 38)))
 				.with(physics)
 				.with(new CollidableComponent(true))
 				.with(new IrremovableComponent())
 				.with(new PlayerComponent())
-				.scale(new Point2D(1.5, 1.5)).build();
+				.scale(new Point2D(1.6, 1.6)).build();
 			    
 	}
 
@@ -165,7 +165,7 @@ public class PlatformerFactory implements EntityFactory {
 	        return entityBuilder(data)
 	                .type(PLAYER_ATTACK)
 	                .bbox(new HitBox(new Point2D(0, -30), BoundingShape.box(130, 60)))
-	                //.viewWithBBox(new Rectangle(130, 60, Color.RED))
+	                //.viewWithBBox(new Rectangle(130, 60, Color.GREEN))
 	                .with(new CollidableComponent(true))
 					.with(new IrremovableComponent())
 	                .build();
