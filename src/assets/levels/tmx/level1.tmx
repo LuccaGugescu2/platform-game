@@ -1,172 +1,120 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="70" height="80" tilewidth="70" tileheight="70" infinite="0" nextlayerid="18" nextobjectid="235">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="70" height="80" tilewidth="32" tileheight="32" infinite="0" nextlayerid="27" nextobjectid="566">
  <properties>
   <property name="star1time" type="float" value="7"/>
  </properties>
- <tileset firstgid="1" name="TX_Tileset_Decorazioni" tilewidth="70" tileheight="70" spacing="1" tilecount="49" columns="7">
-  <image source="TX_Tileset_Decorazioni.png" width="512" height="512"/>
+ <tileset firstgid="1" name="TX Tileset Ground" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="../../../../../../Desktop/Texture/TX Tileset Ground.png" width="512" height="512"/>
  </tileset>
- <tileset firstgid="50" name="TX_Tileset_Generale" tilewidth="70" tileheight="70" spacing="1" tilecount="49" columns="7">
-  <image source="TX_Tileset_Generale.png" width="512" height="512"/>
+ <tileset firstgid="257" name="TX Village Props" tilewidth="32" tileheight="32" tilecount="1024" columns="32">
+  <image source="../../../../../../Desktop/Texture/TX Village Props.png" width="1024" height="1024"/>
  </tileset>
- <layer id="4" name="Terreno" width="70" height="80">
+ <tileset firstgid="1281" name="TX Chest Animation" tilewidth="32" tileheight="32" tilecount="256" columns="16">
+  <image source="../../../../../../Desktop/Texture/TX Chest Animation.png" width="512" height="512"/>
+ </tileset>
+ <tileset firstgid="1537" name="addwork" tilewidth="32" tileheight="32" spacing="1" tilecount="682" columns="11">
+  <image source="../../../../../../Desktop/Unorganized Parts/Unorganized Parts/addwork.png" width="384" height="2048"/>
+ </tileset>
+ <layer id="20" name="wall 2" width="70" height="80">
   <data encoding="base64" compression="zlib">
-   eJztwyERAAAIBLDPhKN/MQpgcIjtbgkAAAAAAAAAAAAAAAAAAAAAAAAAAPBNuW49HC/YLNk=
+   eJzt21FOwjAcx/EaEncNT0F4JCYa9RQk+IB6iZ7DJ4/CUTyGj3Yb88H9NlZoy3/6/SbLQgm0fCKELujc6X1dO3dbOXffHv6uPS56exmOofvDWn1Ysz/jJU92WVW5Z4mrdhm6b1XQxVpjLnXbyn3mXsMcXUqEi25OLsvD5yCfL73xJlx640249MabcOmNN+HSG2+y4LK8wHdhXHTPlbsZGP+oz//V5Vi46HDRlXBZHHndFl0WBfZPuAzOMRouus7l4cq5x3A8ZTifsGYf/6joOUbrXHZh/S/heM1wfou0seRiKVx0uOhw0eGiw0WHi86CS3fNw1IWXCyGiw4XHS46XHS46HDR4aLDRYeLDheddZdc17WPZdkl5jp47HXtCWv2aZ9RzjG7cNHhosNFh4sOFx0uOlx0uOhw0VlyeT98l8+995mSJZe6Xbvf2Yd9z747p977TMmiS+494ZSsudSF9886vH/W3TnysUl+f2fR5dTO+X3e77/Jv+SSMlx0uOhw0eGiw0WHiw4XHS46XHS46HDR4aLDRWfBpdT/LEau2eedYdwl5TWTxGv2+Z79Z47ZhYuuhMu2cpvcc6SuhMscw0WHC+XoG0P1rRI=
   </data>
  </layer>
- <layer id="17" name="Decorazioni" width="70" height="80">
+ <layer id="22" name="wall 1" width="70" height="80">
   <data encoding="base64" compression="zlib">
-   eJztzqENwCAARFFUq0DhOgPsPx4nugOQvJd8ce5KAQAAAAAAAAAAAAAAAAAAAAAAAADgBk96d584UE0t9X9/aaS57RFwigU5rQCz
+   eJzt2TEOAUEYQOGhcQUlh9BrJEqHcABHcAQ1DiBOoRSFM/knCsLbLcgy7HuJYmeym99XTDbZlF6v30tp0nvjAQ1UN0/sLWPmZdMz9Aszyc07Ke271fttdjnVuNQ1e/G+x/7J5Rz3LFrqso69Tfy2nee9UaytWuqSy+fLIOYeNjj7r7jsutf1nOfuraMuulSkC6cLl/9/nLOH+7W4HpfkMof3hG+nC6cLpwunC6cLpwunC6cLpwunC6cLpwunC6cLpwtXgkuJ6cLpwunC6cLpwunC6cLpwunC6cLpwunC6cLpwunC6cLpwunC6cLpwunC6cLpwunCleYyLeTbY2kupaQLpwunC6cLpwunC6cLpwunC6cLpwunC6cLpwunC6cLpwunC6cLpwv3CZdfTBdOF04Xa6ILZq5Y2g==
   </data>
  </layer>
- <layer id="12" name="Piattaforme" width="70" height="80">
+ <layer id="24" name="platforms" width="70" height="80">
   <data encoding="base64" compression="zlib">
-   eJzt3EEOwiAQQFEO5S1cVzfWcv9TCElJJhYpRSzC/JcQuzCGTgY60FZj0NLiml2PH649d46hl23dgQ748TS5dlvbnHF8N/ExiDgNMZJ5dPRcl/rdaU5ep1AnHn4chfkHAADgTKEOGb2mz0Wtq2ONhzps6w50gDn295izUGLE/TrU4ecUvz83iU/mmPFdXLtmfjfkCAAAwJlK1r6ytp0N9a02Nfe5w/4WzzOMqdbeGvdWxmcr/MbIeTLyuZ2NWMKT9UeqUdvq5vPEr3XIA6SQJ8jFnslx8npN7OKYg5CDPEkjPvvC+47yXVhsESd8g7kIpXq/ryZr/k//xZAzLkZaO/DM+pZt3YE/Rr5s2dYd6JzWe2jv552Kg9YY4RjyZJ+MEfFCidj9/t7XRwB0eQFsiD3b
+   eJzt3E1ugzAQhmGXO/QClINUlIP5OFFP0WXU+3TfND8StT7jxqDMFL+P5A0LBF/CjJ1YhAAg5+vJ+gp8eu6sr8CPoQvx5TLCwoj9aVhf6yNNp/t9u4ywMOLYWC4W3nlepU9ykchFU7nM6r8a5/o/7DxPlcus/qtxrv9Tg7n8OOz8vkuOmZ5/JJeYOW6qN57Des1lNJ7Des3FGrlonnIR6+ZoNU/ylItYN0ereZKnXDwhF41cNHLRyEUjF41ctEMXPjLHXx97JT5Zr1+9sl6/AntAfdGoL8B61BeN+gLUu9WVpb0L6fF7atDs/Om55D45L/skbnVlae9CevyeGjQ7f3ouuU9O/f4/VHweLZgqPg+04VqPAs/Mb9d6FHhmUIt+pNGPkOOlH/U+59/m/WhcmH+jTrLmdL0O3MJff7sbK9eB/xW/3SHHWz/ygn6EtfgvSaMfIafPzFNb71FjZp5Kj8Ia9CiNHrWtVr9npftu9XvW6n1vrdXnqoTvF/bGyzvyCu/hqdq/toaXd+QV3sNTtX8NwHrfLaeh6w==
   </data>
  </layer>
- <layer id="13" name="Spine" width="70" height="80" opacity="0.9">
+ <layer id="23" name="spike" width="70" height="80">
   <data encoding="base64" compression="zlib">
-   eJzt2zEKwCAMAEDf5tgnSP//jg6lEFwUbJGUOxAyZBAEE4iWAvAfR4jrRBzzAVjTJhcAADn1/Zz+DgAAAG5mIwAAALCujlMIvNfk4awB3qfGAgAwcu7eAFv5Tw3AV9QYgNzc2ZDDBe5wGNM=
+   eJzt2ksKAyEMAFC9R+cmLXiuOf2kC3dTiuB82rwHkpWggSwSUgoAAAAAAG+PWspS58df94w/vOr8CAAAAADAubLMtUeZawMAQA7Ze59P9D77Ih8t8tF6vPo9dxH106J+Wo+Dd1Pu331j/w4AAAByMzPZZ2YC8H/WOnbgCBvTJB/x
+  </data>
+ </layer>
+ <layer id="19" name="ground" width="70" height="80">
+  <data encoding="base64" compression="zlib">
+   eJztwwEJAAAIA7BjBPuHtcALCBssAQAAAAAAAAAAAAAAAAAAAAAAAAAA+GGs1/oA+V0FeQ==
   </data>
  </layer>
  <objectgroup id="5" name="Livello di oggetti 1">
-  <object id="62" name="ground" type="platform" x="0" y="5390.05" width="4900" height="18.625"/>
-  <object id="72" name="wall" type="platform" x="1680" y="2450" width="70" height="2730"/>
-  <object id="73" name="wall" type="platform" x="3500" y="1470" width="70" height="3920"/>
-  <object id="74" name="platform" type="platform" x="3137" y="5288" width="362.997" height="7.00391"/>
-  <object id="75" name="spikes" type="spike" x="3151.02" y="5378.99" width="348.978" height="11.0066"/>
-  <object id="78" name="wall" type="platform" x="1750" y="5040" width="700" height="70"/>
-  <object id="79" name="spikes" type="spike" x="1750" y="5029.01" width="700" height="10.9889"/>
-  <object id="80" name="wall" type="platform" x="2520" y="4620" width="700" height="70"/>
-  <object id="81" name="spikes" type="spike" x="2520" y="4607.64" width="700" height="13.743"/>
-  <object id="82" name="platform" type="platform" x="2978" y="5148.01" width="64.0028" height="6.9968"/>
-  <object id="83" name="platform" type="platform" x="2768" y="5148" width="64.0028" height="6.9968"/>
-  <object id="84" name="platform" type="platform" x="2558" y="5078" width="64.0028" height="6.9968"/>
-  <object id="85" name="platform" type="platform" x="2698" y="4938" width="64.0028" height="6.9968"/>
-  <object id="88" name="platform" type="platform" x="2488" y="4868" width="64.0028" height="6.9968"/>
-  <object id="89" name="platform" type="platform" x="2208" y="4938.01" width="64.0028" height="6.9968"/>
-  <object id="90" name="platform" type="platform" x="1928" y="4938" width="64.0028" height="6.9968"/>
-  <object id="91" name="platform" type="platform" x="1750" y="4798.01" width="31.9996" height="6.9968"/>
-  <object id="92" name="platform" type="platform" x="1750" y="4658.01" width="31.9996" height="6.9968"/>
-  <object id="93" name="platform" type="platform" x="1876.99" y="4728" width="26.0152" height="7.00461"/>
-  <object id="94" name="platform" type="platform" x="1876.98" y="4588" width="26.0152" height="7.00461"/>
-  <object id="96" name="platform" type="platform" x="1947" y="4517.99" width="586.002" height="7.00461"/>
-  <object id="97" name="platform" type="platform" x="3207" y="4517.99" width="166.001" height="7.00461"/>
-  <object id="98" name="platform" type="platform" x="3276.99" y="4307.99" width="96.0063" height="7.00461"/>
-  <object id="99" name="platform" type="platform" x="3417" y="4447.99" width="83.0032" height="7.00461"/>
-  <object id="101" name="platform" type="platform" x="2977.98" y="4167.99" width="204.008" height="7.00461"/>
-  <object id="102" name="platform" type="platform" x="2697.99" y="4097.98" width="204.008" height="7.00461"/>
-  <object id="103" name="platform" type="platform" x="2506.99" y="4027.99" width="96.0063" height="7.00461"/>
-  <object id="104" name="platform" type="platform" x="2366.99" y="3957.98" width="96.0063" height="7.00461"/>
-  <object id="105" name="platform" type="platform" x="2506.98" y="3817.99" width="96.0063" height="7.00461"/>
-  <object id="106" name="box" type="box" x="2314" y="4457" width="60" height="60"/>
-  <object id="109" name="box" type="box" x="2352.33" y="3686.66" width="60" height="60"/>
-  <object id="110" name="platform" type="platform" x="2297" y="3747.98" width="166.001" height="7.01242"/>
-  <object id="111" name="wall" type="platform" x="1750" y="3850" width="560" height="70"/>
-  <object id="112" name="spikes" type="spike" x="1750" y="3839.01" width="560" height="10.9944"/>
-  <object id="113" name="box_blocker" type="platform" x="2302" y="3844.99" width="7.99609" height="5.0039"/>
-  <object id="115" name="platform" type="platform" x="1750" y="3678" width="83.0036" height="7.00461"/>
-  <object id="116" name="box_blocker" type="platform" x="2455" y="3742.98" width="7.99609" height="5.0039"/>
-  <object id="117" name="box_blocker" type="platform" x="2520" y="4615.12" width="9.99511" height="6.25488"/>
-  <object id="118" name="box_blocker" type="platform" x="3212" y="4614.99" width="7.99609" height="5.0039"/>
-  <object id="119" name="platform" type="platform" x="1876.99" y="3537.99" width="96.0063" height="7.00461"/>
-  <object id="120" name="platform" type="platform" x="2016.99" y="3398" width="96.0063" height="7.00461"/>
-  <object id="121" name="platform" type="platform" x="2156.99" y="3258" width="656.011" height="7.00461"/>
-  <object id="122" name="platform" type="platform" x="2838" y="3118" width="64.0028" height="6.9968"/>
-  <object id="123" name="platform" type="platform" x="2978" y="2978.01" width="64.0028" height="6.9968"/>
-  <object id="124" name="platform" type="platform" x="3118" y="2838.01" width="64.0028" height="6.9968"/>
-  <object id="125" name="platform" type="platform" x="3277" y="2698" width="222.997" height="7.00071"/>
-  <object id="126" name="wall" type="platform" x="2870" y="3360" width="630" height="70"/>
-  <object id="127" name="wall" type="platform" x="2240" y="3500" width="70" height="140"/>
-  <object id="128" name="spikes" type="spike" x="2870" y="3349" width="630" height="10.9944"/>
-  <object id="129" name="spikes" type="spike" x="2450.01" y="3246.99" width="69.9931" height="11.0022"/>
-  <object id="130" name="spikes" type="spike" x="2240.01" y="3489" width="69.9931" height="11.0022"/>
-  <object id="131" name="box" type="box" x="2943.82" y="2495.88" width="60" height="60"/>
-  <object id="132" name="platform" type="platform" x="2787" y="2557.99" width="376.008" height="7.00071"/>
-  <object id="133" name="box_blocker" type="platform" x="2805" y="3253" width="7.99609" height="5.0039"/>
-  <object id="136" name="box_blocker" type="platform" x="3155.01" y="2552.99" width="7.99609" height="5.0039"/>
-  <object id="138" name="box_blocker" type="platform" x="2156.99" y="3253" width="7.99609" height="5.0039"/>
-  <object id="139" name="platform" type="platform" x="1928" y="3048" width="64.0028" height="6.9968"/>
-  <object id="140" name="platform" type="platform" x="1750" y="2978" width="32.0014" height="6.9968"/>
-  <object id="141" name="platform" type="platform" x="1877" y="2838" width="26.0067" height="6.9968"/>
-  <object id="142" name="platform" type="platform" x="1928.01" y="2698.01" width="64.0028" height="6.9968"/>
-  <object id="143" name="platform" type="platform" x="1877" y="2558" width="26.0067" height="6.9968"/>
-  <object id="144" name="wall" type="platform" x="2170" y="2310" width="560" height="70"/>
-  <object id="145" name="wall" type="platform" x="2044" y="1960" width="55.9961" height="560"/>
-  <object id="146" name="spikes" type="spike" x="2170" y="2299.01" width="560" height="10.9905"/>
-  <object id="147" name="box_blocker" type="platform" x="2722" y="2305" width="7.99609" height="5.0039"/>
-  <object id="148" name="box_blocker" type="platform" x="2170" y="2304.99" width="7.99609" height="5.0039"/>
-  <object id="149" name="box" type="box" x="2138.75" y="1935.75" width="60" height="60"/>
-  <object id="150" name="platform" type="platform" x="2100" y="1998" width="137.987" height="4.9968"/>
-  <object id="151" name="walljump" type="walljump" x="2030" y="1960" width="14.0034" height="560"/>
-  <object id="152" name="walljump" type="walljump" x="1736" y="1680" width="14.0034" height="770"/>
-  <object id="153" name="wall" type="platform" x="1680" y="1190" width="70" height="490"/>
-  <object id="154" name="wall" type="platform" x="1680" y="1680" width="55.9922" height="768.667"/>
-  <object id="155" name="wall" type="platform" x="3024" y="2005" width="55.9961" height="235.004"/>
-  <object id="156" name="walljump" type="walljump" x="3010" y="2005" width="14.0034" height="235.004"/>
-  <object id="157" name="platform" type="platform" x="2927.01" y="1997.98" width="82.9896" height="7.00973"/>
-  <object id="158" name="box_blocker" type="platform" x="1947" y="4512.98" width="7.99609" height="5.0039"/>
-  <object id="159" name="box" type="box" x="2806" y="1266" width="60" height="60"/>
-  <object id="160" name="spikes" type="spike" x="2660" y="1319" width="139.996" height="10.9944"/>
-  <object id="161" name="box_blocker" type="platform" x="2660" y="1324.99" width="7.99609" height="5.0039"/>
-  <object id="162" name="spikes" type="spike" x="2940" y="1319" width="140" height="10.9944"/>
-  <object id="163" name="box_blocker" type="platform" x="3072" y="1324.99" width="7.99609" height="5.0039"/>
-  <object id="164" name="wall" type="platform" x="2660" y="1330" width="420" height="70"/>
-  <object id="165" name="wall" type="platform" x="3150" y="1120" width="55.9974" height="420"/>
-  <object id="166" name="walljump" type="walljump" x="3206" y="1120" width="14.0034" height="420"/>
-  <object id="167" name="wall" type="platform" x="3500" y="0" width="70" height="980"/>
-  <object id="168" name="wall" type="platform" x="3514" y="980" width="55.9961" height="490"/>
-  <object id="169" name="walljump" type="walljump" x="3500" y="980" width="14.0034" height="490"/>
-  <object id="170" name="platform" type="platform" x="3137" y="1858" width="306" height="7.00071"/>
-  <object id="172" name="platform" type="platform" x="3347" y="1578" width="26.0067" height="6.9968"/>
-  <object id="173" name="platform" type="platform" x="3467.99" y="1718.01" width="32.0078" height="6.9968"/>
-  <object id="174" name="wall" type="platform" x="3010" y="1960" width="69.9981" height="44.9981"/>
-  <object id="175" name="wall" type="platform" x="2044" y="770" width="55.9961" height="490"/>
-  <object id="176" name="walljump" type="walljump" x="2030" y="770" width="14.0034" height="490"/>
-  <object id="177" name="wall" type="platform" x="1680" y="630" width="55.9974" height="560"/>
-  <object id="178" name="walljump" type="walljump" x="1736" y="630" width="14.0034" height="560"/>
-  <object id="179" name="wall" type="platform" x="1680" y="0" width="70" height="630"/>
-  <object id="180" name="platform" type="platform" x="1877" y="1298.01" width="26.0067" height="6.9968"/>
-  <object id="181" name="platform" type="platform" x="1750" y="1438" width="31.9994" height="6.9968"/>
-  <object id="182" name="platform" type="platform" x="2017" y="1508" width="95.9989" height="6.9968"/>
-  <object id="183" name="platform" type="platform" x="2208" y="1228" width="63.995" height="6.9968"/>
-  <object id="184" name="platform" type="platform" x="2367" y="1158" width="96.0007" height="6.9968"/>
-  <object id="185" name="spikes" type="spike" x="2240.02" y="688.992" width="699.979" height="11.0022"/>
-  <object id="186" name="box_blocker" type="platform" x="2932" y="694.993" width="7.99609" height="5.0039"/>
-  <object id="187" name="box_blocker" type="platform" x="2240.02" y="694.972" width="7.99609" height="5.0039"/>
-  <object id="188" name="wall" type="platform" x="2240" y="700" width="700" height="70"/>
-  <object id="189" name="platform" type="platform" x="2137.99" y="598.003" width="64.0085" height="6.9968"/>
-  <object id="190" name="platform" type="platform" x="2278" y="528.008" width="64.0085" height="6.9968"/>
-  <object id="191" name="platform" type="platform" x="1858" y="108.015" width="64.0085" height="6.9968"/>
-  <object id="192" name="platform" type="platform" x="1750" y="248.003" width="32.0003" height="6.9968"/>
-  <object id="193" name="platform" type="platform" x="3136.99" y="318.002" width="26.0067" height="6.9968"/>
-  <object id="194" name="platform" type="platform" x="3347" y="388.013" width="26.0067" height="6.9968"/>
-  <object id="195" name="platform" type="platform" x="3467.99" y="458.013" width="32.0073" height="6.9968"/>
-  <object id="196" name="platform" type="platform" x="2417.99" y="457.994" width="185.007" height="6.9968"/>
-  <object id="197" name="platform" type="platform" x="1997.99" y="318.002" width="974.009" height="6.9968"/>
-  <object id="198" name="platform" type="platform" x="3347" y="598.006" width="153.002" height="6.9968"/>
-  <object id="199" name="box" type="box" x="2520.5" y="395.5" width="60" height="60"/>
-  <object id="200" name="box_blocker" type="platform" x="2418" y="452.982" width="7.99609" height="5.0039"/>
-  <object id="201" name="spikes" type="spike" x="2240.01" y="306.999" width="69.9931" height="11.0022"/>
-  <object id="202" name="spikes" type="spike" x="2450" y="306.999" width="69.9931" height="11.0022"/>
-  <object id="203" name="spikes" type="spike" x="2660" y="306.995" width="69.9931" height="11.0022"/>
-  <object id="204" name="spikes" type="spike" x="2889.99" y="306.991" width="33.0048" height="11.0022"/>
-  <object id="205" name="spikes" type="spike" x="2050.01" y="306.993" width="32.997" height="11.0022"/>
-  <object id="206" name="platform" type="platform" x="2087" y="108.005" width="26.0067" height="6.9968"/>
-  <object id="207" name="platform" type="platform" x="2296.99" y="107.994" width="26.0067" height="6.9968"/>
-  <object id="208" name="platform" type="platform" x="2506.99" y="108.002" width="26.0067" height="6.9968"/>
-  <object id="221" name="Skeleton" type="skeleton" x="3045.33" y="4085.33" width="48" height="78.6667"/>
-  <object id="223" name="Skeleton" type="skeleton" x="2088" y="4424.67" width="48" height="78.6667"/>
-  <object id="224" name="Skeleton" type="skeleton" x="2780" y="4003.33" width="48" height="78.6667"/>
-  <object id="225" name="Skeleton" type="skeleton" x="2288" y="3172.67" width="48" height="78.6667"/>
-  <object id="226" name="Skeleton" type="skeleton" x="2638.67" y="3171.33" width="48" height="78.6667"/>
-  <object id="227" name="Skeleton" type="skeleton" x="3268" y="1774" width="48" height="78.6667"/>
-  <object id="228" name="Skeleton" type="skeleton" x="2777.33" y="232.667" width="48" height="78.6667"/>
-  <object id="229" name="Skeleton" type="skeleton" x="2142.67" y="234" width="48" height="78.6667"/>
-  <object id="230" name="Skeleton" type="skeleton" x="2352" y="232.667" width="48" height="78.6667"/>
-  <object id="231" name="Skeleton" type="skeleton" x="2561.33" y="232.667" width="48" height="78.6667"/>
-  <object id="232" name="checkpoint" type="checkpoint" x="2028" y="1905.33" width="73.3333" height="45.3333"/>
-  <object id="233" name="checkpoint" type="checkpoint" x="2518.18" y="3754.55" width="72.7273" height="54.5455"/>
-  <object id="234" name="checkpoint" type="checkpoint" x="2030" y="715" width="70" height="43"/>
+  <object id="62" name="ground" type="platform" x="0" y="2496" width="2239" height="8.16459"/>
+  <object id="75" name="spikes" type="spike" x="1536" y="2484.82" width="383.89" height="10.8583"/>
+  <object id="224" name="Skeleton" type="skeleton" x="700.405" y="2441.14" width="48" height="53.4667"/>
+  <object id="235" name="spikes" type="spike" x="746.01" y="2291.73" width="427.481" height="11.7902"/>
+  <object id="236" name="platform" type="platform" x="736" y="2304" width="446.659" height="31.7564"/>
+  <object id="237" name="platform" type="platform" x="1279.72" y="2214.42" width="95.784" height="8.2564"/>
+  <object id="238" name="platform" type="platform" x="1407.9" y="2310.67" width="95.784" height="8.2564"/>
+  <object id="239" name="platform" type="platform" x="1597.11" y="2438.37" width="322.284" height="8.2564"/>
+  <object id="240" name="wall" type="platform" x="1919.8" y="173.939" width="32.182" height="2322.68"/>
+  <object id="242" name="wall" type="platform" x="480" y="0" width="31.784" height="2431.95"/>
+  <object id="243" name="platform" type="platform" x="1024.36" y="2246.04" width="95.784" height="8.2564"/>
+  <object id="244" name="platform" type="platform" x="832.214" y="2150" width="95.784" height="8.2564"/>
+  <object id="245" name="platform" type="platform" x="512.077" y="2054.1" width="228.284" height="8.2564"/>
+  <object id="248" name="platform" type="platform" x="740.426" y="2057.21" width="27.6022" height="5.14968"/>
+  <object id="249" name="platform" type="platform" x="1567.9" y="2440.93" width="29.2656" height="5.64968"/>
+  <object id="498" name="platform" type="platform" x="580.199" y="1865.18" width="27.6022" height="5.14968"/>
+  <object id="499" name="platform" type="platform" x="512.375" y="1862.06" width="68.2423" height="8.25502"/>
+  <object id="500" name="platform" type="platform" x="579.778" y="1672.99" width="27.6022" height="5.14968"/>
+  <object id="501" name="platform" type="platform" x="511.954" y="1669.87" width="68.2423" height="8.25502"/>
+  <object id="502" name="platform" type="platform" x="672" y="1958" width="95.784" height="8.2564"/>
+  <object id="503" name="platform" type="platform" x="671.983" y="1766.12" width="95.784" height="8.2564"/>
+  <object id="504" name="spikes" type="spike" x="1354.01" y="1779.49" width="427.481" height="11.7902"/>
+  <object id="505" name="platform" type="platform" x="1344" y="1791.76" width="446.659" height="31.7564"/>
+  <object id="506" name="platform" type="platform" x="992.5" y="1734.8" width="291.284" height="7.71095"/>
+  <object id="507" name="platform" type="platform" x="1283.85" y="1737.36" width="27.6022" height="5.14968"/>
+  <object id="508" name="platform" type="platform" x="864.199" y="1696.56" width="127.102" height="63.1497"/>
+  <object id="509" name="box" type="box" x="1094.18" y="1649.64" width="60" height="60"/>
+  <object id="510" name="spikes" type="spike" x="864" y="1760" width="127.648" height="11.7902"/>
+  <object id="511" name="spikes" type="spike" x="863.926" y="1684.1" width="127.648" height="11.7902"/>
+  <object id="513" name="platform" type="platform" x="1343.45" y="1777.18" width="10.6022" height="14.1497"/>
+  <object id="515" name="platform" type="platform" x="1781.2" y="1777.43" width="10.6022" height="14.1497"/>
+  <object id="516" name="platform" type="platform" x="1824.43" y="1545.18" width="27.6022" height="5.14968"/>
+  <object id="517" name="platform" type="platform" x="1851.62" y="1542.06" width="68.2423" height="8.25502"/>
+  <object id="518" name="platform" type="platform" x="1824.85" y="1352.99" width="27.6022" height="5.14968"/>
+  <object id="519" name="platform" type="platform" x="1852.04" y="1349.87" width="68.2423" height="8.25502"/>
+  <object id="520" name="platform" type="platform" x="1664.45" y="1638" width="95.784" height="8.2564"/>
+  <object id="521" name="platform" type="platform" x="1664.47" y="1446.12" width="95.784" height="8.2564"/>
+  <object id="522" name="platform" type="platform" x="1280.67" y="1317.82" width="386.549" height="8.2564"/>
+  <object id="523" name="platform" type="platform" x="1668.26" y="1320.79" width="27.6022" height="5.14968"/>
+  <object id="525" name="platform" type="platform" x="960.091" y="1312.28" width="319.647" height="31.3315"/>
+  <object id="526" name="spikes" type="spike" x="960.182" y="1299.82" width="319.83" height="11.7902"/>
+  <object id="527" name="platform" type="platform" x="511.877" y="1318.35" width="447.352" height="8.28671"/>
+  <object id="528" name="Skeleton" type="skeleton" x="730.864" y="1267.04" width="48" height="50.8"/>
+  <object id="529" name="Skeleton" type="skeleton" x="1452.27" y="1266.07" width="48" height="50.8"/>
+  <object id="530" name="platform" type="platform" x="576.275" y="1189.75" width="95.784" height="8.2564"/>
+  <object id="531" name="platform" type="platform" x="575.858" y="1062.12" width="95.784" height="8.2564"/>
+  <object id="532" name="platform" type="platform" x="576.108" y="934.372" width="95.784" height="8.2564"/>
+  <object id="533" name="platform" type="platform" x="699.818" y="358.182" width="264.148" height="8.2564"/>
+  <object id="534" name="platform" type="platform" x="672.125" y="360.75" width="27.6022" height="5.14968"/>
+  <object id="535" name="platform" type="platform" x="964.199" y="361.175" width="27.6022" height="5.14968"/>
+  <object id="536" name="platform" type="platform" x="1659.72" y="614.333" width="136.398" height="8.2564"/>
+  <object id="537" name="platform" type="platform" x="1632.03" y="616.901" width="27.6022" height="5.14968"/>
+  <object id="538" name="platform" type="platform" x="1796.25" y="616.75" width="27.6022" height="5.14968"/>
+  <object id="539" name="platform" type="platform" x="1727.75" y="485.75" width="95.784" height="8.2564"/>
+  <object id="541" name="platform" type="platform" x="1851.65" y="166.455" width="323.853" height="8.2564"/>
+  <object id="542" name="platform" type="platform" x="1823.96" y="169.023" width="27.6022" height="5.14968"/>
+  <object id="543" name="platform" type="platform" x="2161.47" y="72.8797" width="5.6022" height="92.9679"/>
+  <object id="544" name="wall" type="platform" x="1920" y="0" width="32.1022" height="73.4679"/>
+  <object id="545" name="wall" type="platform" x="1664" y="32" width="32.1022" height="370.718"/>
+  <object id="547" name="wall" type="platform" x="1856" y="192" width="32.1022" height="210.718"/>
+  <object id="548" name="wall" type="platform" x="736" y="384" width="32.1022" height="530.468"/>
+  <object id="549" name="wall" type="platform" x="512" y="0" width="1408.1" height="29.3847"/>
+  <object id="550" name="spikes" type="spike" x="843.06" y="627.81" width="681.481" height="11.7902"/>
+  <object id="551" name="platform" type="platform" x="833.05" y="640.08" width="702.992" height="31.7564"/>
+  <object id="552" name="platform" type="platform" x="832.5" y="625.5" width="10.6022" height="14.1497"/>
+  <object id="553" name="platform" type="platform" x="1524.92" y="625.417" width="10.6022" height="14.1497"/>
+  <object id="554" name="walljump" type="walljump" x="512" y="224" width="11.2534" height="671.5"/>
+  <object id="555" name="walljump" type="walljump" x="724.761" y="384.024" width="11.2534" height="511.688"/>
+  <object id="556" name="box" type="box" x="836.667" y="266" width="60" height="60"/>
+  <object id="557" name="checkpoint" type="checkpoint" x="512.667" y="1623.67" width="73.3333" height="45.3333"/>
+  <object id="558" name="checkpoint" type="checkpoint" x="1846.33" y="1304.33" width="73.3333" height="45.3333"/>
+  <object id="559" name="checkpoint" type="checkpoint" x="587.5" y="888.5" width="73.3333" height="45.3333"/>
+  <object id="560" name="checkpoint" type="checkpoint" x="1741.42" y="440.25" width="73.3333" height="45.3333"/>
+  <object id="561" name="walljump" type="walljump" x="1696" y="32" width="11.2534" height="351.938"/>
+  <object id="562" name="walljump" type="walljump" x="1844.63" y="190.25" width="11.2534" height="192.938"/>
  </objectgroup>
 </map>

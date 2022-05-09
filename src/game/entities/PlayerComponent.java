@@ -47,14 +47,15 @@ public class PlayerComponent extends Component {
 		Image attack = image("player/_Attack.png");
 		Image turnAround = image("player/_TurnAround.png");
 		Image hit = image("player/_Hit.png");
+		//                            immagine,nuero frame, width frame, height frame, secondi, inizio frame, fine frame 
 		animIdle = new AnimationChannel(image, 10, 21, 38, Duration.seconds(0.3), 0, 9);
-		animWalk = new AnimationChannel(imgDash, 8, 30, 39, Duration.seconds(0.6), 0, 7);
+		animWalk = new AnimationChannel(imgDash, 8, 32, 39, Duration.seconds(0.6), 0, 7);
 		animJump = new AnimationChannel(jumpImage, 3, 26, 38, Duration.seconds(0.6), 0, 2);
 		animFall = new AnimationChannel(fallImage, 3, 29, 42, Duration.seconds(0.2), 0, 2);
-		animWallSlide = new AnimationChannel(wallSlide, 3, 22, 36, Duration.seconds(0.5), 0, 2);
+		animWallSlide = new AnimationChannel(wallSlide, 3, 22, 34, Duration.seconds(0.5), 0, 2);
 		animAttack = new AnimationChannel(attack, 4, 82, 43, Duration.seconds(0.35), 0, 3);
 		animTurnAround = new AnimationChannel(turnAround, 3, 30, 35, Duration.seconds(0.15), 0, 2);
-		animHit = new AnimationChannel(hit, 3, 31, 39, Duration.seconds(0.2), 0, 2);
+		animHit = new AnimationChannel(hit, 3, 31, 39, Duration.seconds(0.6), 0, 2);
 		texture = new AnimatedTexture(animJump);
 		texture.loop();
 		texture.setOnCycleFinished(() -> {
@@ -130,7 +131,7 @@ public class PlayerComponent extends Component {
 			}
 
 		}
-		if (!physics.isMovingX() && !physics.isMovingY() && jumps == 2 && !isAttacking && !isTurnedAround
+		if (!physics.isMovingX() && !physics.isMovingY() && jumps == 2 && !isAttacking
 				&& !isTakingDamage && texture.getAnimationChannel() != animIdle) {
 			texture.loopAnimationChannel(animIdle);
 		}

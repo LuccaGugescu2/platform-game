@@ -34,7 +34,7 @@ public class PlatformerApp extends GameApplication {
 	private static final int MAX_LEVEL = 2;
 	private static final int STARTING_LEVEL = 0;
 	// altezza del livello
-	private static final int levelHeight = 80 * 70;
+	private static final int levelHeight = 80 * 32;
 
 	@Override
 	protected void initSettings(GameSettings settings) {
@@ -131,10 +131,10 @@ public class PlatformerApp extends GameApplication {
 		player = spawn("player", Config.playerPosition.getX(), Config.playerPosition.getY());
 		set("player", player);
 		spawn("background");
-		spawn("castleBackground");
+		//spawn("castleBackground");
 		Viewport viewport = getGameScene().getViewport();
-		viewport.setZoom(1.5);
-		viewport.setBounds(0, 0, 70 * 70, 80 * 70);
+		viewport.setZoom(1.05);
+		viewport.setBounds(0, 0, 70 * 32, 80 * 32);
 		viewport.bindToEntity(player, getAppWidth() / 2, getAppHeight() / 2);
 	}
 
@@ -196,7 +196,7 @@ public class PlatformerApp extends GameApplication {
 			break;
 		default:
 			throw new IllegalArgumentException(
-					"Unexpected value: " + player.getComponent(PlayerComponent.class).getHealth() % 6);
+					"Unexpected value: " + player.getComponent(PlayerComponent.class).getHealth());
 		}
 	}
 

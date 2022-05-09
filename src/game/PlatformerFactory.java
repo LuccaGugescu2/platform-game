@@ -38,9 +38,9 @@ public class PlatformerFactory implements EntityFactory {
 	@Spawns("background")
 	public Entity newBackground(SpawnData data) {
 		return entityBuilder()
-				.view(new ScrollingBackgroundView(texture("background/forest.png").getImage(), getAppWidth(),
-						getAppHeight()))
-				.zIndex(-2).at(data.getX(), data.getY() + (80 * 70 - getAppHeight()))
+				.view(new ScrollingBackgroundView(texture("background/background.png").getImage(), 70 * 32,
+						80 * 32))
+				.zIndex(-2).at(data.getX(), data.getY() + 32 * 32 - getAppHeight())
 				.with(new IrremovableComponent())
 				.build();
 	}
@@ -51,7 +51,7 @@ public class PlatformerFactory implements EntityFactory {
 		return entityBuilder()
 				.view(texture)
 				.zIndex(-1)
-				.at(70 *24, 5)
+				.at(32 * 15, (-87 *32)+2)
 				.with(new IrremovableComponent())
 				.build();
 	}
