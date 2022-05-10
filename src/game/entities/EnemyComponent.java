@@ -1,21 +1,16 @@
 package game.entities;
 
-import static com.almasb.fxgl.dsl.FXGL.image;
-
 import java.util.List;
+import java.util.Random;
 
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
-import com.almasb.fxgl.entity.state.EntityState;
-import com.almasb.fxgl.entity.state.StateComponent;
-import com.almasb.fxgl.physics.PhysicsComponent;
 import com.almasb.fxgl.texture.AnimatedTexture;
 import com.almasb.fxgl.texture.AnimationChannel;
 import com.almasb.fxgl.time.LocalTimer;
 
 import game.EntityType;
-import javafx.scene.image.Image;
 import javafx.util.Duration;
 
 public class EnemyComponent extends Component {
@@ -34,6 +29,8 @@ public class EnemyComponent extends Component {
 	protected boolean isGettingHit = false;
 	protected boolean isDead = false;
 	protected double spwanXposition;
+	protected boolean isAttacking = false;
+
 	@Override
 	public void onAdded() {
 		timer = FXGL.newLocalTimer();
@@ -64,34 +61,30 @@ public class EnemyComponent extends Component {
 
 	// funzionalità comuni dei nemici
 	protected void commonEnemyFunc(double tpf, boolean isProtecting) {
-	/*	if(entity.distance(player) < 50 ) {
-			System.out.println("ATTACCO");
-		}*/
-		if (this.isDead && texture.getAnimationChannel() != animDeath && !isProtecting) {
+		if (this.isDead && texture.getAnimationChannel() != animDeath && !isProtecting && !isAttacking) {
 			texture.playAnimationChannel(animDeath);
 		}
-		if (isGettingHit && texture.getAnimationChannel() != animHit && !isDead && !isProtecting) {
+		if (isGettingHit && texture.getAnimationChannel() != animHit && !isDead && !isProtecting && !isAttacking) {
 			texture.playAnimationChannel(animHit);
 		}
 
-		if (this.hasTakenDamage && texture.getAnimationChannel() != animHit && !isGettingHit && !isDead
-				&& !isProtecting) {
+		if (this.hasTakenDamage && texture.getAnimationChannel() != animHit && !isGettingHit && !isDead && !isProtecting
+				&& !isAttacking) {
 			texture.playAnimationChannel(animHit);
 		}
 		if (timer.elapsed(duration)) {
 			goingRight = !goingRight;
 			timer.capture();
 		}
+
+		if (speed != 0&& texture.getAnimationChannel() != animWalk && !isGettingHit && !isDead && !isProtecting && !isAttacking)
+			texture.loopAnimationChannel(animWalk);
 		if (goingRight) {
-			if (texture.getAnimationChannel() != animWalk && !isGettingHit && !isDead && !isProtecting)
-				texture.loopAnimationChannel(animWalk);
 			entity.setScaleX(-1.2);
 		}
 		if (!goingRight) {
-			if (texture.getAnimationChannel() != animWalk && !isGettingHit && !isDead && !isProtecting)
-				texture.loopAnimationChannel(animWalk);
 			entity.setScaleX(1.2);
 		}
-		entity.translateX(goingRight || entity.getPosition().getX() > spwanXposition - 10 ? speed * tpf : -speed * tpf);
+		entity.translateX(goingRight || entity.getPosition().getX() > spwanXposition - 8 ? speed * tpf : -speed * tpf);
 	}
 }

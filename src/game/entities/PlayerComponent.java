@@ -27,9 +27,7 @@ public class PlayerComponent extends Component {
 	private int jumps = 2;
 	private boolean enemyLoading = false;
 	private int health = 6;
-	private Duration duration;
 	private Entity playerAttack;
-	private int attacks = 0;
 	private String moving = "right";
 	private String prevMoving = "right";
 	private boolean isTurnedAround = false;
@@ -206,7 +204,7 @@ public class PlayerComponent extends Component {
 			if (jumps == 0)
 				return;
 
-			physics.setVelocityY(-330);
+			physics.setVelocityY(-360);
 			jumps--;
 		}
 	}
