@@ -10,7 +10,7 @@ import javafx.util.Duration;
 
 public class FlyingEyeComponent extends EnemyComponent{
 	public FlyingEyeComponent() {
-		duration = Duration.seconds(1.4);
+		duration = Duration.seconds(1.7);
 		Image image = image("enemies/Flying eye/Flight.png");
 		Image imgWalk = image("enemies/Flying eye/Flight.png");
 		Image imgAttack = image("enemies/Flying eye/Attack.png");

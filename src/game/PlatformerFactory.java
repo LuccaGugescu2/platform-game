@@ -170,7 +170,7 @@ public class PlatformerFactory implements EntityFactory {
 	    public Entity newPlayerAttack(SpawnData data) {
 	        return entityBuilder(data)
 	                .type(PLAYER_ATTACK)
-	                .bbox(new HitBox(new Point2D(0, -30), BoundingShape.box(130, 60)))
+	                .bbox(new HitBox(new Point2D(0, -30), BoundingShape.box(120, 60)))
 	                //.viewWithBBox(new Rectangle(130, 60, Color.GREEN))
 	                .with(new CollidableComponent(true))
 					.with(new IrremovableComponent())

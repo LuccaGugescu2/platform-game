@@ -115,9 +115,9 @@
   <object id="561" name="walljump" type="walljump" x="1696" y="32" width="11.2534" height="351.938"/>
   <object id="562" name="walljump" type="walljump" x="1844.63" y="190.25" width="11.2534" height="192.938"/>
   <object id="566" name="Skeleton" type="skeleton" x="1452.43" y="1263.09" width="45" height="55"/>
-  <object id="567" name="Skeleton" type="skeleton" x="661.939" y="1263.85" width="45" height="55"/>
-  <object id="568" name="flyingEye" type="flyingEye" x="621" y="690" width="46" height="30"/>
-  <object id="570" name="flyingEye" type="flyingEye" x="618" y="551" width="46" height="30"/>
-  <object id="571" name="flyingEye" type="flyingEye" x="615" y="419" width="46" height="30"/>
+  <object id="567" name="Skeleton" type="skeleton" x="723.272" y="1261.18" width="45" height="55"/>
+  <object id="568" name="flyingEye" type="flyingEye" x="609.5" y="809.5" width="46" height="30"/>
+  <object id="570" name="flyingEye" type="flyingEye" x="608.5" y="577" width="46" height="30"/>
+  <object id="571" name="flyingEye" type="flyingEye" x="609" y="386" width="46" height="30"/>
  </objectgroup>
 </map>
