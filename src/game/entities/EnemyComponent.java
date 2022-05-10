@@ -34,7 +34,7 @@ public class EnemyComponent extends Component {
 		Image imgHit = image("enemies/Skeleton/Take Hit.png");
 		animIdle = new AnimationChannel(image, 4, 45, 51, Duration.seconds(0.8), 0, 3);
 		animAttack = new AnimationChannel(imgAttack, 8, 45, 57, Duration.seconds(1.5), 0, 7);
-		animWalk = new AnimationChannel(imgWalk, 4, 45, 51, Duration.seconds(0.8), 0, 3);
+		animWalk = new AnimationChannel(imgWalk, 4, 47, 51, Duration.seconds(0.8), 0, 3);
 		animHit = new AnimationChannel(imgHit, 4, 45, 51, Duration.seconds(0.8), 0, 3);
 		texture = new AnimatedTexture(animIdle);
 		texture.loop();

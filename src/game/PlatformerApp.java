@@ -13,6 +13,7 @@ import com.almasb.fxgl.physics.PhysicsComponent;
 
 import game.menu.PlatformerGameMenu;
 import game.menu.PlatformerMainMenu;
+import game.collisionHandler.EnemyCollisionHandler;
 import game.collisionHandler.PlayerAttackHandler;
 import game.collisionHandler.PlayerChekpointHandler;
 import game.collisionHandler.PlayerSpikeHandler;
@@ -145,6 +146,7 @@ public class PlatformerApp extends GameApplication {
 		getPhysicsWorld().addCollisionHandler(new PlayerSpikeHandler());
 		getPhysicsWorld().addCollisionHandler(new PlayerChekpointHandler());
 		getPhysicsWorld().addCollisionHandler(new PlayerAttackHandler());
+		getPhysicsWorld().addCollisionHandler(new EnemyCollisionHandler());
 	}
 
 	private void nextLevel() {

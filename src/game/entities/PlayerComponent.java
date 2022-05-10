@@ -198,7 +198,7 @@ public class PlayerComponent extends Component {
 			if (jumps == 0)
 				return;
 
-			physics.setVelocityY(-400);
+			physics.setVelocityY(-330);
 			jumps--;
 		}
 	}

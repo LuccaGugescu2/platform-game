@@ -18,8 +18,8 @@ public class CheckpointComponent extends Component {
 	public CheckpointComponent() {
 		Image bonfireImage = image("bonfire.png");
 		Image bonfireAnimation = image("bonfire_animation.png");
-		animBonfire = new AnimationChannel(bonfireAnimation, 8, 60, 80, Duration.seconds(0.6), 0, 7);
-		bonfire = new AnimationChannel(bonfireImage, 1, 35, 80, Duration.seconds(0.8), 0, 0);
+		animBonfire = new AnimationChannel(bonfireAnimation, 8, 36, 70, Duration.seconds(0.6), 0, 7);
+		bonfire = new AnimationChannel(bonfireImage, 1, 35, 70, Duration.seconds(0.8), 0, 0);
 		texture = new AnimatedTexture(bonfire);
 
 	}

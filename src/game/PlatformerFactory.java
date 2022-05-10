@@ -121,9 +121,6 @@ public class PlatformerFactory implements EntityFactory {
 
 		return entityBuilder(data)
 				.type(PLAYER)
-				//.bbox(new HitBox(new Point2D(5, 4), BoundingShape.circle(4)))
-				//.viewWithBBox(new Circle(13, 5, 4, Color.BLUE))
-				//.viewWithBBox(new Rectangle(28, 38, Color.RED))
 				.bbox(new HitBox(new Point2D(0, 0),BoundingShape.box(28, 38)))
 				.with(physics)
 				.with(new CollidableComponent(true))
@@ -155,7 +152,7 @@ public class PlatformerFactory implements EntityFactory {
 	public Entity newSkeleton(SpawnData data) {
 		return entityBuilder(data)
 				.type(ENEMY)
-				.bbox(new HitBox(new Point2D(45,0), BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+				.bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
 				.with(new CollidableComponent(true))
 				.with(new EnemyComponent())
 				.build();
