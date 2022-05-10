@@ -3,6 +3,7 @@ package game.entities;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.component.Component;
 import com.almasb.fxgl.physics.PhysicsComponent;
+import com.almasb.fxgl.physics.box2d.dynamics.FixtureDef;
 import com.almasb.fxgl.texture.AnimatedTexture;
 import com.almasb.fxgl.texture.AnimationChannel;
 import com.almasb.fxgl.time.LocalTimer;
@@ -74,8 +75,15 @@ public class PlayerComponent extends Component {
 				texture.playAnimationChannel(animIdle);
 			}
 			if (texture.getAnimationChannel() == animAttack) {
-				if (this.enemyLoading)
-					enemy.getComponent(EnemyComponent.class).hasTakenDamage = false;
+				if (this.enemyLoading) {
+					if(enemy.getComponents().get(5).getClass() == FlyingEyeComponent.class) {
+						enemy.getComponent(FlyingEyeComponent.class).hasTakenDamage = false;
+					}
+					else {
+						enemy.getComponent(SkeletonComponent.class).hasTakenDamage = false;
+					}
+					
+				}
 				this.isAttacking = false;
 			}
 			if (texture.getAnimationChannel() == animTurnAround) {
@@ -237,5 +245,12 @@ public class PlayerComponent extends Component {
 
 	public boolean getAttack() {
 		return this.isAttacking;
+	}
+	public void addFriction() {
+		// fa scivolare il player sul muro
+		physics.setFixtureDef(new FixtureDef().friction(0.005f));
+	}
+	public void removeFriction() {
+		physics.setFixtureDef(new FixtureDef().friction(0f));
 	}
 }

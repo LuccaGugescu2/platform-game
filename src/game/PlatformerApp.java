@@ -141,7 +141,7 @@ public class PlatformerApp extends GameApplication {
 	@Override
 	protected void initPhysics() {
 		// gestione collisioni tra entità
-		getPhysicsWorld().setGravity(0, 760);
+		getPhysicsWorld().setGravity(0, 800);
 		getPhysicsWorld().addCollisionHandler(new PlayerWallJumpHandler());
 		getPhysicsWorld().addCollisionHandler(new PlayerSpikeHandler());
 		getPhysicsWorld().addCollisionHandler(new PlayerChekpointHandler());

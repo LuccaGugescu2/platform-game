@@ -16,35 +16,20 @@ import javafx.scene.image.Image;
 import javafx.util.Duration;
 
 public class EnemyComponent extends Component {
-	public int health = 3;
-	private LocalTimer timer;
-	private Duration duration;
-	private boolean goingRight = true;
-	private double speed;
-	private boolean isRemoved = false;
+	protected int health = 3;
+	protected LocalTimer timer;
+	protected Duration duration;
+	protected boolean goingRight = true;
+	protected double speed;
 	public boolean hasTakenDamage = false;
-	private AnimationChannel animIdle, animWalk, animAttack, animHit;
-	private AnimatedTexture texture;
-	private boolean isGettingHit = false;
-	public EnemyComponent() {
-		duration = Duration.seconds(2);
-		Image image = image("enemies/Skeleton/Idle.png");
-		Image imgWalk = image("enemies/Skeleton/Walk.png");
-		Image imgAttack = image("enemies/Skeleton/Attack.png");
-		Image imgHit = image("enemies/Skeleton/Take Hit.png");
-		animIdle = new AnimationChannel(image, 4, 45, 51, Duration.seconds(0.8), 0, 3);
-		animAttack = new AnimationChannel(imgAttack, 8, 45, 57, Duration.seconds(1.5), 0, 7);
-		animWalk = new AnimationChannel(imgWalk, 4, 47, 51, Duration.seconds(0.8), 0, 3);
-		animHit = new AnimationChannel(imgHit, 4, 45, 51, Duration.seconds(0.8), 0, 3);
-		texture = new AnimatedTexture(animIdle);
-		texture.loop();
-		texture.setOnCycleFinished(() -> {
-			if(texture.getAnimationChannel() == animHit) {
-				this.isGettingHit = false;
-				this.speed = -75;
-			}
-		});
-	}
+	protected AnimationChannel animIdle;
+	protected AnimationChannel animWalk;
+	protected AnimationChannel animAttack;
+	protected AnimationChannel animHit;
+	protected AnimationChannel animDeath;
+	protected AnimatedTexture texture;
+	protected boolean isGettingHit = false;
+	protected boolean isDead = false;
 
 	@Override
 	public void onAdded() {
@@ -52,14 +37,18 @@ public class EnemyComponent extends Component {
 		timer.capture();
 		speed = -75;
 		entity.getViewComponent().addChild(texture);
+		entity.setScaleY(1.2);
 	}
 
 	public void onUpdate(double tpf) {
-		if(isGettingHit && texture.getAnimationChannel() != animHit) {
+		if (this.isDead && texture.getAnimationChannel() != animDeath) {
+			texture.playAnimationChannel(animDeath);
+		}
+		if (isGettingHit && texture.getAnimationChannel() != animHit && !isDead) {
 			texture.playAnimationChannel(animHit);
 		}
-		
-		if(this.hasTakenDamage && texture.getAnimationChannel() != animHit && !isGettingHit) {
+
+		if (this.hasTakenDamage && texture.getAnimationChannel() != animHit && !isGettingHit && !isDead) {
 			texture.playAnimationChannel(animHit);
 		}
 		if (timer.elapsed(duration)) {
@@ -67,27 +56,30 @@ public class EnemyComponent extends Component {
 			timer.capture();
 		}
 		if (goingRight) {
-			if (texture.getAnimationChannel() != animWalk && !isGettingHit)
+			if (texture.getAnimationChannel() != animWalk && !isGettingHit && !isDead)
 				texture.loopAnimationChannel(animWalk);
 			entity.setScaleX(-1.2);
-			entity.setScaleY(1.2);
 		}
 		if (!goingRight) {
-			if (texture.getAnimationChannel() != animWalk && !isGettingHit)
+			if (texture.getAnimationChannel() != animWalk && !isGettingHit && !isDead)
 				texture.loopAnimationChannel(animWalk);
 			entity.setScaleX(1.2);
-			entity.setScaleY(1.2);
 		}
 		entity.translateX(goingRight ? speed * tpf : -speed * tpf);
 
 	}
 
 	public void addDamage() {
-		if(!this.hasTakenDamage) {
-			this.health--;			
+		if (!this.hasTakenDamage) {
+			if (this.health > 1) {
+				this.health--;
+			} else {
+				this.isDead = true;
+			}
 			this.hasTakenDamage = true;
 			this.isGettingHit = true;
 			this.speed = 0;
+
 		}
 	}
 }

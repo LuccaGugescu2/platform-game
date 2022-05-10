@@ -15,13 +15,13 @@ import com.almasb.fxgl.physics.box2d.dynamics.FixtureDef;
 import com.almasb.fxgl.texture.Texture;
 
 import game.entities.CheckpointComponent;
-import game.entities.EnemyComponent;
+import game.entities.FlyingEyeComponent;
 import game.entities.HealthComponent;
 import game.entities.PlayerComponent;
+import game.entities.SkeletonComponent;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.scene.paint.Color;
-import javafx.scene.shape.Circle;
 import javafx.scene.shape.Rectangle;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
@@ -116,17 +116,16 @@ public class PlatformerFactory implements EntityFactory {
 		physics.setBodyType(BodyType.DYNAMIC);
 		physics.addGroundSensor(new HitBox("GROUND_SENSOR", new Point2D(16, 38), BoundingShape.box(6, 8)));
 
-		// fa scivolare il player sul muro
-		physics.setFixtureDef(new FixtureDef().friction(0.005f));
 
 		return entityBuilder(data)
 				.type(PLAYER)
-				.bbox(new HitBox(new Point2D(0, 0),BoundingShape.box(28, 38)))
+				.bbox(new HitBox(new Point2D(0, 0),BoundingShape.box(25, 38)))
 				.with(physics)
 				.with(new CollidableComponent(true))
 				.with(new IrremovableComponent())
 				.with(new PlayerComponent())
-				.scale(new Point2D(1.6, 1.6)).build();
+				.scale(new Point2D(1.6, 1.6))
+				.build();
 			    
 	}
 
@@ -154,7 +153,17 @@ public class PlatformerFactory implements EntityFactory {
 				.type(ENEMY)
 				.bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
 				.with(new CollidableComponent(true))
-				.with(new EnemyComponent())
+				.with(new SkeletonComponent())
+				.build();
+	}
+	@Spawns("flyingEye")
+	public Entity newSFlyingEye(SpawnData data) {
+		return entityBuilder(data)
+				.type(ENEMY)
+				// .viewWithBBox(new Rectangle(46, 30, Color.GREEN))
+				.bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+				.with(new CollidableComponent(true))
+				.with(new FlyingEyeComponent())
 				.build();
 	}
 	   @Spawns("playerAttack")
