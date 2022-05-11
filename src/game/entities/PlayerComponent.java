@@ -132,7 +132,7 @@ public class PlayerComponent extends Component {
 		}
 		switch (moving) {
 		case "left":
-			playerAttack.setAnchoredPosition(entity.getPosition().getX() - 100, entity.getPosition().getY());
+			playerAttack.setAnchoredPosition(entity.getPosition().getX() - 120, entity.getPosition().getY());
 			break;
 		case "right":
 			playerAttack.setAnchoredPosition(entity.getPosition().getX(), entity.getPosition().getY());
