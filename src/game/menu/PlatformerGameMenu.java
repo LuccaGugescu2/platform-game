@@ -62,8 +62,7 @@ public class PlatformerGameMenu extends FXGLMenu {
         pane.addRow(2, getUIFactoryService().newText("Attack"), new KeyView(Config.fightKey));
         pane.addRow(3, getUIFactoryService().newText("Jump"), new KeyView(Config.jumpKey));
         
-        
-        getDialogService().showBox("Istruzzioni", pane, getUIFactoryService().newButton("Ok"));;
+        getDialogService().showBox("Istruzzioni", pane, getUIFactoryService().newButton("Ok"));
     }
 }
 

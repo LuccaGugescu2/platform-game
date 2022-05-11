@@ -122,7 +122,7 @@ public class PlatformerApp extends GameApplication {
 
 	@Override
 	protected void onPreInit() {
-		Config.setDefaultSettings();
+		Config.setDefaultConfig();
 		getSettings().setGlobalMusicVolume(0.0);
 		loopBGM("BGM_dash_runner.wav");
 	}

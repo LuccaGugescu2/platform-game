@@ -4,7 +4,10 @@ package game.menu;
 import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.MenuType;
 import com.almasb.fxgl.dsl.FXGL;
+import com.almasb.fxgl.entity.Entity;
+import com.almasb.fxgl.entity.GameWorld;
 import com.almasb.fxgl.input.view.KeyView;
+import com.almasb.fxgl.texture.AnimationChannel;
 import com.almasb.fxgl.ui.FontType;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
@@ -15,6 +18,7 @@ import javafx.scene.Parent;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Slider;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -24,9 +28,19 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+import javafx.util.Duration;
+
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static javafx.scene.input.KeyCode.*;
+
+import java.io.*;
+import java.nio.file.FileAlreadyExistsException;
+import java.util.function.Consumer;
+
+import game.PlatformerApp;
 import game.data.Config;
+import game.data.GestoreSalvataggio;
 
 /**
  * @author Almas Baimagambetov (almaslvl@gmail.com)
@@ -52,7 +66,7 @@ public class PlatformerMainMenu extends FXGLMenu {
         Image img = new Image("/assets/textures/background/darkCastleBackground.jpg");
         
         background.setFill(new ImagePattern(img));
-        
+      
         getContentRoot().getChildren().setAll(background);
         
         
@@ -88,7 +102,33 @@ public class PlatformerMainMenu extends FXGLMenu {
         getContentRoot().getChildren().addAll(menuBox);
     }
 
-    private void showCredits() {
+	/**
+	 * crea file partita e lo carica
+	 * @author montis
+	 */
+    private void newGame() {
+		getDialogService().showInputBox("Metti nome partita", new Consumer<String>() {
+			@Override
+			public void accept(String t) {
+				try {
+					GestoreSalvataggio.SalvaSuFile(t);
+					
+					
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				
+				
+			}
+		});
+		
+	}
+
+    /**
+     * finestra credits
+     * @author montis
+     */
+	private void showCredits() {
         getDialogService().showMessageBox("credits.....");
     }
 
@@ -122,6 +162,7 @@ public class PlatformerMainMenu extends FXGLMenu {
     	bgOption.setFill(Color.BLACK);
     	bgOption.setTranslateX(optionMenuPositionX);
     	bgOption.setTranslateY(optionMenuPositionY);
+    	bgOption.setOpacity(0.9);
     	
     	Separator separa = new Separator(Orientation.VERTICAL);
     	separa.setTranslateX(optionMenuPositionX + optionMenuDimensionX / 4);
@@ -145,9 +186,8 @@ public class PlatformerMainMenu extends FXGLMenu {
     	
     	FXGL.getDialogService().showConfirmationBox("vuoi resettare le impostazioni ?", yes -> {
     		if (yes) {
-            Config.setDefaultSettings();
-        }
-    		
+            Config.setDefaultConfig();
+    		}
     	});
 	}
 
@@ -184,18 +224,30 @@ public class PlatformerMainMenu extends FXGLMenu {
 	private void command() {
 		getContentRoot().getChildren().remove(9, getContentRoot().getChildren().size());
 		
+		Image imgDash = new Image(new File("player/_Run.png").toURI().toString());
+		ImageView run = new ImageView(imgDash);
+		
+		
 		GridPane pane = new GridPane();
 
-		pane.setHgap(450);
+		pane.setHgap(optionMenuDimensionX / 3 - 50);
+		pane.setVgap(optionMenuDimensionY / 3);
+		pane.add(getUIFactoryService().newText("Comandi"), 1, 0);
+		
+		pane.addRow(2, 
+					getUIFactoryService().newText("Right"), 
+					new CommandButton(Config.rightKey,() -> cambiaTasto(Config.rightKey)));
+		pane.add(run, 2, 1);
 		pane.setVgap(50);
-		pane.addRow(1, getUIFactoryService().newText("Right"), new CommandButton(Config.rightKey,() -> cambiaTasto(Config.rightKey)));
-		pane.addRow(2, getUIFactoryService().newText("Left"),  new CommandButton(Config.leftKey,() -> cambiaTasto(Config.leftKey)));
-		pane.addRow(3, getUIFactoryService().newText("Jump"),  new CommandButton(Config.jumpKey,() -> cambiaTasto(Config.jumpKey)));
 		
-		pane.setTranslateX(optionMenuPositionX + optionMenuDimensionX / 4 + 100);
-		pane.setTranslateY(optionMenuPositionY + optionMenuDimensionY / 4);
+		pane.addRow(3, getUIFactoryService().newText("Left"),  new CommandButton(Config.leftKey,() -> cambiaTasto(Config.leftKey)));
 		
-		getContentRoot().getChildren().add(pane);
+		pane.addRow(4, getUIFactoryService().newText("Jump"),  new CommandButton(Config.jumpKey,() -> cambiaTasto(Config.jumpKey)));
+		
+		pane.setTranslateX(optionMenuPositionX + optionMenuDimensionX / 4 + 35);
+		pane.setTranslateY(optionMenuPositionY + 30);
+		
+		getContentRoot().getChildren().addAll(pane);
     }
 
     /**
