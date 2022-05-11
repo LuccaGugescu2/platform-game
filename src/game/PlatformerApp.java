@@ -46,7 +46,6 @@ public class PlatformerApp extends GameApplication {
 		settings.setMainMenuEnabled(true);
 		settings.setGameMenuEnabled(true);
 		settings.setDeveloperMenuEnabled(true);
-
 		settings.setSceneFactory(new SceneFactory() {
 			// menu inizio gioco
 			@Override
@@ -102,6 +101,17 @@ public class PlatformerApp extends GameApplication {
 				player.getComponent(PlayerComponent.class).attack();
 			}
 		}, KeyCode.F);
+		getInput().addAction(new UserAction("menu dev") {
+			@Override
+			protected void onActionBegin() {
+				FXGL.getDevService().openDevPane();
+			}
+			@Override
+			protected void onActionEnd() {
+				FXGL.getDevService().closeDevPane();
+			}
+
+		}, KeyCode.P);
 
 	}
 
@@ -140,7 +150,7 @@ public class PlatformerApp extends GameApplication {
 
 	@Override
 	protected void initPhysics() {
-		// gestione collisioni tra entit‡
+		// gestione collisioni tra entit√†
 		getPhysicsWorld().setGravity(0, 800);
 		getPhysicsWorld().addCollisionHandler(new PlayerWallJumpHandler());
 		getPhysicsWorld().addCollisionHandler(new PlayerSpikeHandler());
