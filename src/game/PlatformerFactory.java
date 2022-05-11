@@ -27,7 +27,7 @@ import javafx.scene.shape.Rectangle;
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static game.EntityType.*;
 
-//la classe factory definisce le specifiche delle varie entit‡ ad esempio se hanno le collisioni, le fisiche, se hanno una classe componente dove sono presenti le animazioni ...
+//la classe factory definisce le specifiche delle varie entit√† ad esempio se hanno le collisioni, le fisiche, se hanno una classe componente dove sono presenti le animazioni ...
 public class PlatformerFactory implements EntityFactory {
 	/**
 	 * crea il background che si muove in base alla posizione del player
@@ -72,7 +72,7 @@ public class PlatformerFactory implements EntityFactory {
 	}
 
 	/**
-	 * crea un entit‡ invisibile che permette al player di scivolare solo su alcuni
+	 * crea un entit√† invisibile che permette al player di scivolare solo su alcuni
 	 * tipi di muro
 	 * 
 	 * @param data
@@ -104,7 +104,7 @@ public class PlatformerFactory implements EntityFactory {
 	}
 
 	/**
-	 * crea l' entit‡ player e gli assegna le fisiche e alcuni elementi presenti nel
+	 * crea l' entit√† player e gli assegna le fisiche e alcuni elementi presenti nel
 	 * PlayerComponent come ad esempio le animazioni
 	 * 
 	 * @param data
@@ -170,7 +170,7 @@ public class PlatformerFactory implements EntityFactory {
 	    public Entity newPlayerAttack(SpawnData data) {
 	        return entityBuilder(data)
 	                .type(PLAYER_ATTACK)
-	                .bbox(new HitBox(new Point2D(0, -30), BoundingShape.box(120, 60)))
+	                .bbox(new HitBox(new Point2D(32, -10), BoundingShape.box(80, 60)))
 	                //.viewWithBBox(new Rectangle(130, 60, Color.GREEN))
 	                .with(new CollidableComponent(true))
 					.with(new IrremovableComponent())
