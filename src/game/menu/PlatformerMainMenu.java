@@ -12,6 +12,7 @@ import com.almasb.fxgl.ui.FontType;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.geometry.Point3D;
 import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
 import javafx.scene.Parent;
@@ -229,20 +230,31 @@ public class PlatformerMainMenu extends FXGLMenu {
 		
 		
 		GridPane pane = new GridPane();
-
-		pane.setHgap(optionMenuDimensionX / 3 - 50);
+		
+		Image imgRun = new Image("/assets/textures/player/gif/run.gif");
+		Image imgJump = new Image("/assets/textures/player/gif/jump.gif");
+		Image imgAttack = new Image("/assets/textures/player/gif/attack.gif");		
+		
+		ImageView imgRightView = new ImageView(imgRun);
+		ImageView imgLeftView = new ImageView(imgRun);
+		imgLeftView.setRotationAxis(new Point3D(0, 1, 0));
+		imgLeftView.setRotate(180);
+		
+		ImageView imgJumpView = new ImageView(imgJump);
+		ImageView imgAttackView = new ImageView(imgAttack);
+		
+		pane.setHgap(optionMenuDimensionX / 3 - 100);
 		pane.setVgap(optionMenuDimensionY / 3);
 		pane.add(getUIFactoryService().newText("Comandi"), 1, 0);
 		
 		pane.addRow(2, 
-					getUIFactoryService().newText("Right"), 
-					new CommandButton(Config.rightKey,() -> cambiaTasto(Config.rightKey)));
-		pane.add(run, 2, 1);
+					getUIFactoryService().newText("Right"),new CommandButton(Config.rightKey,() -> cambiaTasto(Config.rightKey)),imgRightView);
 		pane.setVgap(50);
 		
-		pane.addRow(3, getUIFactoryService().newText("Left"),  new CommandButton(Config.leftKey,() -> cambiaTasto(Config.leftKey)));
+		pane.addRow(3, getUIFactoryService().newText("Left"),  new CommandButton(Config.leftKey,() -> cambiaTasto(Config.leftKey)), imgLeftView);
 		
-		pane.addRow(4, getUIFactoryService().newText("Jump"),  new CommandButton(Config.jumpKey,() -> cambiaTasto(Config.jumpKey)));
+		pane.addRow(4, getUIFactoryService().newText("Jump"),  new CommandButton(Config.jumpKey,() -> cambiaTasto(Config.jumpKey)) , imgJumpView);
+		pane.addRow(5, getUIFactoryService().newText("Attack"),  new CommandButton(Config.fightKey,() -> cambiaTasto(Config.jumpKey)) , imgAttackView);
 		
 		pane.setTranslateX(optionMenuPositionX + optionMenuDimensionX / 4 + 35);
 		pane.setTranslateY(optionMenuPositionY + 30);

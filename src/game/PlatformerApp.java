@@ -135,6 +135,7 @@ public class PlatformerApp extends GameApplication {
 
 	@Override
 	protected void initGame() {
+		
 		getGameWorld().addEntityFactory(new PlatformerFactory());
 		nextLevel();
 		// creazione vita del player (quando il gioco parte)

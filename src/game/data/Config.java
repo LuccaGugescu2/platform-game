@@ -11,6 +11,7 @@ public class Config {
     public static KeyCode jumpKey = SPACE;
     public static KeyCode fightKey = F;
     
+    public static int health;
     public static int playerPositionX;
     public static int playerPositionY;
     
@@ -22,7 +23,8 @@ public class Config {
     public static void setDefaultConfig () {
     	playerPositionX = 76;
     	playerPositionY = 77*32 -20;
-    			
+    	health = 6;
+    	
     	playerPosition = new Point2D(playerPositionX, playerPositionY);
     	music = 0.25;
     	

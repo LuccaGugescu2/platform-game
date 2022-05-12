@@ -1,11 +1,19 @@
 package game.menu;
 
 import static com.almasb.fxgl.dsl.FXGL.getDialogService;
+import static com.almasb.fxgl.dsl.FXGL.getGameScene;
+import static com.almasb.fxgl.dsl.FXGL.getGameWorld;
 import static com.almasb.fxgl.dsl.FXGL.getUIFactoryService;
 
+import java.lang.ModuleLayer.Controller;
+import java.util.ResourceBundle.Control;
+
+import com.almasb.fxgl.app.scene.FXGLLoadingScene;
 import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.MenuType;
+import com.almasb.fxgl.entity.GameWorld;
 import com.almasb.fxgl.input.view.KeyView;
+import com.almasb.fxgl.scene.Scene;
 
 import game.data.Config;
 import game.menu.PlatformerMainMenu.*;
@@ -39,7 +47,7 @@ public class PlatformerGameMenu extends FXGLMenu {
                 new MenuButton("Resume", dim, () -> fireResume()),
                 new MenuButton("Salva", dim, () -> fireSave()),
                 new MenuButton("Comandi", dim, () -> instructions()),
-                new MenuButton("Torna al menu", dim, () -> fireExitToMainMenu()),
+                new MenuButton("Torna al menu", dim, () -> exitToMainMenu()),
                 new MenuButton("Esci", dim, () -> fireExit())
         );
 		
@@ -52,6 +60,13 @@ public class PlatformerGameMenu extends FXGLMenu {
 		
 	}
 	
+	private void exitToMainMenu() {
+		getGameScene().clearUINodes();
+		getGameScene().getContentRoot().getChildren().remove(getContentRoot().getChildren().size());
+		getController().gotoMainMenu();
+		
+	}
+
 	private void instructions() {
         GridPane pane = new GridPane();
         

@@ -8,6 +8,7 @@ import com.almasb.fxgl.texture.AnimatedTexture;
 import com.almasb.fxgl.texture.AnimationChannel;
 import com.almasb.fxgl.time.LocalTimer;
 
+import game.data.Config;
 import javafx.geometry.Point2D;
 import javafx.scene.image.Image;
 import javafx.util.Duration;
@@ -26,7 +27,6 @@ public class PlayerComponent extends Component {
 	private Entity enemy;
 	private int jumps = 2;
 	private boolean enemyLoading = false;
-	private int health = 6;
 	private Entity playerAttack;
 	private String moving = "right";
 	private String prevMoving = "right";
@@ -65,7 +65,7 @@ public class PlayerComponent extends Component {
 		texture.loop();
 		texture.setOnCycleFinished(() -> {
 			if (texture.getAnimationChannel() == animDeath) {
-				this.health--;
+				Config.health--;
 				this.isDead = false;
 				this.isTakingDamage = false;
 				physics.setVelocityX(0);
@@ -118,7 +118,7 @@ public class PlayerComponent extends Component {
 	public void onUpdate(double tpf) {
 		if (this.isDead && texture.getAnimationChannel() != animDeath) {
 			texture.playAnimationChannel(animDeath);
-			System.out.println(health);
+			System.out.println(Config.health);
 		}
 		if (this.isTakingDamage && texture.getAnimationChannel() != animHit && !isDead) {
 			texture.playAnimationChannel(animHit);
@@ -224,8 +224,8 @@ public class PlayerComponent extends Component {
 	}
 
 	public void losehealth() {
-		if (this.health > 1) {
-			health--;
+		if (Config.health > 1) {
+			Config.health--;
 			physics.setVelocityY(-350);
 		} else {
 			this.isDead = true;
@@ -234,11 +234,11 @@ public class PlayerComponent extends Component {
 	}
 
 	public void refillHealth() {
-		health = 6;
+		Config.health = 6;
 	}
 
 	public int getHealth() {
-		return health;
+		return Config.health;
 	}
 
 	public boolean getAttack() {

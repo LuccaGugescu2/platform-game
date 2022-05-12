@@ -10,12 +10,12 @@ public class GestoreSalvataggio {
 		
 		FileWriter file = new FileWriter(nome + ".txt");
 		
-		BufferedWriter buf = new BufferedWriter(file);
+		var buf = new BufferedWriter(file);
 		
 		
 		buf.write(String.valueOf(Config.playerPositionX) + "\t"
 				+ String.valueOf(Config.playerPositionY) + "\t"
-				+ String.valueOf(Config.music) + "\t"
+				+ String.valueOf(Config.health) + "\t"
 				);
 		
 		buf.flush();
