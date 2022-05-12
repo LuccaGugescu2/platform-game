@@ -92,12 +92,13 @@ public class SkeletonComponent extends EnemyComponent {
 		}*/
 		List<Entity> playerEntities = FXGL.getGameWorld().getEntitiesByType(EntityType.PLAYER);
 		Entity player = playerEntities.get(0);
-		if (entity.distance(player) < 120 && !enemyWaiting) {
+		if (entity.distance(player) < 120 && !enemyWaiting && !isGettingHit) {
 			if (entity.getPosition().getX() < player.getPosition().getX()) {
 				goingRight = false;
 			} else {
 				goingRight = true;
 			}
+			speed = -75;
 		}
 		/*if (entity.distance(player) < 70) {
 			speed = 0;
