@@ -11,6 +11,7 @@ import com.almasb.fxgl.input.UserAction;
 import com.almasb.fxgl.input.virtual.VirtualButton;
 import com.almasb.fxgl.physics.PhysicsComponent;
 
+import com.almasb.fxgl.physics.PhysicsWorld;
 import game.menu.PlatformerGameMenu;
 import game.menu.PlatformerMainMenu;
 import game.collisionHandler.EnemyCollisionHandler;
@@ -60,6 +61,10 @@ public class PlatformerApp extends GameApplication {
 				return new PlatformerGameMenu();
 			}
 		});
+
+
+
+
 	}
 
 	@Override
@@ -151,14 +156,15 @@ public class PlatformerApp extends GameApplication {
 
 	@Override
 	protected void initPhysics() {
+		PhysicsWorld physics = getPhysicsWorld();
 		// gestione collisioni tra entità
-		getPhysicsWorld().setGravity(0, 800);
-		getPhysicsWorld().addCollisionHandler(new PlayerWallJumpHandler());
-		getPhysicsWorld().addCollisionHandler(new PlayerSpikeHandler());
-		getPhysicsWorld().addCollisionHandler(new PlayerChekpointHandler());
-		getPhysicsWorld().addCollisionHandler(new PlayerAttackHandler());
-		getPhysicsWorld().addCollisionHandler(new EnemyCollisionHandler());
-		getPhysicsWorld().addCollisionHandler(new EnemyLimitHandler());
+		physics.setGravity(0, 800);
+		physics.addCollisionHandler(new PlayerWallJumpHandler());
+		physics.addCollisionHandler(new PlayerSpikeHandler());
+		physics.addCollisionHandler(new PlayerChekpointHandler());
+		physics.addCollisionHandler(new PlayerAttackHandler());
+		physics.addCollisionHandler(new EnemyCollisionHandler());
+		physics.addCollisionHandler(new EnemyLimitHandler());
 	}
 
 	private void nextLevel() {
