@@ -30,11 +30,15 @@ public class EnemyComponent extends Component {
 	protected boolean isDead = false;
 	protected double spwanXposition;
 	protected boolean isAttacking = false;
+	protected boolean enemyWaiting = false;
+	protected LocalTimer waitTimer;
 
 	@Override
 	public void onAdded() {
 		timer = FXGL.newLocalTimer();
 		timer.capture();
+		waitTimer = FXGL.newLocalTimer();
+		waitTimer.capture();
 		speed = -75;
 		entity.getViewComponent().addChild(texture);
 		entity.setScaleY(1.2);
@@ -61,10 +65,15 @@ public class EnemyComponent extends Component {
 
 	// funzionalità comuni dei nemici
 	protected void commonEnemyFunc(double tpf, boolean isProtecting) {
-		if (this.isDead && texture.getAnimationChannel() != animDeath && !isProtecting && !isAttacking) {
+		if (waitTimer.elapsed(Duration.seconds(1.2))) {
+			enemyWaiting = false;
+		}
+		if (this.isDead && texture.getAnimationChannel() != animDeath && !isProtecting && !isAttacking
+				&& !this.hasTakenDamage) {
 			texture.playAnimationChannel(animDeath);
 		}
-		if (isGettingHit && texture.getAnimationChannel() != animHit && !isDead && !isProtecting && !isAttacking) {
+		if (isGettingHit && texture.getAnimationChannel() != animHit && !isDead && !isProtecting && !isAttacking
+				&& !this.hasTakenDamage) {
 			texture.playAnimationChannel(animHit);
 		}
 
@@ -77,7 +86,8 @@ public class EnemyComponent extends Component {
 			timer.capture();
 		}
 
-		if (speed != 0&& texture.getAnimationChannel() != animWalk && !isGettingHit && !isDead && !isProtecting && !isAttacking)
+		if (speed != 0 && texture.getAnimationChannel() != animWalk && !isGettingHit && !isDead && !isProtecting
+				&& !isAttacking && !this.hasTakenDamage)
 			texture.loopAnimationChannel(animWalk);
 		if (goingRight) {
 			entity.setScaleX(-1.2);
@@ -85,6 +95,12 @@ public class EnemyComponent extends Component {
 		if (!goingRight) {
 			entity.setScaleX(1.2);
 		}
-		entity.translateX(goingRight || entity.getPosition().getX() > spwanXposition - 8 ? speed * tpf : -speed * tpf);
+		entity.translateX(goingRight ? speed * tpf : -speed * tpf);
+	}
+
+	public void changeDirection() {
+		goingRight = !goingRight;
+		enemyWaiting = true;
+		waitTimer.capture();
 	}
 }

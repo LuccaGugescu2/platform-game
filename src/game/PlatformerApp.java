@@ -14,6 +14,7 @@ import com.almasb.fxgl.physics.PhysicsComponent;
 import game.menu.PlatformerGameMenu;
 import game.menu.PlatformerMainMenu;
 import game.collisionHandler.EnemyCollisionHandler;
+import game.collisionHandler.EnemyLimitHandler;
 import game.collisionHandler.PlayerAttackHandler;
 import game.collisionHandler.PlayerChekpointHandler;
 import game.collisionHandler.PlayerSpikeHandler;
@@ -141,7 +142,7 @@ public class PlatformerApp extends GameApplication {
 		player = spawn("player", Config.playerPosition.getX(), Config.playerPosition.getY());
 		set("player", player);
 		spawn("background");
-		//spawn("castleBackground");
+		spawn("castleBackground");
 		Viewport viewport = getGameScene().getViewport();
 		viewport.setZoom(1);
 		viewport.setBounds(0, 0, 70 * 32, 80 * 32);
@@ -157,6 +158,7 @@ public class PlatformerApp extends GameApplication {
 		getPhysicsWorld().addCollisionHandler(new PlayerChekpointHandler());
 		getPhysicsWorld().addCollisionHandler(new PlayerAttackHandler());
 		getPhysicsWorld().addCollisionHandler(new EnemyCollisionHandler());
+		getPhysicsWorld().addCollisionHandler(new EnemyLimitHandler());
 	}
 
 	private void nextLevel() {

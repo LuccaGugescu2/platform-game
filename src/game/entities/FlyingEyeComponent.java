@@ -10,7 +10,6 @@ import javafx.util.Duration;
 
 public class FlyingEyeComponent extends EnemyComponent{
 	public FlyingEyeComponent() {
-		duration = Duration.seconds(1.7);
 		Image image = image("enemies/Flying eye/Flight.png");
 		Image imgWalk = image("enemies/Flying eye/Flight.png");
 		Image imgAttack = image("enemies/Flying eye/Attack.png");
@@ -34,5 +33,34 @@ public class FlyingEyeComponent extends EnemyComponent{
 				entity.removeFromWorld();
 			}
 		});
+	}
+	protected void commonEnemyFunc(double tpf, boolean isProtecting) {
+		if (waitTimer.elapsed(Duration.seconds(1.2))) {
+			enemyWaiting = false;
+		}
+		if (this.isDead && texture.getAnimationChannel() != animDeath && !isProtecting && !isAttacking
+				&& !this.hasTakenDamage) {
+			texture.playAnimationChannel(animDeath);
+		}
+		if (isGettingHit && texture.getAnimationChannel() != animHit && !isDead && !isProtecting && !isAttacking
+				&& !this.hasTakenDamage) {
+			texture.playAnimationChannel(animHit);
+		}
+
+		if (this.hasTakenDamage && texture.getAnimationChannel() != animHit && !isGettingHit && !isDead && !isProtecting
+				&& !isAttacking) {
+			texture.playAnimationChannel(animHit);
+		}
+
+		if (speed != 0 && texture.getAnimationChannel() != animWalk && !isGettingHit && !isDead && !isProtecting
+				&& !isAttacking && !this.hasTakenDamage)
+			texture.loopAnimationChannel(animWalk);
+		if (goingRight) {
+			entity.setScaleX(-1.2);
+		}
+		if (!goingRight) {
+			entity.setScaleX(1.2);
+		}
+		entity.translateX(goingRight ? speed * tpf : -speed * tpf);
 	}
 }

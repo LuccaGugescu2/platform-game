@@ -64,6 +64,7 @@ public class SkeletonComponent extends EnemyComponent {
 	public void onAdded() {
 		timer = FXGL.newLocalTimer();
 		timer.capture();
+		waitTimer = FXGL.newLocalTimer();
 		speed = -75;
 		entity.getViewComponent().addChild(texture);
 		entity.setScaleY(1.2);
@@ -79,7 +80,7 @@ public class SkeletonComponent extends EnemyComponent {
 			texture.playAnimationChannel(animShield);
 		}
 		// attiva lo scudo random
-		if (timer.elapsed(Duration.seconds(1.4))) {
+		/*if (timer.elapsed(Duration.seconds(1.4))) {
 			Random rand = new Random();
 			int upperbound = 122;
 			// generate random values from 0-121
@@ -88,25 +89,17 @@ public class SkeletonComponent extends EnemyComponent {
 				isProtecting = true;
 				speed = 0;
 			}
-		}
-		if (choose.elapsed(Duration.seconds(1))) {
-			// sceglie cosa fare
-			Random rand = new Random();
-			int upperbound = 3;
-			// generate random values from 0-2
-			actionToDo = rand.nextInt(upperbound);
-			choose.capture();
-		}
+		}*/
 		List<Entity> playerEntities = FXGL.getGameWorld().getEntitiesByType(EntityType.PLAYER);
 		Entity player = playerEntities.get(0);
-		if (entity.distance(player) < 90) {
+		if (entity.distance(player) < 120 && !enemyWaiting) {
 			if (entity.getPosition().getX() < player.getPosition().getX()) {
 				goingRight = false;
 			} else {
 				goingRight = true;
 			}
 		}
-		if (entity.distance(player) < 70) {
+		/*if (entity.distance(player) < 70) {
 			speed = 0;
 			if (actionToDo == 0) {
 				isProtecting = true;
@@ -123,7 +116,7 @@ public class SkeletonComponent extends EnemyComponent {
 		} else {
 			speed = -75;
 		}
-		
+		*/
 
 	}
 

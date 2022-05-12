@@ -46,12 +46,12 @@ public class PlatformerFactory implements EntityFactory {
 	}
 	@Spawns("castleBackground")
 	public Entity newCastleBackground(SpawnData data) {
-		Image image = image("background/Sfondo_castello.png");
+		Image image = image("background/castelBackgound.png");
 		Texture texture = new Texture(image);
 		return entityBuilder()
 				.view(texture)
 				.zIndex(-1)
-				.at(32 * 15, (-87 *32)+2)
+				.at(32 * 16, 0)
 				.with(new IrremovableComponent())
 				.build();
 	}
@@ -85,6 +85,18 @@ public class PlatformerFactory implements EntityFactory {
 				.with(new CollidableComponent(true)).build();
 	}
 
+	
+	
+	@Spawns("enemyLimit")
+	public Entity newEnemyLimit(SpawnData data) {
+		return entityBuilder(data).type(ENEMYLIMIT)
+				.bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+				.with(new CollidableComponent(true))
+				.build();
+	}
+
+	
+	
 	@Spawns("checkpoint")
 	public Entity newCheckpoint(SpawnData data) {
 		return entityBuilder(data).type(CHEKPOINT)
@@ -116,7 +128,8 @@ public class PlatformerFactory implements EntityFactory {
 		physics.setBodyType(BodyType.DYNAMIC);
 		physics.addGroundSensor(new HitBox("GROUND_SENSOR", new Point2D(16, 38), BoundingShape.box(6, 8)));
 
-
+		physics.setFixtureDef(new FixtureDef().friction(0.005f));
+		
 		return entityBuilder(data)
 				.type(PLAYER)
 				.bbox(new HitBox(new Point2D(0, 0),BoundingShape.box(25, 38)))
