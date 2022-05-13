@@ -5,6 +5,7 @@ import static com.almasb.fxgl.dsl.FXGL.getGameScene;
 import static com.almasb.fxgl.dsl.FXGL.getGameWorld;
 import static com.almasb.fxgl.dsl.FXGL.getUIFactoryService;
 
+import java.io.IOException;
 import java.lang.ModuleLayer.Controller;
 import java.util.ResourceBundle.Control;
 
@@ -16,6 +17,7 @@ import com.almasb.fxgl.input.view.KeyView;
 import com.almasb.fxgl.scene.Scene;
 
 import game.data.Config;
+import game.data.GestoreSalvataggio;
 import game.menu.PlatformerMainMenu.*;
 import javafx.geometry.Pos;
 import javafx.scene.layout.GridPane;
@@ -45,7 +47,14 @@ public class PlatformerGameMenu extends FXGLMenu {
 		var menuBox = new VBox(
                 10,
                 new MenuButton("Resume", dim, () -> fireResume()),
-                new MenuButton("Salva", dim, () -> fireSave()),
+                new MenuButton("Salva", dim, () -> {
+					try {
+						GestoreSalvataggio.SalvaSuFile(Config.nomePartita);
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}),
+                
                 new MenuButton("Comandi", dim, () -> instructions()),
                 new MenuButton("Torna al menu", dim, () -> exitToMainMenu()),
                 new MenuButton("Esci", dim, () -> fireExit())

@@ -87,7 +87,7 @@ public class PlatformerMainMenu extends FXGLMenu {
         var menuBox = new VBox(
                 10,
                 new MenuButton("Continua", dim, () -> {}),
-                new MenuButton("Nuova Partita", dim, () -> fireNewGame()),
+                new MenuButton("Nuova Partita", dim, () -> newGame()),
                 new MenuButton("Opzioni", dim, () -> option()),
                 new MenuButton("Credits", dim, () -> showCredits()),
                 new MenuButton("Esci", dim, () -> fireExit()),
@@ -111,9 +111,13 @@ public class PlatformerMainMenu extends FXGLMenu {
 		getDialogService().showInputBox("Metti nome partita", new Consumer<String>() {
 			@Override
 			public void accept(String t) {
+				
+				Config.setConfig();
 				try {
+					Config.nomePartita = t;
 					GestoreSalvataggio.SalvaSuFile(t);
 					
+					fireNewGame();
 					
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -187,7 +191,7 @@ public class PlatformerMainMenu extends FXGLMenu {
     	
     	FXGL.getDialogService().showConfirmationBox("vuoi resettare le impostazioni ?", yes -> {
     		if (yes) {
-            Config.setDefaultConfig();
+    			Config.music = 0.25;
     		}
     	});
 	}
