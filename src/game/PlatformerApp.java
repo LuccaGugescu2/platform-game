@@ -62,9 +62,6 @@ public class PlatformerApp extends GameApplication {
 			}
 		});
 
-
-
-
 	}
 
 	@Override
@@ -112,6 +109,7 @@ public class PlatformerApp extends GameApplication {
 			protected void onActionBegin() {
 				FXGL.getDevService().openDevPane();
 			}
+
 			@Override
 			protected void onActionEnd() {
 				FXGL.getDevService().closeDevPane();
@@ -130,11 +128,11 @@ public class PlatformerApp extends GameApplication {
 	protected void onPreInit() {
 		getSettings().setGlobalMusicVolume(Config.music);
 		loopBGM("BGM_dash_runner.wav");
+		getPhysicsWorld().clear();
 	}
 
 	@Override
 	protected void initGame() {
-		
 		getGameWorld().addEntityFactory(new PlatformerFactory());
 		nextLevel();
 		// creazione vita del player (quando il gioco parte)
@@ -157,7 +155,6 @@ public class PlatformerApp extends GameApplication {
 	@Override
 	protected void initPhysics() {
 		PhysicsWorld physics = getPhysicsWorld();
-		// gestione collisioni tra entità
 		physics.setGravity(0, 800);
 		physics.addCollisionHandler(new PlayerWallJumpHandler());
 		physics.addCollisionHandler(new PlayerSpikeHandler());
@@ -187,8 +184,8 @@ public class PlatformerApp extends GameApplication {
 			}
 			onPlayerDied();
 		}
-		
-		if(player.getComponent(PlayerComponent.class).isDead) {
+
+		if (player.getComponent(PlayerComponent.class).isDead) {
 			for (int i = 0; i < health.length; i++) {
 				health[i].setOpacity(0);
 			}
@@ -235,7 +232,7 @@ public class PlatformerApp extends GameApplication {
 
 	private void setLevel(int levelNum) {
 		if (player != null) {
-			player.getComponent(PhysicsComponent.class).overwritePosition(Config.playerPosition);
+			// player.getComponent(PhysicsComponent.class).overwritePosition(Config.playerPosition);
 			player.setZIndex(Integer.MAX_VALUE);
 		}
 
