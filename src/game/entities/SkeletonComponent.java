@@ -77,22 +77,23 @@ public class SkeletonComponent extends EnemyComponent {
 	public void onUpdate(double tpf) {
 		commonEnemyFunc(tpf, isProtecting);
 		if (isProtecting && texture.getAnimationChannel() != animShield) {
+			speed = 0;
 			texture.playAnimationChannel(animShield);
 		}
 		// attiva lo scudo random
-		/*if (timer.elapsed(Duration.seconds(1.4))) {
+		if (timer.elapsed(Duration.seconds(1.4))) {
 			Random rand = new Random();
-			int upperbound = 122;
-			// generate random values from 0-121
+			int upperbound = 30;
+			// generate random values from 0-29
 			int int_random = rand.nextInt(upperbound);
-			if (int_random == 34) {
+			if (int_random == 13) {
 				isProtecting = true;
 				speed = 0;
 			}
-		}*/
+		}
 		List<Entity> playerEntities = FXGL.getGameWorld().getEntitiesByType(EntityType.PLAYER);
 		Entity player = playerEntities.get(0);
-		if (entity.distance(player) < 120 && !enemyWaiting && !isGettingHit) {
+		if (entity.distance(player) > 0 && entity.distance(player) < 120 && entity.distance(player) > 33 && !enemyWaiting && !isGettingHit) {
 			if (entity.getPosition().getX() < player.getPosition().getX()) {
 				goingRight = false;
 			} else {
@@ -118,6 +119,9 @@ public class SkeletonComponent extends EnemyComponent {
 			speed = -75;
 		}
 		*/
+		if (entity.distance(player) < 33) {
+			speed = 0;
+		}
 
 	}
 
