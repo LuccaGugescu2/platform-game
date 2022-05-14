@@ -4,6 +4,12 @@ import static javafx.scene.input.KeyCode.*;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 
+
+/**
+ * Contiene alcune variabili di servizio
+ * @author montis
+ *
+ */
 public class Config {
     
     public static KeyCode leftKey = A;

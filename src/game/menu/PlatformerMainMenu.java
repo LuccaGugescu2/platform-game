@@ -60,6 +60,8 @@ public class PlatformerMainMenu extends FXGLMenu {
 	
 	private VBox gamesRoot = new VBox(10);
 	private Node menuGames;
+	private File directoryGame = new File("src/fileData");
+	private String gamesName;
 	
 	/**
 	 * Costruttore Main Menu
@@ -107,11 +109,37 @@ public class PlatformerMainMenu extends FXGLMenu {
         
         
         
-        
+        // creazione menu a tendina per caricare una partita
         
         gamesRoot.setPadding(new Insets(10));
         gamesRoot.setAlignment(Pos.TOP_LEFT);
-
+        
+        
+        if(!directoryGame.exists() && !directoryGame.isDirectory()) {
+			directoryGame.mkdir();
+		}
+        else {
+			System.out.println("directory already exists");
+		}
+        
+        // creo i vari bottoni
+        
+        for(String n : directoryGame.list()) {
+        	
+        	gamesName = n.substring(0, n.length() - 4);
+        	
+        	gamesRoot.getChildren().add(new MenuButton( gamesName, 20 , () -> {
+				
+        		try {
+					loadGame(gamesName);
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			}));
+        }
+        
+        
         StackPane hsRoot = new StackPane(new Rectangle(650, 450, Color.color(0, 0, 0, 0.8)), gamesRoot);
         hsRoot.setAlignment(Pos.TOP_CENTER);
         hsRoot.setCache(true);
@@ -125,26 +153,13 @@ public class PlatformerMainMenu extends FXGLMenu {
     }
 
 	
-	
-	/**
-	 * crea un menu a tendina per  visualizzare i salvataggi
-	 * @author montis
-	 */
-	private void menuLoadGame() {
+	 private void loadGame(String name) throws IOException {
 		
-		Rectangle mlRoot = new Rectangle(650 , 500);
-		mlRoot.setOpacity(0.6);
-		
-		
-		
-		StackPane menuPartite = new StackPane(mlRoot);
-		menuPartite.setTranslateX(getAppWidth() / 2 + 250);
-		menuPartite.setTranslateY(450);
-		
+		 GestoreSalvataggio.LeggiDaFile(name);
 	}
-	
-	
-	 private void toggleLoadGame() {
+
+
+	private void toggleLoadGame() {
 	        animationBuilder(this)
 	                .duration(Duration.seconds(0.66))
 	                .interpolator(Interpolators.EXPONENTIAL.EASE_OUT())
@@ -165,8 +180,8 @@ public class PlatformerMainMenu extends FXGLMenu {
 				
 				Config.setConfig();
 				try {
-					Config.nomePartita = t;
 					GestoreSalvataggio.SalvaSuFile(t);
+					Config.nomePartita = t;
 					
 					fireNewGame();
 					
