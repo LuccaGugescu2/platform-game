@@ -1,6 +1,7 @@
 package game.menu;
 
 
+import com.almasb.fxgl.animation.Interpolators;
 import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.MenuType;
 import com.almasb.fxgl.dsl.FXGL;
@@ -12,9 +13,11 @@ import com.almasb.fxgl.ui.FontType;
 import javafx.beans.binding.Bindings;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
+import javafx.geometry.Point2D;
 import javafx.geometry.Point3D;
 import javafx.geometry.Pos;
 import javafx.scene.CacheHint;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Separator;
 import javafx.scene.control.Slider;
@@ -35,6 +38,7 @@ import javafx.util.Duration;
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static javafx.scene.input.KeyCode.*;
 
+import java.awt.ScrollPane;
 import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
 import java.util.function.Consumer;
@@ -54,7 +58,8 @@ public class PlatformerMainMenu extends FXGLMenu {
 	protected double optionMenuPositionX = getAppWidth() / 12;
 	protected double optionMenuPositionY = getAppHeight() / 12;
 	
-	
+	private VBox gamesRoot = new VBox(10);
+	private Node menuGames;
 	
 	/**
 	 * Costruttore Main Menu
@@ -86,7 +91,7 @@ public class PlatformerMainMenu extends FXGLMenu {
         
         var menuBox = new VBox(
                 10,
-                new MenuButton("Continua", dim, () -> {}),
+                new MenuButton("Carica Partita", dim, () -> toggleLoadGame()),
                 new MenuButton("Nuova Partita", dim, () -> newGame()),
                 new MenuButton("Opzioni", dim, () -> option()),
                 new MenuButton("Credits", dim, () -> showCredits()),
@@ -97,12 +102,58 @@ public class PlatformerMainMenu extends FXGLMenu {
         menuBox.setAlignment(Pos.TOP_LEFT);
 
         menuBox.setTranslateX(getAppWidth() / 20);
-        menuBox.setTranslateY(getAppHeight() / 2.0 + 100);
+        menuBox.setTranslateY(getAppHeight() / 2.0 + 200);
         
         
-        getContentRoot().getChildren().addAll(menuBox);
+        
+        
+        
+        
+        gamesRoot.setPadding(new Insets(10));
+        gamesRoot.setAlignment(Pos.TOP_LEFT);
+
+        StackPane hsRoot = new StackPane(new Rectangle(650, 450, Color.color(0, 0, 0, 0.8)), gamesRoot);
+        hsRoot.setAlignment(Pos.TOP_CENTER);
+        hsRoot.setCache(true);
+        hsRoot.setCacheHint(CacheHint.SPEED);
+        hsRoot.setTranslateX(getAppWidth());
+        hsRoot.setTranslateY(menuBox.getTranslateY());
+        
+        menuGames = hsRoot;
+        
+        getContentRoot().getChildren().addAll(menuBox , hsRoot);        
     }
 
+	
+	
+	/**
+	 * crea un menu a tendina per  visualizzare i salvataggi
+	 * @author montis
+	 */
+	private void menuLoadGame() {
+		
+		Rectangle mlRoot = new Rectangle(650 , 500);
+		mlRoot.setOpacity(0.6);
+		
+		
+		
+		StackPane menuPartite = new StackPane(mlRoot);
+		menuPartite.setTranslateX(getAppWidth() / 2 + 250);
+		menuPartite.setTranslateY(450);
+		
+	}
+	
+	
+	 private void toggleLoadGame() {
+	        animationBuilder(this)
+	                .duration(Duration.seconds(0.66))
+	                .interpolator(Interpolators.EXPONENTIAL.EASE_OUT())
+	                .translate(menuGames)
+	                .from(new Point2D(getAppWidth(), menuGames.getTranslateY()))
+	                .to(new Point2D(getAppWidth() / 2 + 250, 450))
+	                .buildAndPlay();
+	    }
+	
 	/**
 	 * crea file partita e lo carica
 	 * @author montis
@@ -229,8 +280,6 @@ public class PlatformerMainMenu extends FXGLMenu {
 	private void command() {
 		getContentRoot().getChildren().remove(9, getContentRoot().getChildren().size());
 		
-		Image imgDash = new Image(new File("player/_Run.png").toURI().toString());
-		ImageView run = new ImageView(imgDash);
 		
 		
 		GridPane pane = new GridPane();
