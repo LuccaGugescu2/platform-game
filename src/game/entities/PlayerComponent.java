@@ -77,8 +77,11 @@ public class PlayerComponent extends Component {
 					if(enemy.getComponents().get(5).getClass() == FlyingEyeComponent.class) {
 						enemy.getComponent(FlyingEyeComponent.class).hasTakenDamage = false;
 					}
-					else {
+					else if(enemy.getComponents().get(5).getClass() == SkeletonComponent.class) {
 						enemy.getComponent(SkeletonComponent.class).hasTakenDamage = false;
+					}
+					else {
+						enemy.getComponent(GoblinComponent.class).hasTakenDamage = false;
 					}
 					
 				}

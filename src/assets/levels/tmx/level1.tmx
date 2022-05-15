@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="70" height="80" tilewidth="32" tileheight="32" infinite="0" nextlayerid="27" nextobjectid="580">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="70" height="80" tilewidth="32" tileheight="32" infinite="0" nextlayerid="27" nextobjectid="586">
  <properties>
   <property name="star1time" type="float" value="7"/>
  </properties>
@@ -123,5 +123,10 @@
   <object id="577" name="enemyLimit" type="enemyLimit" x="1647.39" y="1254.24" width="17.2121" height="62.1818"/>
   <object id="578" name="enemyLimit" type="enemyLimit" x="524.727" y="364.242" width="8.54543" height="531.515"/>
   <object id="579" name="enemyLimit" type="enemyLimit" x="713.727" y="365.576" width="8.54543" height="531.515"/>
+  <object id="580" name="goblin" type="goblin" x="613" y="2016.25" width="45" height="38"/>
+  <object id="582" name="enemyLimit" type="enemyLimit" x="944.394" y="1253.91" width="15.2121" height="62.1818"/>
+  <object id="583" name="enemyLimit" type="enemyLimit" x="512.394" y="1254.91" width="15.7121" height="62.1818"/>
+  <object id="584" name="enemyLimit" type="enemyLimit" x="513.394" y="1991.58" width="9.7121" height="62.1818"/>
+  <object id="585" name="enemyLimit" type="enemyLimit" x="730.061" y="1991.24" width="9.2121" height="62.1818"/>
  </objectgroup>
 </map>

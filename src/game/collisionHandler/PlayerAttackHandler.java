@@ -8,6 +8,7 @@ import com.almasb.fxgl.physics.CollisionHandler;
 
 import game.EntityType;
 import game.entities.FlyingEyeComponent;
+import game.entities.GoblinComponent;
 import game.entities.PlayerComponent;
 import game.entities.SkeletonComponent;
 
@@ -23,8 +24,11 @@ public class PlayerAttackHandler extends CollisionHandler {
 			if(enemy.getComponents().get(5).getClass() == FlyingEyeComponent.class) {
 				enemy.getComponent(FlyingEyeComponent.class).addDamage();
 			}
-			else {
+			else if(enemy.getComponents().get(5).getClass() == SkeletonComponent.class) {
 				enemy.getComponent(SkeletonComponent.class).addDamage();
+			}
+			else {
+				enemy.getComponent(GoblinComponent.class).addDamage();
 			}
 		}
 		

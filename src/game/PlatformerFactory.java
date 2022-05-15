@@ -16,6 +16,7 @@ import com.almasb.fxgl.texture.Texture;
 
 import game.entities.CheckpointComponent;
 import game.entities.FlyingEyeComponent;
+import game.entities.GoblinComponent;
 import game.entities.HealthComponent;
 import game.entities.PlayerComponent;
 import game.entities.SkeletonComponent;
@@ -198,6 +199,15 @@ public class PlatformerFactory implements EntityFactory {
 					.with(new HealthComponent())
 	                .build();
 	    }
+	   @Spawns("goblin")
+		public Entity newGoblin(SpawnData data) {
+			return entityBuilder(data)
+					.type(ENEMY)
+					.bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+					.with(new CollidableComponent(true))
+					.with(new GoblinComponent())
+					.build();
+		}
 	   
 
 }
