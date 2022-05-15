@@ -74,7 +74,7 @@ public class PlatformerGameMenu extends FXGLMenu {
 	
 	protected void salva() {
 		
-		FXGL.getDialogService().showConfirmationBox("vuoi salvare <" + Config.nomePartita +"> ?", yes -> {
+		FXGL.getDialogService().showConfirmationBox("vuoi salvare " + Config.nomePartita +" ?", yes -> {
     		if (yes) {
 				
     			try {

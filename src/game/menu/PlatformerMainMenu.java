@@ -43,6 +43,10 @@ import static javafx.scene.input.KeyCode.*;
 import java.awt.ScrollPane;
 import java.io.*;
 import java.nio.file.FileAlreadyExistsException;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
+import java.util.ListIterator;
 import java.util.function.Consumer;
 
 import game.PlatformerApp;
@@ -126,38 +130,47 @@ public class PlatformerMainMenu extends FXGLMenu {
 			System.out.println("directory already exists");
 		}
         
+        getContentRoot().getChildren().addAll(menuBox);  
         // creo i vari bottoni
-        
-        for(String n : directoryGame.list()) {
-        	
-        	gamesName = n.substring(0, n.length() - 4);
-        	
-        	gamesRoot.getChildren().add(new MenuButton( gamesName, 30 , () -> {
-        		try {
-					loadGame(gamesName);
+        createGames();       
+    }
+	
+	
+	
+	protected void createGames() {
+		for (String n : directoryGame.list()) {
+
+			gamesName = n.substring(0, n.length() -4);
+			
+			gamesRoot.getChildren().add(new MenuButton(gamesName, 30, () -> {
+				
+				try {
+					loadGame(MenuButton.bottonPressed);
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-			}
-        	, true));
-        }
-        
-        
-        StackPane hsRoot = new StackPane(new Rectangle(650, 450, Color.color(0, 0, 0, 0.8)), gamesRoot);
+			
+			
+			}, true));
+		}
+		
+		StackPane hsRoot = new StackPane(new Rectangle(650, 450, Color.color(0, 0, 0, 0.8)), gamesRoot);
         hsRoot.setAlignment(Pos.TOP_CENTER);
         hsRoot.setCache(true);
         hsRoot.setCacheHint(CacheHint.SPEED);
         hsRoot.setTranslateX(getAppWidth());
-        hsRoot.setTranslateY(menuBox.getTranslateY());
+        hsRoot.setTranslateY(getAppHeight());
         
         menuGames = hsRoot;
         
-        getContentRoot().getChildren().addAll(menuBox , hsRoot);        
-    }
+        getContentRoot().getChildren().addAll(hsRoot);
+		
+	}
 
-	
-	 private void loadGame(String name) throws IOException {
+
+	private void loadGame(String name) throws IOException {
 		 
+		 System.out.println(name);
 		 GestoreSalvataggio.LeggiDaFile(name);
 		 Config.nomePartita = name;
 		 
@@ -359,6 +372,10 @@ public class PlatformerMainMenu extends FXGLMenu {
      */
 	protected static class MenuButton extends Parent {
 		
+		protected String name;
+		protected static String bottonPressed;
+		
+		
 		/**
 		 * costruttore bottone
 		 * @author montis
@@ -366,29 +383,41 @@ public class PlatformerMainMenu extends FXGLMenu {
 		 *  @param action funzione che viene lanciata quando si preme il bottone	 
 		 **/
 		MenuButton(String name, float dimentionText, Runnable action , boolean disposable) {
-			var text = getUIFactoryService().newText(name, Color.GRAY, FontType.MONO, dimentionText);
+			
+			this.name = name;
+			
+			var text = getUIFactoryService().newText(this.name, Color.GRAY, FontType.MONO, dimentionText);
 			text.setStrokeWidth(1);
 			// text.strokeProperty().bind(text.fillProperty());
 
 			text.fillProperty().bind(Bindings.when(hoverProperty()).then(Color.WHITE).otherwise(Color.GRAY));
 			
-			/*
-			if(disposable) {
-				setOnMouseReleased(e -> deleteButton().run());
-			}
-			*/
-			
-			setOnMouseClicked(e -> action.run());
+			setOnMouseClicked(e -> {
+				
+				bottonPressed = this.name;
+				action.run();
+			});
 
 			setPickOnBounds(true);
 
 			getChildren().add(text);
 		}
 		
-		public Runnable deleteButton() {
-			return null;
-		}
 		
+public String getName() {
+			return name;
+		}
+
+		protected void deleteButton(String name) {
+			
+					
+			FXGL.getDialogService().showConfirmationBox("Vuoi Eliminare la Partita ?", yes -> {
+				if (yes) {
+					GestoreSalvataggio.RemoveFile(name);
+					
+				}
+			});
+		}
 	}
 	
 }
