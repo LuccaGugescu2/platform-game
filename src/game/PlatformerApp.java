@@ -190,7 +190,7 @@ public class PlatformerApp extends GameApplication {
 
 	@Override
 	protected void onUpdate(double tpf) {
-
+		Config.setConfig(player.getX(), player.getY(), player.getComponent(PlayerComponent.class).getHealth());
 		if (player.getY() > levelHeight || player.getComponent(PlayerComponent.class).getHealth() <= 0) {
 			player.getComponent(PlayerComponent.class).refillHealth();
 			for (int i = 0; i < health.length; i++) {
