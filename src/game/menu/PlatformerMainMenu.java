@@ -48,7 +48,7 @@ import game.data.Config;
 import game.data.GestoreSalvataggio;
 
 /**
- * @author Almas Baimagambetov (almaslvl@gmail.com)
+ * @author montis
  */
 public class PlatformerMainMenu extends FXGLMenu {
 
@@ -62,6 +62,8 @@ public class PlatformerMainMenu extends FXGLMenu {
 	private Node menuGames;
 	private File directoryGame = new File("src/fileData");
 	private String gamesName;
+	private MenuButton esc;
+	
 	
 	/**
 	 * Costruttore Main Menu
@@ -200,7 +202,9 @@ public class PlatformerMainMenu extends FXGLMenu {
      * @author montis
      */
 	private void showCredits() {
-        getDialogService().showMessageBox("credits.....");
+        getDialogService().showMessageBox("Autori , Sviluppatori ed Ideatori del gioco\n\n "
+        								+ "Lorenzo Del Dotto \n Federico Di Pietro \n Lucca Gugescu "
+        								+ "\n Marsel Meta \n Francesco Montis");
     }
 
     
@@ -241,7 +245,7 @@ public class PlatformerMainMenu extends FXGLMenu {
     	separa.setPrefHeight(optionMenuDimensionY);
     	separa.setOpacity(0.6);
     	
-    	MenuButton esc = new MenuButton("ESC", dim,() -> comeBackToMainMenu());
+    	esc = new MenuButton("ESC", dim,() -> comeBackToMainMenu());
     	esc.setTranslateX(getAppHeight() / 6);
     	esc.setTranslateY((getAppHeight() - getAppHeight() / 12) - 35);
     	
@@ -267,7 +271,7 @@ public class PlatformerMainMenu extends FXGLMenu {
      * @author montis
      */
 	protected void audio() {
-		getContentRoot().getChildren().remove(9, getContentRoot().getChildren().size());
+		getContentRoot().getChildren().remove(getContentRoot().getChildren().indexOf(esc) + 1, getContentRoot().getChildren().size());
 		
 		Slider musicSlider = new Slider();
 		musicSlider.setValue(getSettings().getGlobalMusicVolume());
@@ -292,10 +296,13 @@ public class PlatformerMainMenu extends FXGLMenu {
 		getContentRoot().getChildren().add(menuAudio);
 	}
 
+	
+	/**
+	 * apre il menu coamndi dove vengono visualizzati i comandi
+	 * @author montis
+	 */
 	private void command() {
-		getContentRoot().getChildren().remove(9, getContentRoot().getChildren().size());
-		
-		
+		getContentRoot().getChildren().remove(getContentRoot().getChildren().indexOf(esc) + 1, getContentRoot().getChildren().size());
 		
 		GridPane pane = new GridPane();
 		
@@ -335,7 +342,7 @@ public class PlatformerMainMenu extends FXGLMenu {
      * @author montis
      */
     private void comeBackToMainMenu () {		 	
-    getContentRoot().getChildren().remove(4, getContentRoot().getChildren().size());	
+    getContentRoot().getChildren().remove(5, getContentRoot().getChildren().size());	
     }
     
     

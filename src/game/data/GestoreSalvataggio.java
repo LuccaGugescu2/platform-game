@@ -76,8 +76,11 @@ public class GestoreSalvataggio {
 		try {
 			buffer = new BufferedReader(new FileReader(file));
 			
-			String a = buffer.readLine();
-		
+			 int posX = Integer.parseInt(buffer.readLine());
+			 int posY = Integer.parseInt(buffer.readLine());
+			 int health = Integer.parseInt(buffer.readLine());
+			 
+			 Config.setConfig(posX, posY, health);
 			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
@@ -96,6 +99,16 @@ public class GestoreSalvataggio {
 				}
 			}
 		}
+	}
+	
+	
+	public static void RemoveFile (String nome) {
+		
+		isDirectory(gamesDirectory);
+		
+		File file = new File(gamesDirectory + "/" + nome + ".txt");
+		
+		file.delete();
 	}
 	
 	/**
