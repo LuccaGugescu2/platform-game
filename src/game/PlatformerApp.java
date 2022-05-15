@@ -5,6 +5,7 @@ import com.almasb.fxgl.app.GameSettings;
 import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.SceneFactory;
 import com.almasb.fxgl.app.scene.Viewport;
+import com.almasb.fxgl.cutscene.Cutscene;
 import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.input.UserAction;
@@ -16,16 +17,19 @@ import game.menu.PlatformerGameMenu;
 import game.menu.PlatformerMainMenu;
 import game.collisionHandler.EnemyCollisionHandler;
 import game.collisionHandler.EnemyLimitHandler;
+import game.collisionHandler.MeomartinoCollisionHandler;
 import game.collisionHandler.PlayerAttackHandler;
 import game.collisionHandler.PlayerChekpointHandler;
 import game.collisionHandler.PlayerSpikeHandler;
 import game.collisionHandler.PlayerWallJumpHandler;
 import game.data.Config;
 import game.entities.HealthComponent;
+import game.entities.MeomartinoComponent;
 import game.entities.PlayerComponent;
 import javafx.geometry.Point2D;
 import javafx.scene.input.KeyCode;
 
+import java.util.List;
 import java.util.Map;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
@@ -54,7 +58,6 @@ public class PlatformerApp extends GameApplication {
 			public FXGLMenu newMainMenu() {
 				return new PlatformerMainMenu();
 			}
-
 			// menu interno gioco
 			@Override
 			public FXGLMenu newGameMenu() {
@@ -116,7 +119,17 @@ public class PlatformerApp extends GameApplication {
 			}
 
 		}, KeyCode.P);
-
+		getInput().addAction(new UserAction("interact") {
+			@Override
+			protected void onActionBegin() {
+				List<Entity> npc = FXGL.getGameWorld().getEntitiesByType(EntityType.NPC);
+				npc.get(0).getComponent(MeomartinoComponent.class).setActive(true);
+			}
+			protected void onActionEnd() {
+				List<Entity> npc = FXGL.getGameWorld().getEntitiesByType(EntityType.NPC);
+				npc.get(0).getComponent(MeomartinoComponent.class).setActive(false);
+			}
+		}, KeyCode.E);
 	}
 
 	@Override
@@ -162,6 +175,7 @@ public class PlatformerApp extends GameApplication {
 		physics.addCollisionHandler(new PlayerAttackHandler());
 		physics.addCollisionHandler(new EnemyCollisionHandler());
 		physics.addCollisionHandler(new EnemyLimitHandler());
+		physics.addCollisionHandler(new MeomartinoCollisionHandler());
 	}
 
 	private void nextLevel() {

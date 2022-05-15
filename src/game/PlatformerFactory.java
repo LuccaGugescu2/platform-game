@@ -18,6 +18,7 @@ import game.entities.CheckpointComponent;
 import game.entities.FlyingEyeComponent;
 import game.entities.GoblinComponent;
 import game.entities.HealthComponent;
+import game.entities.MeomartinoComponent;
 import game.entities.PlayerComponent;
 import game.entities.SkeletonComponent;
 import javafx.geometry.Point2D;
@@ -208,6 +209,25 @@ public class PlatformerFactory implements EntityFactory {
 					.with(new GoblinComponent())
 					.build();
 		}
+	   @Spawns("meomartino")
+		public Entity newMeomartino(SpawnData data) {
+			return entityBuilder(data)
+					.type(NPC)
+					.bbox(new HitBox(BoundingShape.box(data.<Integer>get("width"), data.<Integer>get("height"))))
+					.with(new CollidableComponent(true))
+					.with(new MeomartinoComponent())
+					.build();
+		}
+	   @Spawns("button")
+	    public Entity newButton(SpawnData data) {
+
+	        return entityBuilder(data)
+	                .type(BUTTON)
+	                .viewWithBBox(texture("button.png", 80, 80))
+	                .with(new CollidableComponent(true))
+	                .scale(new Point2D(0.5, 0.5))
+	                .build();
+	    }
 	   
 
 }

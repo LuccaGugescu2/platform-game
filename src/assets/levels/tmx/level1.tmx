@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="70" height="80" tilewidth="32" tileheight="32" infinite="0" nextlayerid="27" nextobjectid="586">
+<map version="1.8" tiledversion="1.8.4" orientation="orthogonal" renderorder="right-down" width="70" height="80" tilewidth="32" tileheight="32" infinite="0" nextlayerid="27" nextobjectid="588">
  <properties>
   <property name="star1time" type="float" value="7"/>
  </properties>
@@ -128,5 +128,6 @@
   <object id="583" name="enemyLimit" type="enemyLimit" x="512.394" y="1254.91" width="15.7121" height="62.1818"/>
   <object id="584" name="enemyLimit" type="enemyLimit" x="513.394" y="1991.58" width="9.7121" height="62.1818"/>
   <object id="585" name="enemyLimit" type="enemyLimit" x="730.061" y="1991.24" width="9.2121" height="62.1818"/>
+  <object id="586" name="meomartino" type="meomartino" x="2095.95" y="125.136" width="27.5" height="40.5"/>
  </objectgroup>
 </map>

@@ -1,0 +1,5 @@
+1.name = Meo
+1.image = meo.png
+1: Che cazzo vuoi?
+1.image = meo.png
+1: Il cippa lippa ti sta aspettando
