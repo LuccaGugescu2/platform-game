@@ -30,7 +30,7 @@ public class Config {
     	
     }
     
-    public static void setConfig (int positionX , int positionY , int h) {
+    public static void setConfig (double positionX ,double positionY , int h) {
     	playerPosition = new Point2D(positionX , positionY);
     	health = h;
     	

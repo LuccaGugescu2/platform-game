@@ -12,6 +12,7 @@ import java.util.ResourceBundle.Control;
 import com.almasb.fxgl.app.scene.FXGLLoadingScene;
 import com.almasb.fxgl.app.scene.FXGLMenu;
 import com.almasb.fxgl.app.scene.MenuType;
+import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.GameWorld;
 import com.almasb.fxgl.input.view.KeyView;
 import com.almasb.fxgl.scene.Scene;
@@ -25,9 +26,17 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.shape.Rectangle;
 
-
+/**
+ * crea un menu all'interno del gioco apribile tramite tasto <b>ESC</b> durante la partita
+ * @author montis
+ *
+ */
 public class PlatformerGameMenu extends FXGLMenu {
 
+	/**
+	 * crea un menu di gioco
+	 * @author montis
+	 */
 	public PlatformerGameMenu() {
 		super(MenuType.GAME_MENU);
 		
@@ -46,18 +55,12 @@ public class PlatformerGameMenu extends FXGLMenu {
 		
 		var menuBox = new VBox(
                 10,
-                new MenuButton("Resume", dim, () -> fireResume()),
-                new MenuButton("Salva", dim, () -> {
-					try {
-						GestoreSalvataggio.SalvaSuFile(Config.nomePartita);
-					} catch (IOException e) {
-						e.printStackTrace();
-					}
-				}),
+                new MenuButton("Resume", dim, () -> fireResume() , false),
+                new MenuButton("Salva", dim, () -> salva() , false),
                 
-                new MenuButton("Comandi", dim, () -> instructions()),
-                new MenuButton("Torna al menu", dim, () -> exitToMainMenu()),
-                new MenuButton("Esci", dim, () -> fireExit())
+                new MenuButton("Comandi", dim, () -> instructions(), false),
+                new MenuButton("Torna al menu", dim, () -> exitToMainMenu(), false),
+                new MenuButton("Esci", dim, () -> fireExit(), false)
         );
 		
 		menuBox.setAlignment(Pos.TOP_CENTER);
@@ -69,14 +72,39 @@ public class PlatformerGameMenu extends FXGLMenu {
 		
 	}
 	
-	private void exitToMainMenu() {
+	protected void salva() {
+		
+		FXGL.getDialogService().showConfirmationBox("vuoi salvare <" + Config.nomePartita +"> ?", yes -> {
+    		if (yes) {
+				
+    			try {
+					GestoreSalvataggio.SalvaSuFile(Config.nomePartita);
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+    		}
+    	});
+		
+	}
+	
+	
+	/**
+	 * torna al menu principale
+	 * @author montis
+	 */
+	protected void exitToMainMenu() {
 		getGameScene().clearUINodes();
 		getGameScene().getContentRoot().getChildren().remove(getContentRoot().getChildren().size());
 		getController().gotoMainMenu();
 		
 	}
 
-	private void instructions() {
+	
+	/**
+	 * apre una finestra con i comandi del gioco
+	 * @author montis
+	 */
+	protected void instructions() {
         GridPane pane = new GridPane();
         
         

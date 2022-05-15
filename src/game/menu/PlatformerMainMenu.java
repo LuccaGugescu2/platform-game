@@ -8,6 +8,7 @@ import com.almasb.fxgl.dsl.FXGL;
 import com.almasb.fxgl.entity.Entity;
 import com.almasb.fxgl.entity.GameWorld;
 import com.almasb.fxgl.input.view.KeyView;
+import com.almasb.fxgl.input.view.MouseButtonView;
 import com.almasb.fxgl.texture.AnimationChannel;
 import com.almasb.fxgl.ui.FontType;
 import javafx.beans.binding.Bindings;
@@ -34,6 +35,7 @@ import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextAlignment;
 import javafx.util.Duration;
+import kotlin.contracts.Returns;
 
 import static com.almasb.fxgl.dsl.FXGL.*;
 import static javafx.scene.input.KeyCode.*;
@@ -95,11 +97,11 @@ public class PlatformerMainMenu extends FXGLMenu {
         
         var menuBox = new VBox(
                 10,
-                new MenuButton("Carica Partita", dim, () -> toggleLoadGame()),
-                new MenuButton("Nuova Partita", dim, () -> newGame()),
-                new MenuButton("Opzioni", dim, () -> option()),
-                new MenuButton("Credits", dim, () -> showCredits()),
-                new MenuButton("Esci", dim, () -> fireExit()),
+                new MenuButton("Carica Partita", dim, () -> toggleLoadGame() , false),
+                new MenuButton("Nuova Partita", dim, () -> newGame(), false),
+                new MenuButton("Opzioni", dim, () -> option(), false),
+                new MenuButton("Credits", dim, () -> showCredits(), false),
+                new MenuButton("Esci", dim, () -> fireExit(), false),
                 new Text(""),
                 new Separator(Orientation.HORIZONTAL)
         );
@@ -130,15 +132,14 @@ public class PlatformerMainMenu extends FXGLMenu {
         	
         	gamesName = n.substring(0, n.length() - 4);
         	
-        	gamesRoot.getChildren().add(new MenuButton( gamesName, 20 , () -> {
-				
+        	gamesRoot.getChildren().add(new MenuButton( gamesName, 30 , () -> {
         		try {
 					loadGame(gamesName);
 				} catch (IOException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
-			}));
+			}
+        	, true));
         }
         
         
@@ -156,8 +157,11 @@ public class PlatformerMainMenu extends FXGLMenu {
 
 	
 	 private void loadGame(String name) throws IOException {
-		
+		 
 		 GestoreSalvataggio.LeggiDaFile(name);
+		 Config.nomePartita = name;
+		 
+		 fireNewGame();
 	}
 
 
@@ -220,11 +224,11 @@ public class PlatformerMainMenu extends FXGLMenu {
     	
     	VBox optionMenu = new VBox(
     			10,
-    			new MenuButton("Audio", dim, () -> audio()),
+    			new MenuButton("Audio", dim, () -> audio(), false),
     			new Text(""),
-    			new MenuButton("Command", dim, () -> command()),
+    			new MenuButton("Command", dim, () -> command(), false),
     			new Text(""),
-    			new MenuButton("Restore", dim, () -> restore())
+    			new MenuButton("Restore", dim, () -> restore(), false)
     			);
     	optionMenu.setTranslateX(getAppHeight() / 6);
     	optionMenu.setTranslateY(getAppWidth() / 6);
@@ -245,7 +249,7 @@ public class PlatformerMainMenu extends FXGLMenu {
     	separa.setPrefHeight(optionMenuDimensionY);
     	separa.setOpacity(0.6);
     	
-    	esc = new MenuButton("ESC", dim,() -> comeBackToMainMenu());
+    	esc = new MenuButton("ESC", dim,() -> comeBackToMainMenu(), false);
     	esc.setTranslateX(getAppHeight() / 6);
     	esc.setTranslateY((getAppHeight() - getAppHeight() / 12) - 35);
     	
@@ -323,13 +327,13 @@ public class PlatformerMainMenu extends FXGLMenu {
 		pane.add(getUIFactoryService().newText("Comandi"), 1, 0);
 		
 		pane.addRow(2, 
-					getUIFactoryService().newText("Right"),new CommandButton(Config.rightKey,() -> cambiaTasto(Config.rightKey)),imgRightView);
+					getUIFactoryService().newText("Right"),new KeyView(Config.rightKey),imgRightView);
 		pane.setVgap(50);
 		
-		pane.addRow(3, getUIFactoryService().newText("Left"),  new CommandButton(Config.leftKey,() -> cambiaTasto(Config.leftKey)), imgLeftView);
+		pane.addRow(3, getUIFactoryService().newText("Left"), new KeyView(Config.leftKey), imgLeftView);
 		
-		pane.addRow(4, getUIFactoryService().newText("Jump"),  new CommandButton(Config.jumpKey,() -> cambiaTasto(Config.jumpKey)) , imgJumpView);
-		pane.addRow(5, getUIFactoryService().newText("Attack"),  new CommandButton(Config.fightKey,() -> cambiaTasto(Config.jumpKey)) , imgAttackView);
+		pane.addRow(4, getUIFactoryService().newText("Jump"), new KeyView(Config.jumpKey) , imgJumpView);
+		pane.addRow(5, getUIFactoryService().newText("Attack"), new KeyView(Config.fightKey), imgAttackView);
 		
 		pane.setTranslateX(optionMenuPositionX + optionMenuDimensionX / 4 + 35);
 		pane.setTranslateY(optionMenuPositionY + 30);
@@ -346,43 +350,45 @@ public class PlatformerMainMenu extends FXGLMenu {
     }
     
     
+   
+
     /**
-     * viene utilizzata nella sezione command dell'option menu e serve per cambire il tasto di una certa funzionalità
-     * @param tasto
+     * crea i bottoni all'interno del menu
      * @author montis
+     *
      */
-    private void cambiaTasto(KeyCode tasto) {
-  
-	}
-
-
 	protected static class MenuButton extends Parent {
-		MenuButton(String name, float dimentionText, Runnable action) {
+		
+		/**
+		 * costruttore bottone
+		 * @author montis
+		 *  @param name testo sul bottone
+		 *  @param action funzione che viene lanciata quando si preme il bottone	 
+		 **/
+		MenuButton(String name, float dimentionText, Runnable action , boolean disposable) {
 			var text = getUIFactoryService().newText(name, Color.GRAY, FontType.MONO, dimentionText);
 			text.setStrokeWidth(1);
 			// text.strokeProperty().bind(text.fillProperty());
 
 			text.fillProperty().bind(Bindings.when(hoverProperty()).then(Color.WHITE).otherwise(Color.GRAY));
-
+			
+			/*
+			if(disposable) {
+				setOnMouseReleased(e -> deleteButton().run());
+			}
+			*/
+			
 			setOnMouseClicked(e -> action.run());
 
 			setPickOnBounds(true);
 
 			getChildren().add(text);
 		}
-	}
-
-	private static class CommandButton extends Parent {
-		CommandButton(KeyCode key, Runnable action) {
-
-			var k = new KeyView(key);
-
-			setOnMouseClicked(e -> action.run());
-
-			setPickOnBounds(true);
-
-			getChildren().add(k);
+		
+		public Runnable deleteButton() {
+			return null;
 		}
+		
 	}
+	
 }
-

@@ -76,8 +76,8 @@ public class GestoreSalvataggio {
 		try {
 			buffer = new BufferedReader(new FileReader(file));
 			
-			 int posX = Integer.parseInt(buffer.readLine());
-			 int posY = Integer.parseInt(buffer.readLine());
+			 double posX = Double.parseDouble(buffer.readLine());
+			 double posY = Double.parseDouble(buffer.readLine());
 			 int health = Integer.parseInt(buffer.readLine());
 			 
 			 Config.setConfig(posX, posY, health);
