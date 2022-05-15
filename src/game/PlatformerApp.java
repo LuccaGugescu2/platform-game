@@ -70,7 +70,7 @@ public class PlatformerApp extends GameApplication {
 	@Override
 	protected void initInput() {
 		// input da tastiera per il movimento del player
-		getInput().addAction(new UserAction("Left") {
+			getInput().addAction(new UserAction("Left") {
 			@Override
 			protected void onAction() {
 				player.getComponent(PlayerComponent.class).left();
@@ -190,7 +190,6 @@ public class PlatformerApp extends GameApplication {
 
 	@Override
 	protected void onUpdate(double tpf) {
-		Config.setConfig(player.getX(), player.getY(), player.getComponent(PlayerComponent.class).getHealth());
 		if (player.getY() > levelHeight || player.getComponent(PlayerComponent.class).getHealth() <= 0) {
 			player.getComponent(PlayerComponent.class).refillHealth();
 			for (int i = 0; i < health.length; i++) {
@@ -217,21 +216,34 @@ public class PlatformerApp extends GameApplication {
 			break;
 		case 5:
 			health[2].getComponent(HealthComponent.class).sethalf();
+			health[1].getComponent(HealthComponent.class).setFull();
+			health[0].getComponent(HealthComponent.class).setFull();
 			break;
 		case 4:
 			health[2].getComponent(HealthComponent.class).setEmpty();
+			health[1].getComponent(HealthComponent.class).setFull();
+			health[0].getComponent(HealthComponent.class).setFull();
 			break;
 		case 3:
+			health[2].getComponent(HealthComponent.class).setEmpty();
 			health[1].getComponent(HealthComponent.class).sethalf();
+			health[0].getComponent(HealthComponent.class).setFull();
 			break;
 		case 2:
+			health[2].getComponent(HealthComponent.class).setEmpty();
 			health[1].getComponent(HealthComponent.class).setEmpty();
+			health[0].getComponent(HealthComponent.class).setFull();
 			break;
 		case 1:
+			health[2].getComponent(HealthComponent.class).setEmpty();
+			health[1].getComponent(HealthComponent.class).setEmpty();
 			health[0].getComponent(HealthComponent.class).sethalf();
 			break;
 		case 0:
+			health[2].getComponent(HealthComponent.class).setEmpty();
+			health[1].getComponent(HealthComponent.class).setEmpty();
 			health[0].getComponent(HealthComponent.class).setEmpty();
+			
 			break;
 		default:
 			throw new IllegalArgumentException(
