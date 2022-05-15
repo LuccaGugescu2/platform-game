@@ -46,7 +46,7 @@ public class PlatformerFactory implements EntityFactory {
 	}
 	@Spawns("castleBackground")
 	public Entity newCastleBackground(SpawnData data) {
-		Image image = image("background/castelBackgound.png");
+		Image image = image("background/castleBackgound.png");
 		Texture texture = new Texture(image);
 		return entityBuilder()
 				.view(texture)
