@@ -132,11 +132,25 @@ public class PlatformerMainMenu extends FXGLMenu {
         
         getContentRoot().getChildren().addAll(menuBox);  
         // creo i vari bottoni
-        createGames();       
+        createGames(); 
+        
+        StackPane hsRoot = new StackPane(new Rectangle(650, 450, Color.color(0, 0, 0, 0.8)), gamesRoot);
+        hsRoot.setAlignment(Pos.TOP_CENTER);
+        hsRoot.setCache(true);
+        hsRoot.setCacheHint(CacheHint.SPEED);
+        hsRoot.setTranslateX(getAppWidth());
+        hsRoot.setTranslateY(getAppHeight());
+        
+        menuGames = hsRoot;
+        
+        getContentRoot().getChildren().addAll(hsRoot);
+        
     }
 	
-	
-	
+
+	/**
+	 * crea un bottone per ogni salvataggio tramite il quale si carica la partita
+	 */
 	protected void createGames() {
 		for (String n : directoryGame.list()) {
 
@@ -150,26 +164,16 @@ public class PlatformerMainMenu extends FXGLMenu {
 					e.printStackTrace();
 				}
 			
-			
 			}, true));
 		}
-		
-		StackPane hsRoot = new StackPane(new Rectangle(650, 450, Color.color(0, 0, 0, 0.8)), gamesRoot);
-        hsRoot.setAlignment(Pos.TOP_CENTER);
-        hsRoot.setCache(true);
-        hsRoot.setCacheHint(CacheHint.SPEED);
-        hsRoot.setTranslateX(getAppWidth());
-        hsRoot.setTranslateY(getAppHeight());
-        
-        menuGames = hsRoot;
-        
-        getContentRoot().getChildren().addAll(hsRoot);
-		
+	
 	}
 
 
 	private void loadGame(String name) throws IOException {
-		 
+		
+		
+		
 		 System.out.println(name);
 		 GestoreSalvataggio.LeggiDaFile(name);
 		 Config.nomePartita = name;
@@ -177,9 +181,15 @@ public class PlatformerMainMenu extends FXGLMenu {
 		 fireNewGame();
 	}
 
-
+	/**
+	 * crea l'animazione del menu a tendina per caricare la partita
+	 * @author montis
+	 */
 	private void toggleLoadGame() {
-	        animationBuilder(this)
+	    gamesRoot.getChildren().remove(0, gamesRoot.getChildren().size());
+		createGames();
+		
+		animationBuilder(this)
 	                .duration(Duration.seconds(0.66))
 	                .interpolator(Interpolators.EXPONENTIAL.EASE_OUT())
 	                .translate(menuGames)
@@ -193,7 +203,8 @@ public class PlatformerMainMenu extends FXGLMenu {
 	 * @author montis
 	 */
     private void newGame() {
-		getDialogService().showInputBox("Metti nome partita", new Consumer<String>() {
+		
+    	getDialogService().showInputBox("Metti nome partita", new Consumer<String>() {
 			@Override
 			public void accept(String t) {
 				
@@ -241,7 +252,9 @@ public class PlatformerMainMenu extends FXGLMenu {
     			new Text(""),
     			new MenuButton("Command", dim, () -> command(), false),
     			new Text(""),
-    			new MenuButton("Restore", dim, () -> restore(), false)
+    			new MenuButton("Restore", dim, () -> restore(), false),
+    			new Text(""),
+    			new MenuButton("Elimina Partita", dim, () -> eliminaPartita(), false)
     			);
     	optionMenu.setTranslateX(getAppHeight() / 6);
     	optionMenu.setTranslateY(getAppWidth() / 6);
@@ -271,6 +284,49 @@ public class PlatformerMainMenu extends FXGLMenu {
     }
     
     /**
+     * menu che permette di eliminare un salvataggio
+     * @author montis
+     */
+    private void eliminaPartita() {
+    	getContentRoot().getChildren().remove(getContentRoot().getChildren().indexOf(esc) + 1, getContentRoot().getChildren().size());
+    	
+    	var menuElimina = new GridPane();
+    	
+    	menuElimina.setHgap(optionMenuDimensionX / 3 - 160);
+        menuElimina.setVgap(optionMenuDimensionY / 8);
+        menuElimina.setTranslateX(optionMenuPositionX + optionMenuDimensionX / 4 + 35);
+		menuElimina.setTranslateY(optionMenuPositionY + 30);
+		
+		
+		menuElimina.add(getUIFactoryService().newText("Salvataggi"), 1, 0);
+		
+		int i = 1;
+		
+		for(String n : directoryGame.list()) {
+			
+			gamesName = n.substring(0, n.length() -4);
+			
+			menuElimina.addRow(i, new MenuButton(gamesName, 25,() -> {
+					
+				FXGL.getDialogService().showConfirmationBox("sicuro di voler eliminare " + MenuButton.bottonPressed +" ?", yes -> {
+		    		if (yes) {
+						GestoreSalvataggio.RemoveFile(MenuButton.bottonPressed);
+						getContentRoot().getChildren().remove(getContentRoot().getChildren().indexOf(esc) + 1, getContentRoot().getChildren().size());
+		    		}
+		    	});
+					
+			}, false));
+			
+			i++;
+		}
+		
+		getContentRoot().getChildren().add(menuElimina);
+		
+	}
+
+
+
+	/**
      * riporta le impostazioni del menu in default
      * @author montis
      */
